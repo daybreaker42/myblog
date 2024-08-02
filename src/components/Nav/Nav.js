@@ -7,10 +7,10 @@ import SearchBar from '../searchBar/SearchBar';
 function Nav() {
     return <nav className="nav">
         <div className='nav-center'>
-            <Link to='/' className='navlink'>Home</Link>
-            <Link to='/category' className='navlink'>Category</Link>
-            <Link to='/tags' className='navlink'>Tags</Link>
-            <Link to='/about' className='navlink'>About</Link>
+            <Link to='/' className='navlink'><span>Home</span></Link>
+            <Link to='/category' className='navlink'><span>Category</span></Link>
+            <Link to='/tags' className='navlink'><span>Tags</span></Link>
+            <Link to='/about' className='navlink'><span>About</span></Link>
             <SearchBar />
         </div>
 

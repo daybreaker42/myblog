@@ -1,0 +1,13 @@
+.category-aside {
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+    margin-left: 45px;
+}
+
+.category-aside-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin: 0px 0px 20px 0px;
+}

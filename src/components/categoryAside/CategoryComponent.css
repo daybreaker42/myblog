@@ -1,0 +1,19 @@
+.category-component {
+    width: 172px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    border-radius: 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.category-component>span {
+    padding: 5px 0px 5px 15px;
+}
+
+
+.category-component:hover {
+    background-color: #515151;
+}
