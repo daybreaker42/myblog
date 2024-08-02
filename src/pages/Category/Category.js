@@ -1,16 +1,15 @@
-import Nav from '../components/nav';
-function Profile() {
+import Nav from '../../components/Nav/Nav';
+function Category() {
     return (
         <div>
             <header className="App-header">
-                {/* nav bar */}
                 <Nav />
             </header>
             <main>
-                <h1>Profile Page</h1>
+                <h1>Category Page</h1>
             </main>
         </div>
     )
 }
 
-export default Profile;
+export default Category;

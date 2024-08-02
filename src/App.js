@@ -1,19 +1,11 @@
 
 import './App.css';
-import Nav from './components/nav';
+import Router from './router';
 
 function App() {
   return (
     <div className="App">
-
-      <header className="App-header">
-        {/* nav bar */}
-        <Nav />
-      </header>
-      <main>
-        <h1>Main page</h1>
-      </main>
-
+      <Router />
     </div>
   );
 }

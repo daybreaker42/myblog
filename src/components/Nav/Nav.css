@@ -1,0 +1,43 @@
+.nav {
+    /* width: calc(100% - 270 * 2px); */
+    /* width: calc(100% - 270px); */
+    width: calc(100% - 270px);
+    height: 72px;
+    margin-left: 270px;
+    justify-content: space-between;
+}
+
+.nav,
+.nav-center {
+    display: flex;
+    /* gap: 40px; */
+}
+
+.nav-center,
+.nav-right {
+    /* gap: 30px; */
+    justify-content: center;
+}
+
+.nav-right {
+    display: flex;
+    margin-right: 15px;
+    /* gap: 30px; */
+}
+
+/* nav 안에 items */
+.navlink {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    /* padding: 20px 0px; */
+}
+
+.nav-center .navlink {
+    padding: 20px;
+}
+
+.nav-right .navlink {
+    padding: 20px 15px;
+}
