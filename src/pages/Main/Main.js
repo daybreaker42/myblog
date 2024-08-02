@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // component imports
 import Nav from '../../components/nav/Nav';
@@ -9,9 +9,12 @@ import Article from '../../components/article/Article';
 
 // css imports
 import './Main.css';
+import PageButtons from '../../components/pageButton/PageButtons';
 
 function Main() {
     const [posts, setPosts] = React.useState([]);
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [totalPages, setTotalPages] = React.useState(10);
     useEffect(() => {
         console.log(`main page loaded`);
         // fetch data from api
@@ -229,10 +232,8 @@ function Main() {
                         </section>
                         <Social />
                     </section>
-
-
                 </section>
-
+                <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
             </main>
             <footer>
                 <p>Footer</p>

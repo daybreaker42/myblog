@@ -1,0 +1,19 @@
+.page-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.pageButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--dark-2);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+
+    color: var(--text-default);
+    font-size: 16px;
+}
