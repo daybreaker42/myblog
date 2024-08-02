@@ -1,4 +1,3 @@
-import CategoryComponent from "./CategoryComponent";
 import './CategoryAside.css';
 
 /**
@@ -7,28 +6,51 @@ import './CategoryAside.css';
  * 자식 컴포넌트로 CategoryComponent를 사용
  */
 function CategoryAside() {
-    const categoryExample = {
-        title: 'category1',
-        count: 10
-    };
-    const categoryExample1 = {
-        title: 'category1'
-    };
 
-    // server로부터 받아온 category 목록을 이용하여 category component를 생성
+    // server로부터 받아온 category 목록을 이용하여 category component를 생성 - TODO
     // const categories = await fetchCategories();
-    // const categoryComponents = categories.map(category => {
-    //     return <CategoryComponent categoryComponentInstance={category} />
-    // });
+    const categories = [
+        {
+            id: 0,
+            name: 'All'
+        },
+        {
+            id: 1,
+            name: 'category1',
+            count: 5
+        },
+        {
+            id: 2,
+            name: 'category2',
+            count: 3
+        },
+        {
+            id: 3,
+            name: 'category3',
+            count: 2
+        }
+    ];
+    const categoryComponents = categories.map(category => {
+        return <CategoryComponent categoryComponentInstance={category} />
+    });
 
     return (
         <div className="category-aside">
             <span className="category-aside-title">Category</span>
-            <CategoryComponent categoryComponentInstance={categoryExample} />
-            <CategoryComponent categoryComponentInstance={categoryExample} />
-            <CategoryComponent categoryComponentInstance={categoryExample1} />
+            {categoryComponents}
         </div>
     )
+}
+
+function CategoryComponent({ categoryComponentInstance }) {
+    return (
+        <div className='category-component'>
+            <span>
+                {categoryComponentInstance.name}
+                {categoryComponentInstance.count !== undefined && `: (${categoryComponentInstance.count})`}
+            </span>
+        </div>
+    );
 }
 
 export default CategoryAside;
