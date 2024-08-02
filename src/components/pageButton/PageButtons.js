@@ -16,12 +16,14 @@ function PageButtons({ currentPage, setPage, totalPages }) {
     pages.push(1);
     for (let i = currentPage - 4; i <= currentPage + 4; i++) {
         if (i > 1 && i < totalPages) {
-            if (i === currentPage - 4 && Math.floor((1 + i) / 2) > 1) {
-                pages.push(Math.floor((1 + i) / 2));
+            const leftMiddle = Math.floor((1 + i) / 2);
+            if (i === currentPage - 4 && leftMiddle > 1 && i !== leftMiddle) {
+                pages.push(leftMiddle);
             }
             pages.push(i);
-            if (i === currentPage + 4 && Math.floor((i + totalPages) / 2) < totalPages) {
-                pages.push(Math.floor((i + totalPages) / 2));
+            const rightMiddle = Math.floor((i + totalPages) / 2);
+            if (i === currentPage + 4 && rightMiddle < totalPages && i !== rightMiddle) {
+                pages.push(rightMiddle);
             }
         }
     }
