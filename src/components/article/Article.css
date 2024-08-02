@@ -2,6 +2,7 @@ article {
     display: flex;
     width: 720px;
     height: 84px;
+    margin-bottom: 20px;
 }
 
 img {

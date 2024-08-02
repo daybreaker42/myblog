@@ -13,7 +13,7 @@ function Article({ articleInstance }) {
                     <section className='article-info'>
                         <span>{`${articleInstance.articleInfo.user.name} · ${articleInstance.articleInfo.createdAt} · `}</span>
                         <span style={{ width: '20px', height: '20px' }}><TimerIcon /></span>
-                        <span>{articleInstance.articleInfo.readingTime.value} {articleInstance.articleInfo.readingTime.unit}</span>
+                        <span>{articleInstance.articleInfo.readingTime.value}{articleInstance.articleInfo.readingTime.unit}</span>
                     </section>
                     <section className='article-data'>
                         <span>{`views ${articleInstance.articledata.viewCnt} · comments ${articleInstance.articledata.commentCnt}`}</span>
