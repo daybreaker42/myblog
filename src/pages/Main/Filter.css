@@ -1,17 +1,32 @@
 .filter {
-    /* margin-bottom: 15px; */
+    display: flex;
+    width: 100%;
+    justify-content: end;
+
+    margin-right: calc(100% - 720px);
+}
+
+.sortbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 15px;
 }
 
 /* custom dropdown 설정 */
 .custom-dropdown {
     position: relative;
-    width: 200px;
+    width: 120px;
+    height: 30px;
 }
 
 .selected-option {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 5px 16px;
+    border: solid none;
+    border-radius: 10px;
     cursor: pointer;
+    background-color: var(--dark-2);
 }
 
 .options {
@@ -20,8 +35,8 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #fff;
-    border: 1px solid #ccc;
+    background-color: transparent;
+    border: none;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -30,8 +45,12 @@
 .options li {
     padding: 10px;
     cursor: pointer;
+    background-color: var(--dark-2);
+    border-radius: 10px;
+
+    margin: 5px 0;
 }
 
 .options li:hover {
-    background: #f0f0f0;
+    background-color: var(--dark-3);
 }

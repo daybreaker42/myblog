@@ -14,10 +14,32 @@ function Filter() {
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
-    const handleOptionClick = (option) => {
+    const handleOptionClick = async (option) => {
+        // TODO - 상태관리로 해당 버튼 눌렀을시 post data re-rendering
         setSelectedOption(option.label);
         setIsOpen(false);
-        console.log('선택된 값:', option.value);
+        // console.log('선택된 값:', option.value);
+        try {
+            // TODO - 백엔드 구현 후 다시 작성
+            // post 요청
+            // const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            //     method: 'POST',
+            //     body: JSON.stringify({
+            //         title: option.label,
+            //         body: 'bar',
+            //         userId: 1,
+            //     }),
+            //     headers: {
+            //         'Content-type': 'application/json; charset=UTF-8',
+            //     },
+            // });
+            // const data = await response.json();
+            // console.log(data);
+
+
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     useEffect(() => {
@@ -35,24 +57,27 @@ function Filter() {
 
     return (
         <div className='filter'>
-            <span>sort:</span>
-            <div className="custom-dropdown" ref={dropdownRef}>
-                <div className="selected-option" onClick={toggleDropdown}>
-                    {selectedOption}
+            <div className='sortbox'>
+                <span>sort:</span>
+                <div className="custom-dropdown" ref={dropdownRef}>
+                    <div className="selected-option" onClick={toggleDropdown}>
+                        {selectedOption}
+                    </div>
+                    {isOpen && (
+                        <ul className="options">
+                            {options.map((option) => (
+                                <li
+                                    key={option.value}
+                                    onClick={() => handleOptionClick(option)}
+                                >
+                                    {option.label}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
-                {isOpen && (
-                    <ul className="options">
-                        {options.map((option) => (
-                            <li
-                                key={option.value}
-                                onClick={() => handleOptionClick(option)}
-                            >
-                                {option.label}
-                            </li>
-                        ))}
-                    </ul>
-                )}
             </div>
+
         </div>
     );
 }
