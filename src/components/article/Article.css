@@ -1,0 +1,49 @@
+article {
+    display: flex;
+    width: 720px;
+    height: 84px;
+}
+
+img {
+    width: 120px;
+    /* height: 84px; */
+    object-fit: cover;
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.article-body {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: calc(100% - 120px - 10px);
+    border-radius: 0px 10px 10px 0px;
+
+    align-items: start;
+
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.article-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    padding: 0px 0px 15px 0px;
+}
+
+.article-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.article-info {
+    display: flex;
+    font-size: 16px;
+}
+
+.article-data {
+    display: flex;
+    font-size: 13px;
+}
