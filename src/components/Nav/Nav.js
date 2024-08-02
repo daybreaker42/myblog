@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Nav.css';
 import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
 import { ReactComponent as Account } from '../../assets/icons/account.svg';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../searchBar/SearchBar';
 
 function Nav() {
     return <nav className="nav">

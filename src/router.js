@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Main from './pages/Main/Main'
-import Profile from './pages/Profile/Profile';
-import About from './pages/About/About';
-import Category from './pages/Category/Category';
-import Tags from './pages/Tags/Tags';
-import Settings from './pages/Settings/Settings';
+import Main from './pages/main/Main'
+import Profile from './pages/profile/Profile';
+import About from './pages/about/About';
+import Category from './pages/category/Category';
+import Tags from './pages/tags/Tags';
+import Settings from './pages/settings/Settings';
 
 const Router = () => {
     return (
