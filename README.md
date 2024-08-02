@@ -1,10 +1,11 @@
-# Getting Started with Create React App
+# MyBlog projet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 설명
 
-## Available Scripts
+- 나만의 블로그 프로젝트
+- React + Supabase + Vercel 이용해서 배포
 
-In the project directory, you can run:
+## 기타 설정 관련 사항들
 
 ### `npm start`
 
