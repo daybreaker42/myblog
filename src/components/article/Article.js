@@ -1,6 +1,7 @@
 import './Article.css';
 import leaves from '../../assets/images/leaves.jpg';
 import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
+import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
 
 function Article({ articleInstance }) {
     return (
@@ -8,8 +9,13 @@ function Article({ articleInstance }) {
             {/* <img src={articleInstance.image} alt={articleInstance.title} /> */}
             <img src={leaves} alt={articleInstance.title} />
             <section className='article-body'>
-                {/* TODO - title overflow 처리 */}
-                <span className='article-title'>{articleInstance.title}</span>
+                <section className='article-header'>
+                    <span className='article-title'>{articleInstance.title}</span>
+                    <button className='article-button'>
+                        <MoreVertIcon />
+                    </button>
+                </section>
+
                 <section className='article-details'>
                     <section className='article-info'>
                         <span>{`${articleInstance.articleInfo.user.name} · ${articleInstance.articleInfo.createdAt} · `}</span>

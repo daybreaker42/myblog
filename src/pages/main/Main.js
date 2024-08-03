@@ -21,7 +21,7 @@ function Main() {
         // fetch data from api
         setPosts([
             {
-                title: 'First Post',
+                title: '이 제목은 너무 길어서 화면에 전부 담지 못합니다. 이 제목은 너무 길어서 화면에 전부 담지 못합니다. 이 제목은 너무 길어서 화면에 전부 담지 못합니다.',
                 articleInfo: {
                     user: {
                         id: 1,
