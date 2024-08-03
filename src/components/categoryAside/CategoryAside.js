@@ -47,7 +47,7 @@ function CategoryComponent({ categoryComponentInstance }) {
         <div className='category-component'>
             <span>
                 {categoryComponentInstance.name}
-                {categoryComponentInstance.count !== undefined && `: (${categoryComponentInstance.count})`}
+                {categoryComponentInstance.count !== undefined && `(${categoryComponentInstance.count})`}
             </span>
         </div>
     );
