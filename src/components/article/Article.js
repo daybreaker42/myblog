@@ -6,6 +6,7 @@ import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg
 function Article({ articleInstance }) {
     return (
         <article>
+            {/* TODO - image fetching한거로 설정하기 */}
             {/* <img src={articleInstance.image} alt={articleInstance.title} /> */}
             <img src={leaves} alt={articleInstance.title} />
             <section className='article-body'>
