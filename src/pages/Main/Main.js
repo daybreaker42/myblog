@@ -11,10 +11,11 @@ import Article from '../../components/article/Article';
 import './Main.css';
 import PageButtons from '../../components/pageButton/PageButtons';
 
+// TODO - 반응형 추가
 function Main() {
-    const [posts, setPosts] = React.useState([]);
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const [totalPages, setTotalPages] = React.useState(10);
+    const [posts, setPosts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(10);
     useEffect(() => {
         console.log(`main page loaded`);
         // fetch data from api

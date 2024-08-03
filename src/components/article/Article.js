@@ -8,6 +8,7 @@ function Article({ articleInstance }) {
             {/* <img src={articleInstance.image} alt={articleInstance.title} /> */}
             <img src={leaves} alt={articleInstance.title} />
             <section className='article-body'>
+                {/* TODO - title overflow 처리 */}
                 <span className='article-title'>{articleInstance.title}</span>
                 <section className='article-details'>
                     <section className='article-info'>
