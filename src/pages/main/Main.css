@@ -4,8 +4,8 @@ main {
     align-items: center;
     justify-content: center;
 
+    /* nav바 높이만큼 top margin 설정 */
     margin-top: var(--nav-height);
-    background-color: #242424;
 }
 
 .title {
