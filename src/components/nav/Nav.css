@@ -1,11 +1,20 @@
 .nav {
-    /* width: calc(100% - 270 * 2px); */
-    /* width: calc(100% - 270px); */
     width: calc(100% - 270px);
-    height: 72px;
-    margin-left: 270px;
+    height: var(--nav-height);
+    padding-left: 270px;
     justify-content: space-between;
+
+    /* 상단고정 관련 코드 */
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+
+    /* blur효과 관련 코드 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
+
 
 .nav,
 .nav-center {
