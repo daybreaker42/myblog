@@ -31,16 +31,14 @@
 .nav-right {
     display: flex;
     margin-right: 15px;
-    /* gap: 30px; */
 }
 
 /* nav 안에 items */
-.navlink {
+.navlink span {
     text-decoration: none;
-    color: white;
+    color: #7b7b7b;
     font-size: 20px;
     font-weight: bold;
-    /* padding: 20px 0px; */
 }
 
 .nav-center .navlink {
@@ -49,4 +47,8 @@
 
 .nav-right .navlink {
     padding: 20px 15px;
+}
+
+.navlink.active>span {
+    color: white;
 }
