@@ -21,6 +21,7 @@ function Main() {
         // fetch data from api
         setPosts([
             {
+                id: 1,
                 title: '이 제목은 너무 길어서 화면에 전부 담지 못합니다. 이 제목은 너무 길어서 화면에 전부 담지 못합니다. 이 제목은 너무 길어서 화면에 전부 담지 못합니다.',
                 articleInfo: {
                     user: {
@@ -39,6 +40,7 @@ function Main() {
                 },
             },
             {
+                id: 2,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -57,6 +59,7 @@ function Main() {
                 },
             },
             {
+                id: 3,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -75,6 +78,7 @@ function Main() {
                 },
             },
             {
+                id: 4,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -93,6 +97,7 @@ function Main() {
                 },
             },
             {
+                id: 5,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -111,6 +116,7 @@ function Main() {
                 },
             },
             {
+                id: 6,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -129,6 +135,7 @@ function Main() {
                 },
             },
             {
+                id: 7,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -147,6 +154,7 @@ function Main() {
                 },
             },
             {
+                id: 8,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -165,6 +173,7 @@ function Main() {
                 },
             },
             {
+                id: 9,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -183,6 +192,7 @@ function Main() {
                 },
             },
             {
+                id: 10,
                 title: 'First Post',
                 articleInfo: {
                     user: {
@@ -227,8 +237,8 @@ function Main() {
                     <section className='main-middle'>
                         <CategoryAside />
                         <section className='main-content'>
-                            {posts.map((item) => (
-                                <Article key={item.id} articleInstance={item} />
+                            {posts.map((item, index) => (
+                                <Article key={`article-${item.id || index}`} article={item} />
                             ))}
                         </section>
                         <Social />
