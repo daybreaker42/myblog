@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './CategoryAside.css';
 
 /**
@@ -5,11 +6,14 @@ import './CategoryAside.css';
  * 화면 왼쪽에 카테고리 목록을 보여주는 컴포넌트
  * 자식 컴포넌트로 CategoryComponent를 사용
  */
-function CategoryAside() {
+function CategoryAside({ categories }) {
 
     // server로부터 받아온 category 목록을 이용하여 category component를 생성 - TODO
-    // const categories = await fetchCategories();
-    const categories = [
+    useEffect(() => {
+        // fetch categories
+        // const categories = await fetchCategories();
+    }, []);
+    const categoriesExample = [
         {
             id: 0,
             name: 'All'
@@ -30,8 +34,8 @@ function CategoryAside() {
             count: 2
         }
     ];
-    const categoryComponents = categories.map(category => {
-        return <CategoryComponent categoryComponentInstance={category} />
+    const categoryComponents = categoriesExample.map((category, index) => {
+        return <CategoryComponent key={`category-${index}`} categoryComponentInstance={category} />
     });
 
     return (
@@ -43,11 +47,16 @@ function CategoryAside() {
 }
 
 function CategoryComponent({ categoryComponentInstance }) {
+    const onClickCategory = (categoryName) => {
+        // TODO - 해당 카테고리에 해당하는 글 목록을 보여주도록 구현
+        console.log(`category ${categoryName} is clicked`);
+    }
+
     return (
-        <div className='category-component'>
+        <div className='category-component' onClick={() => { onClickCategory(categoryComponentInstance.name) }}>
             <span>
                 {categoryComponentInstance.name}
-                {categoryComponentInstance.count !== undefined && `: (${categoryComponentInstance.count})`}
+                {categoryComponentInstance.count !== undefined && `(${categoryComponentInstance.count})`}
             </span>
         </div>
     );

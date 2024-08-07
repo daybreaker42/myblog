@@ -1,23 +1,30 @@
 import './Article.css';
 import leaves from '../../assets/images/leaves.jpg';
 import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
+import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
 
-function Article({ articleInstance }) {
+function Article({ article }) {
     return (
         <article>
-            {/* <img src={articleInstance.image} alt={articleInstance.title} /> */}
-            <img src={leaves} alt={articleInstance.title} />
+            {/* TODO - image fetching한거로 설정하기 */}
+            {/* <img src={article.image} alt={article.title} /> */}
+            <img src={leaves} alt={article.title} />
             <section className='article-body'>
-                {/* TODO - title overflow 처리 */}
-                <span className='article-title'>{articleInstance.title}</span>
+                <section className='article-header'>
+                    <span className='article-title'>{article.title}</span>
+                    <button className='article-button'>
+                        <MoreVertIcon />
+                    </button>
+                </section>
+
                 <section className='article-details'>
                     <section className='article-info'>
-                        <span>{`${articleInstance.articleInfo.user.name} · ${articleInstance.articleInfo.createdAt} · `}</span>
+                        <span>{`${article.articleInfo.user.name} · ${article.articleInfo.createdAt} · `}</span>
                         <span style={{ width: '20px', height: '20px' }}><TimerIcon /></span>
-                        <span>{articleInstance.articleInfo.readingTime.value}{articleInstance.articleInfo.readingTime.unit}</span>
+                        <span>{article.articleInfo.readingTime.value}{article.articleInfo.readingTime.unit}</span>
                     </section>
                     <section className='article-data'>
-                        <span>{`views ${articleInstance.articledata.viewCnt} · comments ${articleInstance.articledata.commentCnt}`}</span>
+                        <span>{`views ${article.articledata.viewCnt} · comments ${article.articledata.commentCnt}`}</span>
                     </section>
                 </section>
             </section>

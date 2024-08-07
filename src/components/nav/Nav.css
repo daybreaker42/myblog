@@ -1,43 +1,56 @@
 .nav {
-    /* width: calc(100% - 270 * 2px); */
-    /* width: calc(100% - 270px); */
     width: calc(100% - 270px);
-    height: 72px;
-    margin-left: 270px;
+    height: var(--nav-height);
+    padding-left: 270px;
     justify-content: space-between;
+
+    /* 상단고정 관련 코드 */
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+
+    /* blur효과 관련 코드 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
+
 
 .nav,
 .nav-center {
     display: flex;
-    /* gap: 40px; */
 }
 
 .nav-center,
 .nav-right {
-    /* gap: 30px; */
     justify-content: center;
+}
+
+.nav-center {
+    gap: 40px;
 }
 
 .nav-right {
     display: flex;
     margin-right: 15px;
-    /* gap: 30px; */
 }
 
 /* nav 안에 items */
-.navlink {
+.navlink span {
     text-decoration: none;
-    color: white;
+    color: #7b7b7b;
     font-size: 20px;
     font-weight: bold;
-    /* padding: 20px 0px; */
 }
 
 .nav-center .navlink {
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .nav-right .navlink {
     padding: 20px 15px;
+}
+
+.navlink.active>span {
+    color: white;
 }

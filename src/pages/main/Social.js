@@ -21,8 +21,8 @@ function Social() {
         },
     ]
 
-    const socialComponents = socialData.map(social => {
-        return <SocialComponent socialComponentInstance={social} />
+    const socialComponents = socialData.map((social, index) => {
+        return <SocialComponent key={`social-${index}`} socialComponentInstance={social} />
     });
 
     return (
