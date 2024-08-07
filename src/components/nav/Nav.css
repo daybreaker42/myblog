@@ -19,13 +19,15 @@
 .nav,
 .nav-center {
     display: flex;
-    /* gap: 40px; */
 }
 
 .nav-center,
 .nav-right {
-    /* gap: 30px; */
     justify-content: center;
+}
+
+.nav-center {
+    gap: 40px;
 }
 
 .nav-right {
@@ -42,7 +44,7 @@
 }
 
 .nav-center .navlink {
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .nav-right .navlink {
