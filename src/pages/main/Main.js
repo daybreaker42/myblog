@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 // component imports
-import Nav from '../../components/nav/Nav';
-import CategoryAside from '../../components/categoryAside/CategoryAside';
+import Nav from 'components/nav/Nav';
+import CategoryAside from 'components/categoryAside/CategoryAside';
 import Filter from './Filter';
 import Social from './Social';
-import Article from '../../components/article/Article';
+import ArticleCard from 'components/article/ArticleCard';
+import PageButtons from 'components/pageButton/PageButtons';
+import Footer from 'components/footer/Footer';
 
 // css imports
 import './Main.css';
-import PageButtons from '../../components/pageButton/PageButtons';
 
 // TODO - 반응형 추가
 function Main() {
@@ -23,7 +24,7 @@ function Main() {
             {
                 id: 1,
                 title: '이 제목은 너무 길어서 화면에 전부 담지 못합니다. 이 제목은 너무 길어서 화면에 전부 담지 못합니다. 이 제목은 너무 길어서 화면에 전부 담지 못합니다.',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -34,7 +35,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -42,7 +43,7 @@ function Main() {
             {
                 id: 2,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -53,7 +54,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -61,7 +62,7 @@ function Main() {
             {
                 id: 3,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -72,7 +73,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -80,7 +81,7 @@ function Main() {
             {
                 id: 4,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -91,7 +92,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -99,7 +100,7 @@ function Main() {
             {
                 id: 5,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -110,7 +111,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -118,7 +119,7 @@ function Main() {
             {
                 id: 6,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -129,7 +130,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -137,7 +138,7 @@ function Main() {
             {
                 id: 7,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -148,7 +149,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -156,7 +157,7 @@ function Main() {
             {
                 id: 8,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -167,7 +168,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -175,7 +176,7 @@ function Main() {
             {
                 id: 9,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -186,7 +187,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -194,7 +195,7 @@ function Main() {
             {
                 id: 10,
                 title: 'First Post',
-                articleInfo: {
+                info: {
                     user: {
                         id: 1,
                         name: 'John Doe',
@@ -205,7 +206,7 @@ function Main() {
                         unit: 'm',
                     },
                 },
-                articledata: {
+                data: {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
@@ -238,7 +239,7 @@ function Main() {
                         <CategoryAside />
                         <section className='main-content'>
                             {posts.map((item, index) => (
-                                <Article key={`article-${item.id || index}`} article={item} />
+                                <ArticleCard key={`article-${item.id || index}`} article={item} />
                             ))}
                         </section>
                         <Social />
@@ -246,9 +247,7 @@ function Main() {
                 </section>
                 <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
             </main>
-            <footer>
-                <p>Footer</p>
-            </footer>
+            <Footer />
         </div>
     );
 }
