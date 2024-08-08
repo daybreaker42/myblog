@@ -22,6 +22,7 @@
 
     border-radius: 10px;
     transition: background-color 0.2s ease-in-out;
+    transition: transform 0.2s ease;
 }
 
 .category-component>span {
@@ -31,4 +32,8 @@
 
 .category-component:hover {
     background-color: #515151;
+}
+
+.category-component:active {
+    transform: scale(0.95);
 }

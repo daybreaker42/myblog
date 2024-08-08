@@ -37,9 +37,15 @@ a.social-button {
 
     font-size: 16px;
     color: var(--text-default);
+
+    transition: transform 0.2s ease;
 }
 
 
 .social-button:hover {
     background-color: #515151;
+}
+
+.social-button:active {
+    transform: scale(0.95);
 }
