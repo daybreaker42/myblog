@@ -85,3 +85,43 @@ img {
     display: flex;
     font-size: 13px;
 }
+
+.article-header {
+    /* menu 위치 설정 */
+    position: relative;
+}
+
+.article-menu {
+    /* menu 위치 설정 */
+    position: absolute;
+    top: calc(-10px);
+    /* 100px menu너비 + 10px 메뉴 padding + 10px heading padding + extra*/
+    right: calc(-100px - 10px - 10px - 10px);
+    z-index: 1;
+
+    background-color: var(--dark-2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 5px;
+
+    width: 100px;
+    /* height: 100px; */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.article-menu>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 24px; */
+    height: 24px;
+    background-color: transparent;
+    border-radius: 500px;
+    border: none;
+    color: var(--text-default);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}

@@ -2,6 +2,8 @@ import './ArticleCard.css';
 import leaves from '../../assets/images/leaves.jpg';
 import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
 import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
+import { Link } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
 /**
  * ArticleCard component
@@ -20,32 +22,95 @@ import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg
  * @returns {JSX.Element}
  */
 function ArticleCard({ article }) {
-    return (
-        <article>
-            {/* TODO - image fetching한거로 설정하기 */}
-            {/* <img src={article.image} alt={article.title} /> */}
-            <img src={leaves} alt={article.title} />
-            <section className='article-body'>
-                <section className='article-header'>
-                    <span className='article-title'>{article.title}</span>
-                    <button className='article-button'>
-                        <MoreVertIcon />
-                    </button>
-                </section>
+    const [menuVisible, setMenuVisible] = useState(false);
+    const menuRef = useRef(null);
 
-                <section className='article-details'>
-                    <section className='article-info'>
-                        <span>{`${article.info.user.name} · ${article.info.createdAt} · `}</span>
-                        <span style={{ width: '20px', height: '20px' }}><TimerIcon /></span>
-                        <span>{article.info.readingTime.value}{article.info.readingTime.unit}</span>
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenuVisible(false);
+            }
+        };
+
+        if (menuVisible) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [menuVisible]);
+
+    const toggleMenu = (event) => {
+        preventEvent(event);
+        setMenuVisible(!menuVisible);
+    };
+
+
+
+    return (
+        <Link to={`/article/${article.id}`}>
+            <article>
+                {/* TODO - image fetching한거로 설정하기 */}
+                {/* <img src={article.image} alt={article.title} /> */}
+                <img src={leaves} alt={article.title} />
+                <section className='article-body'>
+                    <section className='article-header'>
+                        <span className='article-title'>{article.title}</span>
+                        {!menuVisible && (
+                            <button className='article-button' onClick={toggleMenu}>
+                                <MoreVertIcon />
+                            </button>
+                        )}
+                        {menuVisible && (
+                            <div ref={menuRef}>
+                                <ArticleMenu article={article} />
+                            </div>
+                        )}
                     </section>
-                    <section className='article-data'>
-                        <span>{`views ${article.data.viewCnt} · comments ${article.data.commentCnt}`}</span>
+
+                    <section className='article-details'>
+                        <section className='article-info'>
+                            <span>{`${article.info.user.name} · ${article.info.createdAt} · `}</span>
+                            <span style={{ width: '20px', height: '20px' }}><TimerIcon /></span>
+                            <span>{article.info.readingTime.value}{article.info.readingTime.unit}</span>
+                        </section>
+                        <section className='article-data'>
+                            <span>{`views ${article.data.viewCnt} · comments ${article.data.commentCnt}`}</span>
+                        </section>
                     </section>
                 </section>
-            </section>
-        </article >
+            </article >
+        </Link >
     );
 }
+
+// 더보기 버튼을 누르면 나오는 메뉴
+function ArticleMenu({ article }) {
+    return (
+        <section className='article-menu'>
+            <button onClick={(event) => {
+                preventEvent(event);
+                console.log(`edit article ${article.id}`)
+            }}>수정</button>
+            <button onClick={(event) => {
+                preventEvent(event);
+                console.log(`delete article ${article.id}`)
+            }}>삭제</button>
+            <button onClick={(event) => {
+                preventEvent(event);
+                console.log(`share article ${article.id}`)
+            }}>공유</button>
+
+        </section>
+    );
+}
+
+const preventEvent = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+};
 
 export default ArticleCard;
