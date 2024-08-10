@@ -2,6 +2,7 @@ import './ArticleCard.css';
 import leaves from '../../assets/images/leaves.jpg';
 import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
 import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 
@@ -59,17 +60,15 @@ function ArticleCard({ article }) {
                 <section className='article-body'>
                     <section className='article-header'>
                         <span className='article-title'>{article.title}</span>
-                        {!menuVisible && (
-                            <button className='article-button' onClick={toggleMenu}>
-                                <MoreVertIcon />
-                            </button>
-                        )}
-                        {menuVisible && (
-                            <div ref={menuRef}>
-                                <ArticleMenu article={article} />
-                            </div>
-                        )}
+                        <button className='article-button' onClick={toggleMenu}>
+                            {menuVisible ? <CloseIcon /> : <MoreVertIcon />}
+                        </button>
                     </section>
+                    {menuVisible && (
+                        <div ref={menuRef}>
+                            <ArticleMenu article={article} />
+                        </div>
+                    )}
 
                     <section className='article-details'>
                         <section className='article-info'>
@@ -90,7 +89,10 @@ function ArticleCard({ article }) {
 // 더보기 버튼을 누르면 나오는 메뉴
 function ArticleMenu({ article }) {
     return (
-        <section className='article-menu'>
+        <section className='article-menu' onClick={(event) => {
+            preventEvent(event);
+        }}>
+            {/* 권한 있을 경우에만 수정, 삭제 버튼 나오게 */}
             <button onClick={(event) => {
                 preventEvent(event);
                 console.log(`edit article ${article.id}`)

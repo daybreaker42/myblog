@@ -42,7 +42,7 @@ function Main() {
             },
             {
                 id: 2,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,
@@ -61,7 +61,7 @@ function Main() {
             },
             {
                 id: 3,
-                title: 'First Post',
+                title: `post title 2`,
                 info: {
                     user: {
                         id: 1,
@@ -80,7 +80,7 @@ function Main() {
             },
             {
                 id: 4,
-                title: 'First Post',
+                title: `post title 3`,
                 info: {
                     user: {
                         id: 1,
@@ -99,7 +99,7 @@ function Main() {
             },
             {
                 id: 5,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,
@@ -118,7 +118,7 @@ function Main() {
             },
             {
                 id: 6,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,
@@ -137,7 +137,7 @@ function Main() {
             },
             {
                 id: 7,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,
@@ -156,7 +156,7 @@ function Main() {
             },
             {
                 id: 8,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,
@@ -175,7 +175,7 @@ function Main() {
             },
             {
                 id: 9,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,
@@ -194,7 +194,7 @@ function Main() {
             },
             {
                 id: 10,
-                title: 'First Post',
+                title: `post title 1`,
                 info: {
                     user: {
                         id: 1,

@@ -1,9 +1,12 @@
 :root {
   --text-default: white;
   --dark-0: #000000;
+  --dark-1-20p: rgba(0, 0, 0, 0.2);
+  --dark-1e: #1e1e1e;
   --dark-1: #242424;
   --dark-2: #515151;
   --dark-3: #606060;
+
 
   --nav-height: 72px;
 }

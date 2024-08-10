@@ -22,7 +22,10 @@ img {
 
     align-items: start;
 
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--dark-1e);
+    /* background-color: var(--dark-1e); */
+    /* menu 위치 위해서 설정 */
+    position: relative;
 }
 
 .article-header {
@@ -62,7 +65,7 @@ img {
     color: var(--text-default);
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    /* transition: background-color 0.3s ease-in-out; */
 }
 
 .article-button:hover {
@@ -94,12 +97,14 @@ img {
 .article-menu {
     /* menu 위치 설정 */
     position: absolute;
-    top: calc(-10px);
+    /* top: calc(-10px); */
     /* 100px menu너비 + 10px 메뉴 padding + 10px heading padding + extra*/
-    right: calc(-100px - 10px - 10px - 10px);
+    /* right: calc(-100px - 10px - 10px - 10px); */
+    top: 0;
+    right: -120px;
     z-index: 1;
 
-    background-color: var(--dark-2);
+    background-color: var(--dark-1e);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 5px;
@@ -113,9 +118,9 @@ img {
 
 .article-menu>button {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    /* width: 24px; */
+    width: 100%;
     height: 24px;
     background-color: transparent;
     border-radius: 500px;
@@ -124,4 +129,8 @@ img {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+}
+
+.article-menu>button:hover {
+    background-color: var(--dark-3);
 }
