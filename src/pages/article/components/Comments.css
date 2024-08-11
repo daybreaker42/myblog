@@ -14,6 +14,8 @@
 
 .comment-section .chat-icon {
     fill: #fff;
+    width: 2rem;
+    height: 2rem;
 }
 
 .comment-section h2 {
@@ -24,7 +26,7 @@
     margin: 0;
     width: 18.75rem;
 
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
