@@ -6,6 +6,7 @@ import Nav from 'components/nav/Nav';
 import Footer from 'components/footer/Footer';
 import ArticleCardScroll from 'components/article/ArticleCardScroll';
 import Comments from './components/Comments';
+import CommentForm from './components/CommentForm';
 
 // css imports
 import './Article.css';
@@ -417,14 +418,12 @@ const Article = () => {
                             </h2>
                             <Filter />
                         </section>
-                        {/* <section className="comment-section-body">
-                            {article.comments.map((comment, index) => (
-                                <Comment comments={comment} isLast={index === article.comments.length - 1} />
-                            ))}
-                        </section> */}
                         <Comments comments={article.comments} />
                     </section>
-                    <section className="comment-form">댓글 작성창</section>
+                    {/* <section className="comment-form">
+                        
+                    </section> */}
+                    <CommentForm articleId={article.id} />
                 </section>
 
                 {/* footer */}
