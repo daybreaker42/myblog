@@ -53,35 +53,23 @@ function ArticleCard({ article }) {
 
     return (
         <Link to={`/article/${article.id}`}>
-            <article>
-                {/* TODO - image fetching한거로 설정하기 */}
-                {/* <img src={article.image} alt={article.title} /> */}
-                <img src={leaves} alt={article.title} />
-                <section className='article-body'>
-                    <section className='article-header'>
-                        <span className='article-title'>{article.title}</span>
-                        <button className='article-button' onClick={toggleMenu}>
-                            {menuVisible ? <CloseIcon /> : <MoreVertIcon />}
-                        </button>
-                    </section>
-                    {menuVisible && (
-                        <div ref={menuRef}>
-                            <ArticleMenu article={article} />
-                        </div>
-                    )}
+            <article class="card">
 
-                    <section className='article-details'>
-                        <section className='article-info'>
-                            <span>{`${article.info.user.name} · ${article.info.createdAt} · `}</span>
-                            <span style={{ width: '20px', height: '20px' }}><TimerIcon /></span>
-                            <span>{article.info.readingTime.value}{article.info.readingTime.unit}</span>
-                        </section>
-                        <section className='article-data'>
-                            <span>{`views ${article.data.viewCnt} · comments ${article.data.commentCnt}`}</span>
-                        </section>
-                    </section>
-                </section>
-            </article >
+                <img src={leaves} alt={article.title} className='card-thumbnail' />
+                <div class="card-content">
+                    <h2 class="card-title">{article.title}</h2>
+                    <p class="card-summary">{article.content}</p>
+                    <div class="card-meta">
+                        <span class="card-author">작성자: {article.info.user.name}</span>
+                        <span class="card-date">{article.info.createdAt}</span>
+                    </div>
+                    <div class="card-stats">
+                        <span class="card-read-time">읽는 시간: {article.info.readingTime.value}{article.info.readingTime.unit}</span>
+                        <span class="card-views">조회수: {article.data.viewCnt}</span>
+                        <span class="card-comments">댓글: {article.data.commentCnt}</span>
+                    </div>
+                </div>
+            </article>
         </Link >
     );
 }

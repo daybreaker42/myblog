@@ -1,136 +1,105 @@
-article {
-    display: flex;
-    width: 720px;
-    height: 84px;
-    margin-bottom: 20px;
+:root {
+    --bg-color: #121212;
+    --card-bg-color: #1E1E1E;
+    --text-primary: #E0E0E0;
+    --text-secondary: #A0A0A0;
+    --accent-color: #BB86FC;
 }
 
-img {
-    width: 120px;
-    /* height: 84px; */
-    object-fit: cover;
-    margin: 0px 0px 0px 0px;
-    border-radius: 10px 0px 0px 10px;
+
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 1rem;
+    transition: transform 0.3s ease;
+
+
+    max-height: 12rem;
 }
 
-.article-body {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    width: calc(100% - 120px - 10px);
-    border-radius: 0px 10px 10px 0px;
-
-    align-items: start;
-
-    background-color: var(--dark-1e);
-    /* background-color: var(--dark-1e); */
-    /* menu 위치 위해서 설정 */
-    position: relative;
+.card:hover {
+    transform: translateY(-5px);
 }
 
-.article-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-
+.card-thumbnail {
     width: 100%;
-    /* height: 29px; */
-    margin-bottom: 15px;
+    height: 200px;
+    object-fit: cover;
 }
 
-.article-title {
-    display: flex;
-    justify-content: start;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    /* width: calc(100% - 124px); */
+.card-content {
+    flex-direction: column;
+    padding: 1rem;
+    overflow: hidden;
+}
 
+.card-title {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    max-height: 2em;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    text-align: start;
+    flex-shrink: 1;
+}
+
+.card-summary {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+
+    text-align: start;
+    flex-shrink: 1;
+    max-height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.5em;
 
+    display: -webkit-box;
+    /* Flex 대신 -webkit-box 사용 */
+    -webkit-box-orient: vertical;
+    /* 수직 방향으로 박스 정렬 */
+    -webkit-line-clamp: 2;
+    /* 두 줄까지만 표시하고 나머지는 ...으로 표시 */
 }
 
-.article-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    background-color: transparent;
-    border-radius: 500px;
-    border: none;
-    color: var(--text-default);
-    font-size: 16px;
-    cursor: pointer;
-    /* transition: background-color 0.3s ease-in-out; */
-}
-
-.article-button:hover {
-    background-color: var(--dark-3);
-}
-
-.article-details {
+.card-meta,
+.card-stats {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
-.article-info {
-    display: flex;
-    font-size: 16px;
+.card-meta {
+    margin-bottom: 0.5rem;
 }
 
-.article-data {
-    display: flex;
-    font-size: 13px;
+.card-stats span {
+    background-color: rgba(187, 134, 252, 0.1);
+    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
 }
 
-.article-header {
-    /* menu 위치 설정 */
-    position: relative;
-}
+@media (min-width: 768px) {
+    .card {
+        display: flex;
+        max-width: 720px;
+    }
 
-.article-menu {
-    /* menu 위치 설정 */
-    position: absolute;
-    /* top: calc(-10px); */
-    /* 100px menu너비 + 10px 메뉴 padding + 10px heading padding + extra*/
-    /* right: calc(-100px - 10px - 10px - 10px); */
-    top: 0;
-    right: -120px;
-    z-index: 1;
+    .card-thumbnail {
+        width: 300px;
+        height: auto;
+    }
 
-    background-color: var(--dark-1e);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 5px;
-
-    width: 100px;
-    /* height: 100px; */
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-
-.article-menu>button {
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    width: 100%;
-    height: 24px;
-    background-color: transparent;
-    border-radius: 500px;
-    border: none;
-    color: var(--text-default);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.article-menu>button:hover {
-    background-color: var(--dark-3);
+    .card-content {
+        flex: 1;
+    }
 }
