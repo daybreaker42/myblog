@@ -13,6 +13,8 @@
     /* blur효과 관련 코드 */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+
+    z-index: 9999;
 }
 
 
