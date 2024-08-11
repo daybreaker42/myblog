@@ -40,6 +40,11 @@ const Comments = ({ comments }) => {
                     {comments.length - 1 > index && <div className='comment-divider'></div>}
                 </React.Fragment>
             ))}
+            <section className='comment-page-btns'>
+                <button className='page-btn'>이전</button>
+                <button className='page-btn'>다음</button>
+
+            </section>
         </section>
     );
 };
