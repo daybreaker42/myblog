@@ -1,0 +1,78 @@
+.article-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 100%;
+}
+
+.article-scroll .section-title {
+    margin: 6.25rem 0 1.875rem 0;
+    width: 46.25rem;
+    font-size: 32px;
+    font-weight: bold;
+
+    text-align: start;
+}
+
+.article-scroll .articles {
+    display: flex;
+    gap: 1.875rem;
+
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-width: calc(100% - 16.875rem);
+
+    padding: 5px 0;
+}
+
+.article-scroll .articles .article-item {
+    flex: 0 0 auto;
+    /* 요소의 너비를 고정 */
+    width: 200px;
+    /* 원하는 너비로 설정 */
+}
+
+.article-scroll .card {
+    min-width: 25rem;
+    height: 12.5rem;
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1.25rem;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin: 0 0 1.25rem 0;
+    height: 1.875rem;
+
+}
+
+.card-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0;
+    padding: 0;
+
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.card-info>*::after {
+    content: "|";
+    padding: 0 5px;
+}
+
+.card-info>*:last-child::after {
+    content: none;
+}

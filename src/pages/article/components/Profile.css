@@ -10,7 +10,7 @@
     justify-content: space-between;
     align-items: end;
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 1.25rem;
 }
 
 .profile-header h2 {
@@ -132,6 +132,14 @@
 .favorite-icon,
 .chat-icon {
     fill: inherit;
+}
+
+.like.liked {
+    fill: #FF6B6B;
+}
+
+.like.liked:hover {
+    fill: #FF6B6B;
 }
 
 .share {

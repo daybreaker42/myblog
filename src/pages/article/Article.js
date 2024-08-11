@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import Nav from 'components/nav/Nav';
 import { useParams } from 'react-router-dom';
 
+// componetns imports
+import Nav from 'components/nav/Nav';
+import Footer from 'components/footer/Footer';
+import ArticleCardScroll from 'components/article/ArticleCardScroll';
+import Comments from './components/Comments';
+
+// css imports
 import './Article.css';
 import './components/Profile.css';
 import './components/ArticleIndex.css';
-import Footer from 'components/footer/Footer';
 
+import 'components/scrollbar.css';
+
+// svgs imports
 import { ReactComponent as ArrowIcon } from 'assets/icons/arrow_forward.svg';
 import { ReactComponent as LinkIcon } from 'assets/icons/link.svg';
 import { ReactComponent as FavoriteIcon } from 'assets/icons/favorite.svg';
 import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
+import Filter from 'pages/main/Filter';
 
 const articleMockupData = {
     id: 1,
@@ -60,20 +69,186 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
     comments: [
         {
             id: 1,
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+            writer: '댓글 작성자',
+            likes: [
+                {
+                    id: 1,
+                    writer: '좋아요 누른 사람1'
+                },
+                {
+                    id: 2,
+                    writer: '좋아요 누른 사람1'
+                },
+                {
+                    id: 3,
+                    writer: '좋아요 누른 사람1'
+                },
+            ],
+            createdAt: '2024-11-11 13:34'
+        },
+        {
+            id: 2,
             content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
             writer: '댓글 작성자',
-            createdAt: '댓글 작성일'
-        }
+            likes: [
+                {
+                    id: 1,
+                    writer: '좋아요 누른 사람1'
+                },
+                {
+                    id: 2,
+                    writer: '좋아요 누른 사람1'
+                },
+                {
+                    id: 3,
+                    writer: '좋아요 누른 사람1'
+                },
+            ],
+            createdAt: '2024-11-11 13:34'
+        },
+        {
+            id: 3,
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+            writer: '댓글 작성자',
+            likes: [
+                {
+                    id: 1,
+                    writer: '좋아요 누른 사람1'
+                },
+                {
+                    id: 2,
+                    writer: '좋아요 누른 사람1'
+                },
+                {
+                    id: 3,
+                    writer: '좋아요 누른 사람1'
+                },
+            ],
+            createdAt: '2024-11-11 13:34'
+        },
     ],
     relatedArticles: [
         {
+            id: 1,
+            title: '제목2',
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+            writer: '작성자2',
+            createdAt: '2024-10-11',
+            readingTime: {
+                time: 5,
+                unit: '분'
+            },
+            commentCnt: 1,
+            likesCnt: 3,
+            viewCnt: 10
+        },
+        {
             id: 2,
             title: '제목2',
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
             writer: '작성자2',
-            createdAt: '작성일2'
-        }
-    ]
+            createdAt: '2024-10-11',
+            readingTime: {
+                time: 5,
+                unit: '분'
+            },
+            commentCnt: 1,
+            likesCnt: 3,
+            viewCnt: 10
+        },
+        {
+            id: 3,
+            title: '제목2',
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+            writer: '작성자2',
+            createdAt: '2024-10-11',
+            readingTime: {
+                time: 5,
+                unit: '분'
+            },
+            commentCnt: 1,
+            likesCnt: 3,
+            viewCnt: 10
+        },
+        {
+            id: 4,
+            title: '제목2',
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+            writer: '작성자2',
+            createdAt: '2024-10-11',
+            readingTime: {
+                time: 5,
+                unit: '분'
+            },
+            commentCnt: 1,
+            likesCnt: 3,
+            viewCnt: 10
+        },
+        {
+            id: 5,
+            title: '제목2',
+            content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+            writer: '작성자2',
+            createdAt: '2024-10-11',
+            readingTime: {
+                time: 5,
+                unit: '분'
+            },
+            commentCnt: 1,
+            likesCnt: 3,
+            viewCnt: 10
+        },
+    ],
+    category: {
+        name: 'category',
+        articles: [
+            {
+                id: 1,
+                title: '제목2',
+                content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+                writer: '작성자2',
+                createdAt: '2024-10-11',
+                readingTime: {
+                    time: 5,
+                    unit: '분'
+                },
+                commentCnt: 1,
+                likesCnt: 3,
+                viewCnt: 10
+            },
+            {
+                id: 2,
+                title: '제목2',
+                content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+                writer: '작성자2',
+                createdAt: '2024-10-11',
+                readingTime: {
+                    time: 5,
+                    unit: '분'
+                },
+                commentCnt: 1,
+                likesCnt: 3,
+                viewCnt: 10
+            },
+            {
+                id: 3,
+                title: '제목2',
+                content: `제목학원이란 2040년까지 흥할 줄 알았지만, 그러지 못했던 비운의 사이트이다. 어떤 사진을 올리면 그것에 대한 재밌는 제목을 댓글로 짓는 사이트인데 지금 봐도 제법 잘 쓴 제목들이 많다. 필자는 여기서...`,
+                writer: '작성자2',
+                createdAt: '2024-10-11',
+                readingTime: {
+                    time: 5,
+                    unit: '분'
+                },
+                commentCnt: 1,
+                likesCnt: 3,
+                viewCnt: 10
+            },
+        ]
+    }
 };
+
 
 
 const Article = () => {
@@ -100,14 +275,8 @@ const Article = () => {
 
     // 공유하기 눌렀는지 체크
     const [isShareClicked, setIsShareClicked] = useState(false);
-
-    // share hover시 .link-icon 색상 변경
-    // const share = document.querySelector('.share');
-    // share.addEventListener('mouseover', () => {
-    //     const linkIcon = document.querySelector('.link-icon');
-    //     linkIcon.style.fill = '#838383';
-    //     console.log(`hover`);
-    // });
+    // 좋아요 눌렀는지 체크
+    const [isLiked, setIsLiked] = useState(false);
 
     return (
         <>
@@ -149,7 +318,7 @@ const Article = () => {
                     <section className="article-content">
                         <pre>{article.content}</pre>
                     </section>
-                    <section className='article-index'>
+                    <section className='article-index scrollbar'>
                         <span>목차</span>
                         <ul>
                             <li className='h1-index'><a href='#hello'>h1 제목</a></li>
@@ -195,11 +364,22 @@ const Article = () => {
                             </section>
                             <section className='reaction'>
                                 <section className='like-comment'>
-                                    <button className='like'>
+                                    <button className='like' onClick={
+                                        () => {
+                                            const like = document.querySelector('.like');
+                                            setIsLiked(!isLiked);
+                                            like.classList.add('liked');
+                                        }
+                                    }>
                                         <FavoriteIcon className='favorite-icon' />
                                         <span>좋아요</span>
                                     </button>
-                                    <button className='comment'>
+                                    <button className='comment' onClick={
+                                        () => {
+                                            const comment = document.querySelector('.comment');
+                                            comment.scrollIntoView({ behavior: 'smooth' });
+                                        }
+                                    }>
                                         <ChatIcon className='chat-icon' />
                                         <span>댓글</span>
                                     </button>
@@ -222,13 +402,28 @@ const Article = () => {
                         </section>
 
                     </section>
-                    <section className="reaction">반응</section>
+
                     {/* 추천 게시물 및 댓글 */}
-                    <section className="recommand-articles">추천 게시물들</section>
+                    <ArticleCardScroll sectionName='recommand' />
                     {/* 카테고리 다른 게시물 */}
-                    <section className="category-others">다른 게시물들</section>
+                    <ArticleCardScroll sectionName='category' />
+
                     {/* 댓글창 */}
-                    <section className="comment">댓글창</section>
+                    <section className="comment-section">
+                        <section className="comment-section-header">
+                            <h2>
+                                <ChatIcon className='chat-icon' />
+                                <span>댓글</span>
+                            </h2>
+                            <Filter />
+                        </section>
+                        {/* <section className="comment-section-body">
+                            {article.comments.map((comment, index) => (
+                                <Comment comments={comment} isLast={index === article.comments.length - 1} />
+                            ))}
+                        </section> */}
+                        <Comments comments={article.comments} />
+                    </section>
                     <section className="comment-form">댓글 작성창</section>
                 </section>
 
