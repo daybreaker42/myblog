@@ -3,7 +3,7 @@ import Nav from "components/nav/Nav";
 import "./errors.css";
 import HomeButton from "./HomeButton";
 
-const Error404 = () => {
+const Error400 = () => {
     return (
         <div>
             <header className="App-header">
@@ -14,8 +14,9 @@ const Error404 = () => {
                     <span className="iconWrapper">
                         <img src={require("assets/icons/warning.svg").default} alt='warning' width="100%" height="100%" />
                     </span>
-                    <h1 className="title">404 Not Found</h1>
-                    <p className="content">The requested resource could not be found on this server. Please check the URL and try again, or navigate to our homepage.</p>
+                    <h1 className="title">400 Bad Request</h1>
+                    <p className="content">We're unable to process your request due to invalid syntax.
+                        Please verify your input and try again.</p>
                     <HomeButton />
                 </section>
             </main>
@@ -23,4 +24,4 @@ const Error404 = () => {
     );
 };
 
-export default Error404;
+export default Error400;

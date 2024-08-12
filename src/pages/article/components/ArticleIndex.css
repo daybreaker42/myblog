@@ -1,0 +1,56 @@
+.article-index {
+    /* 위에 붙어있는 높이 설정 */
+    position: sticky;
+    top: 7rem;
+    width: 210px;
+    height: auto;
+    max-height: 30rem;
+
+    justify-content: start;
+    align-items: start;
+    text-align: start;
+
+    padding: 0.5rem 1rem;
+    border: 0 solid white;
+    border-width: 0 0 0 3px;
+
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.article-index span {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: white;
+}
+
+.article-index ul {
+    list-style-type: none;
+    padding: 1rem 0.5rem;
+    margin: 0;
+}
+
+.article-index li {
+    font-weight: bold;
+    margin: 0.5rem 0;
+    color: #ACACAC;
+}
+
+.article-index li:hover {
+    color: white;
+}
+
+.article-index .h1-index {
+    font-size: 1.5rem;
+
+}
+
+.article-index .h2-index {
+    font-size: 1.25rem;
+    padding-left: 0.5rem;
+}
+
+.article-index .h3-index {
+    font-size: 1.1rem;
+    padding-left: 1rem;
+}

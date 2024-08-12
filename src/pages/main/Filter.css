@@ -4,6 +4,7 @@
     justify-content: end;
 
     margin-right: calc(100% - 720px);
+    z-index: 999;
 }
 
 .sortbox {
@@ -19,6 +20,12 @@
     position: relative;
     width: 120px;
     height: 30px;
+
+    transition: transform 0.2s ease;
+}
+
+.custom-dropdown:active {
+    transform: scale(0.95);
 }
 
 .selected-option {
@@ -26,7 +33,7 @@
     border: solid none;
     border-radius: 10px;
     cursor: pointer;
-    background-color: var(--dark-2);
+    background-color: var(--dark-1e);
 }
 
 .options {
@@ -45,7 +52,7 @@
 .options li {
     padding: 10px;
     cursor: pointer;
-    background-color: var(--dark-2);
+    background-color: var(--dark-1e);
     border-radius: 10px;
 
     margin: 5px 0;

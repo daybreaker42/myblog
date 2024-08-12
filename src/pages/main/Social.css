@@ -31,15 +31,20 @@ a.social-button {
     border-radius: 10px;
     transition: background-color 0.2s ease-in-out;
 
-    background-color: #242424;
     border: none;
     padding: 5px 15px 5px 15px;
 
     font-size: 16px;
     color: var(--text-default);
+
+    transition: transform 0.2s ease;
 }
 
 
 .social-button:hover {
     background-color: #515151;
+}
+
+.social-button:active {
+    transform: scale(0.95);
 }
