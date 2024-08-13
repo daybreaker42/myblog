@@ -1,10 +1,13 @@
-import './ArticleCard.css';
-import leaves from '../../assets/images/leaves.jpg';
+import { Link } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+// import icons
 import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
 import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
-import { Link } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+// imports css
+import styles from './ArticleCard.module.css';
+// import image
+import leaves from '../../assets/images/leaves.jpg';
 
 /**
  * ArticleCard component
@@ -53,20 +56,20 @@ function ArticleCard({ article }) {
 
     return (
         <Link to={`/article/${article.id}`}>
-            <article class="card">
+            <article className={styles.card}>
 
-                <img src={leaves} alt={article.title} className='card-thumbnail' />
-                <div class="card-content">
-                    <h2 class="card-title">{article.title}</h2>
-                    <p class="card-summary">{article.content}</p>
-                    <div class="card-meta">
-                        <span class="card-author">작성자: {article.info.user.name}</span>
-                        <span class="card-date">{article.info.createdAt}</span>
+                <img src={leaves} alt={article.title} className={styles['card-thumbnail']} />
+                <div className={styles["card-content"]}>
+                    <h2 className={styles["card-title"]}>{article.title}</h2>
+                    <p className={styles["card-summary"]}>{article.content}</p>
+                    <div className={styles["card-meta"]}>
+                        <span className={styles["card-author"]}>작성자: {article.info.user.name}</span>
+                        <span className={styles["card-date"]}>{article.info.createdAt}</span>
                     </div>
-                    <div class="card-stats">
-                        <span class="card-read-time">읽는 시간: {article.info.readingTime.value}{article.info.readingTime.unit}</span>
-                        <span class="card-views">조회수: {article.data.viewCnt}</span>
-                        <span class="card-comments">댓글: {article.data.commentCnt}</span>
+                    <div className={styles["card-stats"]}>
+                        <span className={styles["card-read-time"]}>읽는 시간: {article.info.readingTime.value}{article.info.readingTime.unit}</span>
+                        <span className={styles["card-views"]}>조회수: {article.data.viewCnt}</span>
+                        <span className={styles["card-comments"]}>댓글: {article.data.commentCnt}</span>
                     </div>
                 </div>
             </article>
@@ -77,7 +80,7 @@ function ArticleCard({ article }) {
 // 더보기 버튼을 누르면 나오는 메뉴
 function ArticleMenu({ article }) {
     return (
-        <section className='article-menu' onClick={(event) => {
+        <section className={styles['article-menu']} onClick={(event) => {
             preventEvent(event);
         }}>
             {/* 권한 있을 경우에만 수정, 삭제 버튼 나오게 */}

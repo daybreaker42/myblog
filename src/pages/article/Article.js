@@ -25,6 +25,7 @@ import Filter from 'pages/main/Filter';
 
 const articleMockupData = {
     id: 1,
+    slug: 'first-blog-upload',
     title: '제목',
     content: `시맨틱 HTML 요소들은 문서의 구조를 명확하게 정의하고, 검색 엔진이 페이지의 내용을 더 잘 이해하도록 돕습니다. 주요 시맨틱 HTML 요소들과 그 역할은 다음과 같습니다:
 <header>:
@@ -250,10 +251,8 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
     }
 };
 
-
-
 const Article = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
     // const editor = new toastui.Editor({
     //     el: document.querySelector('#editor'),
     //     previewStyle: 'vertical',
@@ -262,6 +261,8 @@ const Article = () => {
     //     // initialValue: content
     // });
     let article = articleMockupData;
+
+
 
     useEffect(() => {
         // fetch article by id
@@ -272,7 +273,7 @@ const Article = () => {
         //         editor.setMarkdown(data.content);
         //     });
         // editor.setMarkdown(article.content);
-    }, [id]);
+    }, [slug]);
 
     // 공유하기 눌렀는지 체크
     const [isShareClicked, setIsShareClicked] = useState(false);
@@ -290,7 +291,8 @@ const Article = () => {
                     {/* 왼쪽 공간 여백 설정 */}
                     <div style={{ width: '220px' }}></div>
                     <section className={styles["article-title"]}>
-                        <h1 className={styles.title}>{article?.title}</h1>
+                        {/* title */}
+                        <h1 className={styles.title}>{article?.title} {slug}</h1>
                         <section className={styles["article-info"]}>
                             <span className={styles.writer}>{article?.writer?.name}</span>
                             <span className={styles.createdAt}>{article?.createdAt}</span>
@@ -405,9 +407,9 @@ const Article = () => {
                     </section>
 
                     {/* 추천 게시물 및 댓글 */}
-                    <ArticleCardScroll sectionTitle='추천 게시글' sectionName='recommand' />
+                    <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} />
                     {/* 카테고리 다른 게시물 */}
-                    <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' sectionName='category' />
+                    <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} />
 
                     {/* 댓글창 */}
                     <Comments comments={article.comments} />
