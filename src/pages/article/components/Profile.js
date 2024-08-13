@@ -8,7 +8,9 @@ import { ReactComponent as FavoriteIcon } from 'assets/icons/favorite.svg';
 import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
 
+// import styles
 import profileStyles from './Profile.module.css';
+import 'components/click.css';
 
 const Profile = ({ likeCnt, commentCnt, scrollToComment, slug, articleWriter }) => {
     // 좋아요, 댓글, 공유, 프로필 버튼
@@ -70,7 +72,7 @@ const Profile = ({ likeCnt, commentCnt, scrollToComment, slug, articleWriter }) 
             </section>
             <section className={profileStyles['profile-body']}>
                 {/* 프로필 카드 - 누르면 블로그 메인으로 이동 */}
-                <a ref={profile} className={profileStyles['profile']} href={`/`}>
+                <a ref={profile} className={`${profileStyles['profile']} click`} href={`/`}>
                     <img src='https://avatars.githubusercontent.com/u/36643295?v=4' alt='profile img' />
                     <section className={profileStyles['info']}>
                         <section className={profileStyles['name']}>
@@ -86,18 +88,18 @@ const Profile = ({ likeCnt, commentCnt, scrollToComment, slug, articleWriter }) 
                 <section className={profileStyles['reaction']}>
                     <section className={profileStyles['like-comment']}>
                         {/* 좋아요 버튼 */}
-                        <button ref={like} className={profileStyles.like} >
+                        <button ref={like} className={`${profileStyles.like} click`} >
                             <FavoriteIcon className={profileStyles['favorite-icon']} />
                             <span>좋아요 {likeCnt}</span>
                         </button>
                         {/* 댓글 버튼 */}
-                        <button className={'comment'} >
+                        <button className={'comment click'} >
                             <ChatIcon className={profileStyles['chat-icon']} />
                             <span>댓글 {commentCnt}</span>
                         </button>
                     </section>
                     {/* 공유하기 버튼 */}
-                    <a ref={share} className={profileStyles['share']} href={`articles/${slug}`}>
+                    <a ref={share} className={`${profileStyles['share']} click`} href={`articles/${slug}`}>
                         {!isShareClicked ? <LinkIcon className={profileStyles['link-icon']} /> : <CheckIcon className={profileStyles['link-icon']} />}
                         <span>{url}</span>
                     </a>

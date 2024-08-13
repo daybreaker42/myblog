@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 import { getArticlesByCategory } from 'api/article';
-
+// import css
 import styles from './ArticleCardScroll.module.css';
+import 'components/click.css';
 
 const sectionData = {
     name: 'section',
@@ -78,7 +79,12 @@ const ArticleCardScroll = ({ sectionTitle, type, currentSlug }) => {
             <span className={styles['section-title']}>{sectionTitle} ({data.articles.length})</span>
             <section className={`${styles.articles} scrollbar`}>
                 {data.articles.map(article => (
-                    <Link to={`/article/${article.slug}`} className={`${styles.card} ${currentSlug === article.slug ? styles.active : ''}`} key={article.id}>
+                    <Link
+                        to={currentSlug === article.slug ? '#' : `/article/${article.slug}`} // 수정: currentSlug가 article.slug일 때 링크를 '#'로 설정
+                        className={`${styles.card} ${currentSlug === article.slug ? styles.active : ''} ${currentSlug !== article.slug ? 'click' : ''}`}
+                        key={article.slug}
+                        onClick={(e) => currentSlug === article.slug && e.preventDefault()} // 수정: currentSlug가 article.slug일 때 클릭 이벤트를 막음
+                    >
                         <div className={styles['card-content']}>
                             <section className={styles["card-header"]}>
                                 <h5 className={styles["card-title"]}>{article.title}</h5>
