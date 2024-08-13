@@ -10,18 +10,13 @@ import CommentForm from './components/CommentForm';
 
 // css imports
 import styles from './Article.module.css';
-import profileStyles from './components/Profile.module.css';
 import articleIndexStyles from './components/ArticleIndex.module.css';
 
 import 'components/scrollbar.css';
 
 // svgs imports
-import { ReactComponent as ArrowIcon } from 'assets/icons/arrow_forward.svg';
-import { ReactComponent as LinkIcon } from 'assets/icons/link.svg';
-import { ReactComponent as FavoriteIcon } from 'assets/icons/favorite.svg';
-import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
-import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
 import Filter from 'pages/main/Filter';
+import Profile from 'pages/article/components/Profile';
 
 const articleMockupData = {
     id: 1,
@@ -275,11 +270,6 @@ const Article = () => {
         // editor.setMarkdown(article.content);
     }, [slug]);
 
-    // 공유하기 눌렀는지 체크
-    const [isShareClicked, setIsShareClicked] = useState(false);
-    // 좋아요 눌렀는지 체크
-    const [isLiked, setIsLiked] = useState(false);
-
     return (
         <>
             <header className={styles["App-header"]}>
@@ -347,64 +337,8 @@ const Article = () => {
                 {/* 아티클 하단 부분 */}
                 <section className={styles['article-footer']}>
                     {/* 작성자 프로필 및 반응 */}
-                    <section className={profileStyles["writer-profile-reaction-section"]}>
-                        <section className={profileStyles['profile-header']}>
-                            <h2>읽어주셔서 감사합니다!</h2>
-                            <p>이 글이 마음에 드셨나요? 좋아요와 댓글로 응원해 주세요!</p>
-                        </section>
-                        <section className={profileStyles['profile-body']}>
-                            <section className={profileStyles['profile']}>
-                                <img src='https://avatars.githubusercontent.com/u/36643295?v=4' alt='profile img' />
-                                <section className={profileStyles['info']}>
-                                    <section className={profileStyles['name']}>
-                                        <span>{article?.writer?.name}</span>
-                                        <ArrowIcon className={profileStyles['arrow-forward']} />
-                                    </section>
-                                    <span className='introduction'>
-                                        {article?.writer?.introduction}
-                                    </span>
-                                </section>
-                            </section>
-                            <section className={profileStyles['reaction']}>
-                                <section className={profileStyles['like-comment']}>
-                                    <button className={profileStyles['like']} onClick={
-                                        () => {
-                                            const like = document.querySelector('.like');
-                                            setIsLiked(!isLiked);
-                                            like.classList.add(profileStyles.liked);
-                                        }
-                                    }>
-                                        <FavoriteIcon className={profileStyles['favorite-icon']} />
-                                        <span>좋아요</span>
-                                    </button>
-                                    <button className={'comment'} onClick={
-                                        () => {
-                                            const comment = document.querySelector('.comment-section');
-                                            comment.scrollIntoView({ behavior: 'smooth' });
-                                        }
-                                    }>
-                                        <ChatIcon className={styles['chat-icon']} />
-                                        <span>댓글</span>
-                                    </button>
-                                </section>
+                    <Profile slug={slug} articleWriter={article.writer} />
 
-                                <a className={styles['share']} href='https://fclipse.github.io/articles/first-blog-upload' onClick={
-                                    (e) => {
-                                        e.preventDefault();
-                                        navigator.clipboard.writeText('https://fclipse.github.io/articles/first-blog-upload');
-                                        setIsShareClicked(true);
-                                    }
-                                }>
-                                    {!isShareClicked ? <LinkIcon className={styles['link-icon']} /> : <CheckIcon className={styles['link-icon']} />}
-
-                                    <span>
-                                        https://fclipse.github.io/articles/first-blog-upload
-                                    </span>
-                                </a>
-                            </section>
-                        </section>
-
-                    </section>
 
                     {/* 추천 게시물 및 댓글 */}
                     <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} />

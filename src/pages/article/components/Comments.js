@@ -39,7 +39,7 @@ const Comments = ({ comments }) => {
     return (
         <section className={styles["comment-section"]}>
             <section className={styles["comment-section-header"]}>
-                <h2>
+                <h2 className='comment-section-header'>
                     <ChatIcon className={styles['chat-icon']} />
                     <span>댓글</span>
                 </h2>
