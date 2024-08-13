@@ -56,7 +56,7 @@ const sectionData = {
     ]
 }
 
-const ArticleCardScroll = ({ sectionName }) => {
+const ArticleCardScroll = ({ sectionTitle, sectionName }) => {
     // TODO: getFunction을 이용해서 데이터를 가져오도록 수정
     // sectionName에 따라 다른 데이터를 가져오도록 설정
     // const { data, error, isLoading } = useQuery(['section', sectionName], async () => await getFunction(sectionName));
@@ -68,7 +68,7 @@ const ArticleCardScroll = ({ sectionName }) => {
 
     return (
         <section className='article-scroll'>
-            <span className='section-title'>{data.name} ({data.articles.length})</span>
+            <span className='section-title'>{sectionTitle} ({data.articles.length})</span>
             <section className='articles scrollbar'>
                 {data.articles.map(article => (
                     <Link to={`/article/${article.id}`} className="card" key={article.id}>

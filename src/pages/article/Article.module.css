@@ -102,7 +102,7 @@ main {
     text-align: start;
 }
 
-.article-content pre {
+.article-content>pre {
     background-color: #333;
     color: white;
     padding: 1rem;

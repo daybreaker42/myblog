@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CommentForm.css';
+import styles from './CommentForm.module.css';
 
 const CommentForm = ({ articleId }) => {
     const [name, setName] = useState('');
@@ -34,9 +34,9 @@ const CommentForm = ({ articleId }) => {
     const isSubmitDisabled = !name || !password || !content;
 
     return (
-        <section className='comment-submit-form'>
+        <section className={styles['comment-submit-form']}>
             <h2>의견 남기기</h2>
-            <section className='comsub-content'>
+            <section className={styles['comsub-content']}>
                 <input
                     type='text'
                     placeholder='이름...'
@@ -55,7 +55,7 @@ const CommentForm = ({ articleId }) => {
                     placeholder='댓글 내용...'
                 />
                 <button
-                    className={`submit-button ${isSubmitDisabled ? 'inactive' : ''}`}
+                    className={`${styles['submit-button']} ${isSubmitDisabled ? styles.inactive : ''}`}
                     onClick={handleSubmit}
                     disabled={isSubmitDisabled || loading}
                 >Submit</button>
