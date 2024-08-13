@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 // util functions
 import isOverflow from 'utils/overflow';
 // css
@@ -16,7 +16,7 @@ import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
  * 
  * @returns {JSX.Element}
  */
-const Comments = ({ comments }) => {
+const Comments = forwardRef(({ comments }, ref) => {
     const [isOverflowedList, setIsOverflowedList] = useState(Array(comments.length).fill(false));
     const commentRefs = useRef([]);
 
@@ -37,7 +37,7 @@ const Comments = ({ comments }) => {
     }, [comments]);
 
     return (
-        <section className={styles["comment-section"]}>
+        <section ref={ref} className={styles["comment-section"]}>
             <section className={styles["comment-section-header"]}>
                 <h2 className='comment-section-header'>
                     <ChatIcon className={styles['chat-icon']} />
@@ -59,7 +59,7 @@ const Comments = ({ comments }) => {
             </section>
         </section >
     );
-};
+});
 
 /**
  * 댓글

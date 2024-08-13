@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 // componetns imports
@@ -7,16 +7,12 @@ import Footer from 'components/footer/Footer';
 import ArticleCardScroll from 'components/article/ArticleCardScroll';
 import Comments from './components/Comments';
 import CommentForm from './components/CommentForm';
+import Profile from 'pages/article/components/Profile';
 
 // css imports
 import styles from './Article.module.css';
 import articleIndexStyles from './components/ArticleIndex.module.css';
-
 import 'components/scrollbar.css';
-
-// svgs imports
-import Filter from 'pages/main/Filter';
-import Profile from 'pages/article/components/Profile';
 
 const articleMockupData = {
     id: 1,
@@ -63,6 +59,7 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
         time: 5,
         unit: '분'
     },
+    likeCnt: 3,
     comments: [
         {
             id: 1,
@@ -246,18 +243,24 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
     }
 };
 
+/**
+ * 아티클 페이지
+ * 
+ * @returns {JSX.Element}
+ */
 const Article = () => {
     const { slug } = useParams();
-    // const editor = new toastui.Editor({
-    //     el: document.querySelector('#editor'),
-    //     previewStyle: 'vertical',
-    //     height: '500px',
-    //     initialEditType: 'wysiwyg',
-    //     // initialValue: content
-    // });
     let article = articleMockupData;
 
-
+    // scroll to comment
+    // TODO - 여기 제대로 안 되는 버그 존재
+    const commentRef = useRef(null);
+    const scrollToComment = () => {
+        if (commentRef.current) {
+            commentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        console.log('scroll to comment');
+    };
 
     useEffect(() => {
         // fetch article by id
@@ -268,6 +271,7 @@ const Article = () => {
         //         editor.setMarkdown(data.content);
         //     });
         // editor.setMarkdown(article.content);
+
     }, [slug]);
 
     return (
@@ -329,7 +333,6 @@ const Article = () => {
                             <li className={articleIndexStyles['h1-index']}><a href='#hello'>그럼 조금 긴 제목은 어떻게 될까?</a></li>
                             <li className={articleIndexStyles['h2-index']}><a href='#'>h2 제목</a></li>
                             <li className={articleIndexStyles['h3-index']}><a href='#'>h3 제목</a></li>
-
                         </ul>
                     </section>
                 </section>
@@ -337,16 +340,13 @@ const Article = () => {
                 {/* 아티클 하단 부분 */}
                 <section className={styles['article-footer']}>
                     {/* 작성자 프로필 및 반응 */}
-                    <Profile slug={slug} articleWriter={article.writer} />
-
-
+                    <Profile likeCnt={article.likeCnt} commentCnt={article.comments.length} scrollToComment={scrollToComment} slug={slug} articleWriter={article.writer} />
                     {/* 추천 게시물 및 댓글 */}
                     <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} />
                     {/* 카테고리 다른 게시물 */}
                     <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} />
-
                     {/* 댓글창 */}
-                    <Comments comments={article.comments} />
+                    <Comments ref={commentRef} comments={article.comments} />
                     <CommentForm articleId={article.id} />
                 </section>
 
