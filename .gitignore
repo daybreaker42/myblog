@@ -25,3 +25,4 @@ yarn-error.log*
 # etc
 /기타 파일들
 /기타 파일들/*
+.env

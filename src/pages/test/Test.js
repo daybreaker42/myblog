@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { supabase } from 'utils/supabase';
 import { Helmet } from "react-helmet-async";
+import config from '../../config';
+
 // components
 import Nav from 'components/nav/Nav';
 
@@ -25,12 +27,13 @@ const Test = () => {
         }
 
         getTodos();
+        console.log(config);
     }, []);
 
     return (
         <>
             <Helmet>
-                <title>Test page | myBlog</title>
+                <title>Test page | {`${config.appName}`}</title>
                 <meta name='description' content='Test page' />
             </Helmet>
             <header >
@@ -40,7 +43,6 @@ const Test = () => {
                 <h1>Test</h1>
                 <h2>data list - ({tests.length})</h2>
                 <ul className='test-table'>
-
                     {tests.filter(test => test.isPinned).map(test => (
                         <li key={test.id} className='table-row'>
                             <h3>{test.title}</h3>

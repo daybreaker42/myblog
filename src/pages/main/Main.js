@@ -11,6 +11,8 @@ import Footer from 'components/footer/Footer';
 
 // css imports
 import './Main.css';
+import { Helmet } from 'react-helmet-async';
+import config from '../../config';
 
 // TODO - 반응형 추가
 function Main() {
@@ -238,9 +240,15 @@ function Main() {
 
     return (
         <div>
+            <Helmet>
+                <title>Home | {`${config.appName}`}</title>
+                <meta name='description' content='Home page' />
+            </Helmet>
+
             <header className="App-header">
                 <Nav />
             </header>
+
             <main>
                 <h1 className='title'>siejwkaodj's blog</h1>
                 <section className='main-body'>
