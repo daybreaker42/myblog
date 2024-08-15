@@ -1,6 +1,6 @@
 import './Social.css';
 
-import { ReactComponent as LinkIcon } from '../../assets/icons/link.svg';
+import { ReactComponent as LinkIcon } from 'assets/icons/link.svg';
 function Social() {
     // get social data from server - TODO
     // const socialData = await fetchSocialData();
