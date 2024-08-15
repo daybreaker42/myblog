@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 // component imports
 import Nav from 'components/nav/Nav';
 import CategoryAside from 'components/categoryAside/CategoryAside';
-import Filter from './Filter';
-import Social from './Social';
+import Filter from '../../components/filter/Filter';
+import Social from './components/Social';
 import ArticleCard from 'components/article/ArticleCard';
 import PageButtons from 'components/pageButton/PageButtons';
 import Footer from 'components/footer/Footer';

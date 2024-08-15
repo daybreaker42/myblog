@@ -5,7 +5,7 @@ import isOverflow from 'utils/overflow';
 import styles from './Comments.module.css';
 import 'components/transparentButton.css';
 // components
-import Filter from 'pages/main/Filter';
+import Filter from 'pages/main/components/Filter';
 import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 
 /**
