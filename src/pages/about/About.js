@@ -2,6 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import Nav from 'components/nav/Nav';
 import config from 'config';
 
+import styles from './About.module.css';
+
 function About() {
     return (
         <div>
@@ -13,7 +15,9 @@ function About() {
                 <Nav />
             </header>
             <main>
-                <h1>About Page</h1>
+                <h1 className={styles.title}>About Page</h1>
+                <section className={styles['profile-card']}>profile card</section>
+                <section className={styles['profile-info']}>profile info</section>
             </main>
         </div>
     )
