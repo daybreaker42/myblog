@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 // component imports
 import Nav from 'components/nav/Nav';
@@ -10,8 +11,7 @@ import PageButtons from 'components/pageButton/PageButtons';
 import Footer from 'components/footer/Footer';
 
 // css imports
-import './Main.css';
-import { Helmet } from 'react-helmet-async';
+import styles from './Main.module.css';
 import config from '../../config';
 
 // TODO - 반응형 추가
@@ -245,17 +245,17 @@ function Main() {
                 <meta name='description' content='Home page' />
             </Helmet>
 
-            <header className="App-header">
+            <header className={styles["App-header"]}>
                 <Nav />
             </header>
 
-            <main>
-                <h1 className='title'>siejwkaodj's blog</h1>
-                <section className='main-body'>
+            <main className={styles['main-main']}>
+                <h1 className={styles.title}>siejwkaodj's blog</h1>
+                <section className={styles['main-body']}>
                     <Filter />
-                    <section className='main-middle'>
+                    <section className={styles['main-middle']}>
                         <CategoryAside />
-                        <section className='main-content'>
+                        <section className={styles['main-content']}>
                             {posts.map((item, index) => (
                                 <ArticleCard key={`article-${item.id || index}`} article={item} />
                             ))}

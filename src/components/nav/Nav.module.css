@@ -28,10 +28,6 @@
     justify-content: center;
 }
 
-.nav-center {
-    gap: 40px;
-}
-
 .nav-right {
     display: flex;
     margin-right: 15px;
@@ -45,14 +41,14 @@
     font-weight: bold;
 }
 
-.nav-center .navlink {
-    padding: 20px 0;
+.navlink {
+    padding: 20px;
 }
 
 .nav-right .navlink {
     padding: 20px 15px;
 }
 
-.navlink.active>span {
+.navlink[class*="active"]>span {
     color: white;
 }

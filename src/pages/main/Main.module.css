@@ -1,11 +1,8 @@
-main {
+.main-main {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-
-    /* nav바 높이만큼 top margin 설정 */
-    margin-top: var(--nav-height);
 }
 
 .title {
