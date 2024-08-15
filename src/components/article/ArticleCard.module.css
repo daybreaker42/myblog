@@ -1,12 +1,3 @@
-:root {
-    --bg-color: #121212;
-    --card-bg-color: #1E1E1E;
-    --text-primary: #E0E0E0;
-    --text-secondary: #A0A0A0;
-    --accent-color: #BB86FC;
-}
-
-
 .card {
     background-color: var(--card-bg-color);
     border-radius: 8px;
@@ -24,7 +15,7 @@
 }
 
 .card-thumbnail {
-    width: 100%;
+    /* width: 100%; */
     height: 200px;
     object-fit: cover;
 }
@@ -73,7 +64,9 @@
 .card-meta,
 .card-stats {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: start;
+    gap: 0.5rem;
     font-size: 0.8rem;
     color: var(--text-secondary);
 }

@@ -8,3 +8,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+main {
+  /* nav바 높이만큼 top margin 설정 */
+  margin-top: var(--nav-height);
+}
