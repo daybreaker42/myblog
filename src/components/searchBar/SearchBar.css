@@ -1,6 +1,7 @@
 .searchBarComponent {
     height: 40px;
     margin: auto;
+    padding: 0 20px;
 }
 
 .searchBar {
