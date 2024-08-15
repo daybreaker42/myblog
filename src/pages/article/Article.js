@@ -287,6 +287,7 @@ const Article = () => {
                     <section className={styles["article-title"]}>
                         {/* title */}
                         <h1 className={styles.title}>{article?.title} {slug}</h1>
+                        {/* <h1 className={styles.title}>{article?.title}</h1> */}
                         <section className={styles["article-info"]}>
                             <span className={styles.writer}>{article?.writer?.name}</span>
                             <span className={styles.createdAt}>{article?.createdAt}</span>
