@@ -9,7 +9,7 @@ import Article from 'pages/article/Article';
 import Test from 'pages/test/Test';
 
 // error pages
-import Error404 from 'pages/errors/Error404';
+import Error from 'pages/errors/Error';
 import ScrollToTop from './ScrollToTop';
 
 const Router = () => {
@@ -25,7 +25,8 @@ const Router = () => {
                 <Route path='/settings' element={<Settings />} />
                 <Route path='/article/:slug' element={<Article />} />
                 <Route path='/test' element={<Test />} />
-                <Route path='*' element={<Error404 />} />
+                {/* <Route path='*' element={<Error404 />} /> */}
+                <Route path='*' element={<Error typeNum={404} />} />
             </Routes>
         </BrowserRouter>
     );
