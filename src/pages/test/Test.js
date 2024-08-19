@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from 'utils/supabase';
 import { Helmet } from "react-helmet-async";
 import config from '../../config';
@@ -6,7 +6,7 @@ import config from '../../config';
 // components
 import Nav from 'components/nav/Nav';
 
-import './Test.css';
+import styles from './Test.module.css';
 
 /**
  * Test component
@@ -14,20 +14,29 @@ import './Test.css';
  * @returns {JSX.Element}
  */
 const Test = () => {
-    const [tests, setTests] = React.useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [tests, setTests] = useState([]);
+
     useEffect(() => {
         async function getTodos() {
+            setIsLoading(true);
             let { data: tests, error } = await supabase
                 .from('test')
                 .select('*');
-            console.log(tests);
+
+            if (error) {
+                console.log('error', error);
+                return;
+            }
+            // console.log(tests);
             if (tests.length > 1) {
                 setTests(tests);
             }
+            setIsLoading(false);
         }
 
         getTodos();
-        console.log(config);
+        // console.log(config);
     }, []);
 
     return (
@@ -42,28 +51,32 @@ const Test = () => {
             <main>
                 <h1>Test</h1>
                 <h2>data list - ({tests.length})</h2>
-                <ul className='test-table'>
-                    {tests.filter(test => test.isPinned).map(test => (
-                        <li key={test.id} className='table-row'>
-                            <h3>{test.title}</h3>
-                            <p>{test.content}</p>
-                        </li>
-                    ))}
-                </ul>
-                <ul className='test-table'>
-                    {tests.filter(test => !test.isPinned).map(test => (
-                        <li key={test.id} className='table-row'>
-                            <h3>{test.title}</h3>
-                            <p>{test.content}</p>
-                        </li>
-                    ))}
-                </ul>
+                {isLoading ? <p>Loading...</p> : <section>
+                    <ul className={styles['test-table']}>
+                        {tests.filter(test => test.isPinned).map(test => (
+                            <li key={test.id} className={styles['table-row']}>
+                                <h3>{test.title}</h3>
+                                <p>{test.content}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    <ul className={styles['test-table']}>
+                        {tests.filter(test => !test.isPinned).map(test => (
+                            <li key={test.id} className={styles['table-row']}>
+                                <h3>{test.title}</h3>
+                                <p>{test.content}</p>
+                            </li>
+                        ))}
+                    </ul></section>}
+
 
                 <Form />
             </main>
         </>
     );
 }
+
+
 function Form() {
     const form = useRef(null);
     const handleSubmit = async (event) => {
@@ -79,14 +92,14 @@ function Form() {
         // form에 있는 입력된 값 삭제
         form.current.reset();
 
-        const { error } = await supabase
+        const { result, error } = await supabase
             .from('countries')
             .insert({ id: 1, name: 'Denmark' })
 
     };
 
     return (
-        <section className='test-form'>
+        <section className={styles['test-form']}>
             <form ref={form} onSubmit={handleSubmit}>
                 <input type='text' placeholder='title' />
                 <textarea placeholder='content'></textarea>
