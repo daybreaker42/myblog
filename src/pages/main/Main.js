@@ -42,6 +42,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 2,
@@ -62,6 +64,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 3,
@@ -82,6 +86,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 4,
@@ -102,6 +108,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 5,
@@ -122,6 +130,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 6,
@@ -142,6 +152,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 7,
@@ -162,6 +174,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 8,
@@ -182,6 +196,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 9,
@@ -202,6 +218,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 10,
@@ -222,6 +240,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
         ]);
         // TODO - 백엔드 구현 후 다시 작성
