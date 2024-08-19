@@ -66,7 +66,7 @@ const Test = () => {
 }
 function Form() {
     const form = useRef(null);
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
         if (!event.target[0].value || !event.target[1].value) {
             return;
@@ -76,8 +76,13 @@ function Form() {
         console.log(`title: ${event.target[0].value}`);
         console.log(`content: ${event.target[1].value}`);
 
-        // data 삭제
+        // form에 있는 입력된 값 삭제
         form.current.reset();
+
+        const { error } = await supabase
+            .from('countries')
+            .insert({ id: 1, name: 'Denmark' })
+
     };
 
     return (
