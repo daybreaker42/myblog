@@ -20,7 +20,7 @@ function Main() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(10);
     useEffect(() => {
-        console.log(`main page loaded`);
+        // console.log(`main page loaded`);
         // fetch data from api
         setPosts([
             {

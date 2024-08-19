@@ -35,8 +35,8 @@ function Nav() {
     // useLocator로 현재 페이지를 가져와서 active 클래스를 추가해준다.
     const location = useLocation(); // 현재 페이지 경로를 가져옴
     const path = location.pathname; // 현재 페이지 경로를 가져옴
-    console.log(`location - `, location);
-    console.log(`location - `, location.pathname);
+    // console.log(`location - `, location);
+    // console.log(`location - `, location.pathname);
 
 
     return <nav className={styles.nav}>
