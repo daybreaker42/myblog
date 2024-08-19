@@ -15,6 +15,7 @@ import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 
 // imports css
 import styles from './ArticleCard.module.css';
+import ImageLoader from 'components/loading/ImageLoader';
 
 /**
  * ArticleCard component
@@ -44,7 +45,8 @@ function ArticleCard({ article }) {
     return (
         <Link to={`/article/${article.id}`}>
             <article className={styles.card}>
-                <img loading='lazy' src={'https://picsum.photos/300/200'} alt={article.title} />
+                <ImageLoader className={styles['thumbnail']} src={'https://picsum.photos/300/200'} alt={article.title} />
+                {/* <img loading='lazy' src={'https://picsum.photos/300/200'} alt={article.title} /> */}
                 <div className={styles["card-content"]}>
                     <div className={styles['card-top']}>
                         <h2 className={styles["card-title"]}>

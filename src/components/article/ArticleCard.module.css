@@ -12,7 +12,7 @@
     transform: translateY(-5px);
 }
 
-.card img {
+.thumbnail {
     width: 18.75rem;
     /* max-width: 18.75rem; */
     object-fit: cover;
@@ -87,7 +87,7 @@
         width: 720px;
     }
 
-    .card img {
+    .thumbnail {
         /* width: 300px; */
         /* height: auto; */
     }
