@@ -26,7 +26,7 @@ function About() {
     return (
         <div>
             <Helmet>
-                <title>About page | {`${config.appName}`}</title>
+                <title>About | {`${config.appName}`}</title>
                 <meta name='description' content='About page' />
             </Helmet>
             <header className="App-header">
