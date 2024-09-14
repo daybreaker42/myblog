@@ -7,17 +7,20 @@
 
 ## Run/Deploy Project
 
+### Init Project
+
+```bash
+npm install
+
+// .env 설정 -> 최상위 폴더에 .env 파일 생성
+```
+
 ### Run Project
 
 ```bash
 npm start 
 ```
 
-or
-
-```bash
-yarn start
-```
 
 ### Deploy Project
 
@@ -27,15 +30,6 @@ npm run build
 serve -s build
 ```
 
-or
-
-```bash
-yarn deploy
-
-yarn global add serve
-
-serve -s build
-```
 
 ## 기능
 
