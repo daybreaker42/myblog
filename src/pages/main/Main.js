@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 // component imports
 import Nav from 'components/nav/Nav';
-import CategoryAside from 'components/categoryAside/CategoryAside';
+import CategoryAside from 'pages/main/components/categoryAside/CategoryAside';
 import Filter from 'components/filter/Filter';
 import Social from './components/Social';
 import ArticleCard from 'components/article/ArticleCard';
@@ -13,6 +13,7 @@ import Footer from 'components/footer/Footer';
 // css imports
 import styles from './Main.module.css';
 import config from '../../config';
+import Aside from './components/Aside';
 
 // TODO - 반응형 추가
 function Main() {
@@ -259,34 +260,33 @@ function Main() {
     }, []);
 
     return (
-        <div>
+        <>
             <Helmet>
                 <title>Home | {`${config.appName}`}</title>
                 <meta name='description' content='Home page' />
             </Helmet>
+            <div className={styles['main-root']}>
+                <Aside />
+                <main className={styles['main-main']}>
+                    <Nav />
+                    <h1 className={styles.title}>siejwkaodj's blog</h1>
+                    <section className={styles['main-body']}>
+                        <Filter />
+                        <section className={styles['main-middle']}>
 
-            <header className={styles["App-header"]}>
-                <Nav />
-            </header>
-
-            <main className={styles['main-main']}>
-                <h1 className={styles.title}>siejwkaodj's blog</h1>
-                <section className={styles['main-body']}>
-                    <Filter />
-                    <section className={styles['main-middle']}>
-                        <CategoryAside />
-                        <section className={styles['main-content']}>
-                            {posts.map((item, index) => (
-                                <ArticleCard key={`article-${item.id || index}`} article={item} />
-                            ))}
+                            <section className={styles['main-content']}>
+                                {posts.map((item, index) => (
+                                    <ArticleCard key={`article-${item.id || index}`} article={item} />
+                                ))}
+                            </section>
+                            <Social />
                         </section>
-                        <Social />
                     </section>
-                </section>
-                <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
-            </main>
+                    <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
+                </main>
+            </div>
             <Footer />
-        </div>
+        </>
     );
 }
 

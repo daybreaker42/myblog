@@ -8,8 +8,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+/* global - 공통으로 들어갈 부분 설정 */
 main {
   /* nav바 높이만큼 top margin 설정 */
-  margin-top: var(--nav-height);
+  /* margin-top: var(--nav-height); */
+}
+
+.clickable{
+  transition: transform 0.2s ease;
+}
+.clickable:active{
+  transform: scale(0.95);
 }

@@ -1,14 +1,16 @@
 .nav {
-    width: calc(100% - 270px);
+    width: clamp(270px, 100%, 720px);
+    /* width: calc(100% - 270px); */
+    /* width: 100%; */
     height: var(--nav-height);
-    padding-left: 270px;
+    /* padding-left: 270px; */
     justify-content: space-between;
 
     /* 상단고정 관련 코드 */
-    position: fixed;
+    /* position: fixed;
     left: 0;
     top: 0;
-    z-index: 9999;
+    z-index: 9999; */
 
     /* blur효과 관련 코드 */
     backdrop-filter: blur(10px);
