@@ -1,0 +1,38 @@
+.filter{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    
+    /* width: 100%; */
+    position: relative;
+}
+.selected-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 16px;
+    border: solid none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--dark-1e);
+}
+.options {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: transparent;
+    margin-top: 10px;
+
+    gap: 5px;
+}
+.options li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--dark-1e);
+    border-radius: 10px;
+}
+.options li:hover {
+    background-color: var(--dark-3);
+}

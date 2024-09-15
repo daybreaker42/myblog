@@ -56,7 +56,7 @@ const CommentForm = ({ articleId }) => {
                 />
                 <button
                     className={`${styles['submit-button']} ${isSubmitDisabled ? styles.inactive : ''}`}
-                    onClick={handleSubmit}
+                    onClick={() => { handleSubmit() }}
                     disabled={isSubmitDisabled || loading}
                 >Submit</button>
             </section>

@@ -40,15 +40,14 @@ function Nav() {
 
 
     return <nav className={styles.nav}>
-        <div className={styles['nav-center']}>
+        <div className={styles['nav-left']}>
             {navItems.map((item, index) => (
                 <NavLink key={`nav-${index}`} to={item.path} className={styles.navlink} activeclassname={styles.active} ><span>{item.name}</span></NavLink>
             ))}
         </div>
 
         <div className={styles['nav-right']}>
-            <Link to='/profile' className={styles.navlink} ><div><Account /></div></Link>
-            <Link to='/settings' className={styles.navlink} ><div><Settings /></div></Link>
+            <NavLink to='/settings' className={styles.navlink} activeclassname={styles.active}><span>설정</span></NavLink>
         </div>
     </nav >;
 }

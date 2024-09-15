@@ -53,20 +53,12 @@
     font-weight: bold;
     color: white;
     text-decoration: none;
-
-    transition: transform 0.2s ease;
 }
 
-.goHome:hover {
-
-    transform: scale(0.95);
-}
 
 .goHome:active {
     box-shadow: 0 0 0 2px var(--dark-2);
 }
-
-
 
 .goBack {
     display: flex;
@@ -80,14 +72,8 @@
     font-size: 16px;
     font-weight: normal;
     color: white;
-
-    transition: transform 0.2s ease;
 }
 
 .goBack:hover {
     text-decoration: underline;
-}
-
-.goBack:active {
-    transform: scale(0.95);
 }

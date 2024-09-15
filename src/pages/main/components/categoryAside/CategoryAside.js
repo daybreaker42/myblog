@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './CategoryAside.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { ReactComponent as ArrowRight } from 'assets/icons/arrow_forward.svg';
 
@@ -33,8 +33,8 @@ const categoriesExample = [
  */
 const CategoryAside = () => {
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(0);
     const navigate = useNavigate();
+    const location = useLocation();
 
     // server로부터 받아온 category 목록을 이용하여 category component를 생성 - TODO
     useEffect(() => {
@@ -45,14 +45,9 @@ const CategoryAside = () => {
     const categoryComponents = categoriesExample.map((category, index) => {
         return (
             <li key={`category-component-${index}`}
-                className={`${styles['category-component']} ${selectedCategory === category.id ? styles['selected'] : ''} clickable`}
+                className={`${styles['category-component']} clickable`}
                 onClick={() => {
-                    setSelectedCategory(category.id);
-                    if (category.id === 0) {
-                        navigate('/');
-                    } else {
-                        navigate(`/category?name=${category.name}`);
-                    }
+                    navigate(`/category?name=${category.name}`);
                     onClickCategory(category.id, category.name);
                 }}>
                 <span>{category.name} {category.count !== undefined && `(${category.count})`}

@@ -1,14 +1,19 @@
 // imports Aside from './components/Aside';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Aside.module.css';
-import CategoryAside from './categoryAside/CategoryAside';
+import CategoryAside from '../categoryAside/CategoryAside';
 
 const Aside = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
     return (
         <aside>
-            <h2 className='clickable' onClick={navigate('/')}>성준의 Blog</h2>
+            <h2 className='clickable' onClick={() => {
+                console.log(`location.href - `, location.pathname);
+                if (location.pathname !== '/') navigate('/');
+            }}>성준의 Blog</h2>
             {/* github commit graph */}
             <div className={styles['github-commit-graph']}>github commit graph</div>
             {/* 방문자 수 */}

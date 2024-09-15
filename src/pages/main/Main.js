@@ -3,17 +3,15 @@ import { Helmet } from 'react-helmet-async';
 
 // component imports
 import Nav from 'components/nav/Nav';
-import CategoryAside from 'pages/main/components/categoryAside/CategoryAside';
-import Filter from 'components/filter/Filter';
-import Social from './components/Social';
-import ArticleCard from 'components/article/ArticleCard';
 import PageButtons from 'components/pageButton/PageButtons';
 import Footer from 'components/footer/Footer';
+import ArticlePinned from './components/article/pinned/ArticlePinned';
+import Article from './components/article/Article';
 
 // css imports
 import styles from './Main.module.css';
 import config from '../../config';
-import Aside from './components/Aside';
+import Aside from './components/aside/Aside';
 
 // TODO - 반응형 추가
 function Main() {
@@ -261,30 +259,32 @@ function Main() {
 
     return (
         <>
+            {/* helmet */}
             <Helmet>
                 <title>Home | {`${config.appName}`}</title>
                 <meta name='description' content='Home page' />
             </Helmet>
+            {/* aside, main */}
             <div className={styles['main-root']}>
                 <Aside />
                 <main className={styles['main-main']}>
                     <Nav />
-                    <h1 className={styles.title}>siejwkaodj's blog</h1>
+                    <section className={styles.title}>
+                        <h1>한성준의 블로그</h1>
+                        <p>결과보다는 과정을, 속도보다는 방향을, 무엇보다 꾸준함을.</p>
+                    </section>
                     <section className={styles['main-body']}>
-                        <Filter />
-                        <section className={styles['main-middle']}>
+                        {/* pinned articles */}
+                        <ArticlePinned article={posts[0]} />
 
-                            <section className={styles['main-content']}>
-                                {posts.map((item, index) => (
-                                    <ArticleCard key={`article-${item.id || index}`} article={item} />
-                                ))}
-                            </section>
-                            <Social />
-                        </section>
+                        {/* article - page 1 contents */}
+                        <Article />
+
                     </section>
                     <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
                 </main>
             </div>
+            {/* footer */}
             <Footer />
         </>
     );
