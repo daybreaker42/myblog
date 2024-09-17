@@ -67,7 +67,7 @@ function ArticleCard({ article }) {
                                 navigate(`/category?name=${article.category}`);
                             }
                         }>
-                            <span className={styles["card-category"]}>
+                            <span className={styles["category"]}>
                                 {article.category}
                             </span>
                         </button>
@@ -77,7 +77,7 @@ function ArticleCard({ article }) {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-date"]}>
+                            <span className={styles["date"]}>
                                 {article.createdAt}
                             </span>
                         </button>
@@ -87,7 +87,7 @@ function ArticleCard({ article }) {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-views"]}>
+                            <span className={styles["views"]}>
                                 조회: {article.viewCnt}
                             </span>
                         </button>
@@ -97,7 +97,7 @@ function ArticleCard({ article }) {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-comments"]}>
+                            <span className={styles["comments"]}>
                                 댓글: {article.commentCnt}
                             </span>
                         </button>
@@ -107,7 +107,7 @@ function ArticleCard({ article }) {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-read-time"]}>
+                            <span className={styles["read-time"]}>
                                 {/* 읽는 시간: {article.readingTime.time}{article.info.readingTime.unit} */}
                             </span>
                         </button>

@@ -112,3 +112,6 @@
 .card-meta span:hover {
     background-color: var(--dark-2);
 }
+.category{
+    outline: 1px solid #1DACFF;
+}
