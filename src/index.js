@@ -6,13 +6,17 @@ import reportWebVitals from './reportWebVitals';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { HelmetProvider } from "react-helmet-async";
+
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={true} />
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </QueryClientProvider >
 );
 

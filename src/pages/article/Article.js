@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 // componetns imports
@@ -7,24 +7,16 @@ import Footer from 'components/footer/Footer';
 import ArticleCardScroll from 'components/article/ArticleCardScroll';
 import Comments from './components/Comments';
 import CommentForm from './components/CommentForm';
+import Profile from 'pages/article/components/Profile';
 
 // css imports
-import './Article.css';
-import './components/Profile.css';
-import './components/ArticleIndex.css';
-
+import styles from './Article.module.css';
+import articleIndexStyles from './components/ArticleIndex.module.css';
 import 'components/scrollbar.css';
-
-// svgs imports
-import { ReactComponent as ArrowIcon } from 'assets/icons/arrow_forward.svg';
-import { ReactComponent as LinkIcon } from 'assets/icons/link.svg';
-import { ReactComponent as FavoriteIcon } from 'assets/icons/favorite.svg';
-import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
-import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
-import Filter from 'pages/main/Filter';
 
 const articleMockupData = {
     id: 1,
+    slug: 'first-blog-upload',
     title: '제목',
     content: `시맨틱 HTML 요소들은 문서의 구조를 명확하게 정의하고, 검색 엔진이 페이지의 내용을 더 잘 이해하도록 돕습니다. 주요 시맨틱 HTML 요소들과 그 역할은 다음과 같습니다:
 <header>:
@@ -67,6 +59,7 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
         time: 5,
         unit: '분'
     },
+    likeCnt: 3,
     comments: [
         {
             id: 1,
@@ -250,18 +243,24 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
     }
 };
 
-
-
+/**
+ * 아티클 페이지
+ * 
+ * @returns {JSX.Element}
+ */
 const Article = () => {
-    const { id } = useParams();
-    // const editor = new toastui.Editor({
-    //     el: document.querySelector('#editor'),
-    //     previewStyle: 'vertical',
-    //     height: '500px',
-    //     initialEditType: 'wysiwyg',
-    //     // initialValue: content
-    // });
+    const { slug } = useParams();
     let article = articleMockupData;
+
+    // scroll to comment
+    // TODO - 여기 제대로 안 되는 버그 존재
+    const commentRef = useRef(null);
+    const scrollToComment = () => {
+        if (commentRef.current) {
+            commentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        console.log('scroll to comment');
+    };
 
     useEffect(() => {
         // fetch article by id
@@ -272,157 +271,83 @@ const Article = () => {
         //         editor.setMarkdown(data.content);
         //     });
         // editor.setMarkdown(article.content);
-    }, [id]);
 
-    // 공유하기 눌렀는지 체크
-    const [isShareClicked, setIsShareClicked] = useState(false);
-    // 좋아요 눌렀는지 체크
-    const [isLiked, setIsLiked] = useState(false);
+    }, [slug]);
 
     return (
         <>
-            <header className="App-header">
+            <header className={styles["App-header"]}>
                 <Nav />
             </header>
             <main>
                 {/* 아티클 상단 부분 */}
-                <section className='article-header'>
+                <section className={styles['article-header']}>
                     {/* 왼쪽 공간 여백 설정 */}
                     <div style={{ width: '220px' }}></div>
-                    <section className="article-title">
-                        <h1 className="title">{article?.title}</h1>
-                        <section className="article-info">
-                            <span className="writer">{article?.writer?.name}</span>
-                            <span className="createdAt">{article?.createdAt}</span>
-                            <section className="readingTime">
-                                <span className="time">{article?.readingTime?.time}</span>
-                                <span className="unit">{article?.readingTime?.unit}</span>
+                    <section className={styles["article-title"]}>
+                        {/* title */}
+                        <h1 className={styles.title}>{article?.title} {slug}</h1>
+                        {/* <h1 className={styles.title}>{article?.title}</h1> */}
+                        <section className={styles["article-info"]}>
+                            <span className={styles.writer}>{article?.writer?.name}</span>
+                            <span className={styles.createdAt}>{article?.createdAt}</span>
+                            <section className={styles.readingTime}>
+                                <span className={styles.time}>{article?.readingTime?.time}</span>
+                                <span className={styles.unit}>{article?.readingTime?.unit}</span>
                             </section>
                         </section>
-                        <section className="article-tags">
-                            <a href='#'><span className="tag">tag1</span></a>
-                            <a href='#'><span className="tag">tag2</span></a>
-                            <a href='#'><span className="tag">tag3</span></a>
+                        <section className={styles["article-tags"]}>
+                            <a href='#'><span>tag1</span></a>
+                            <a href='#'><span>tag2</span></a>
+                            <a href='#'><span>tag3</span></a>
                         </section>
                     </section>
                     {/* 아티클 상단 우측 버튼들 */}
-                    <section className="article-options">
-                        <button className="edit">수정</button>
-                        <button className="delete">삭제</button>
+                    <section className={styles["article-options"]}>
+                        <button className={styles.edit}>수정</button>
+                        <button className={styles.delete}>삭제</button>
                     </section>
                 </section>
 
                 {/* 아티클 중단 부분 */}
-                <section className='article-body'>
+                <section className={styles['article-body']}>
                     {/* <aside className='category-others</section>'></aside> */}
                     <div style={{ width: '210px' }}></div>
-                    <section className="article-content">
+                    <section className={styles["article-content"]}>
                         <pre>{article.content}</pre>
                     </section>
-                    <section className='article-index scrollbar'>
+                    <section className={`${articleIndexStyles['article-index']} scrollbar`}>
                         <span>목차</span>
                         <ul>
-                            <li className='h1-index'><a href='#hello'>h1 제목</a></li>
-                            <li className='h2-index'><a href='#'>h2 제목</a></li>
-                            <li className='h3-index'><a href='#'>h3 제목</a></li>
-                            <li className='h1-index'><a href='#hello'>h1 제목</a></li>
-                            <li className='h2-index'><a href='#'>h2 제목</a></li>
-                            <li className='h3-index'><a href='#'>h3 제목</a></li>
-                            <li className='h1-index'><a href='#hello'>h1 제목</a></li>
-                            <li className='h2-index'><a href='#'>h2 제목</a></li>
-                            <li className='h3-index'><a href='#'>h3 제목</a></li>
-                            <li className='h1-index'><a href='#hello'>h1 제목</a></li>
-                            <li className='h2-index'><a href='#'>h2 제목</a></li>
-                            <li className='h3-index'><a href='#'>h3 제목</a></li>
-                            <li className='h1-index'><a href='#hello'>그럼 조금 긴 제목은 어떻게 될까?</a></li>
-                            <li className='h2-index'><a href='#'>h2 제목</a></li>
-                            <li className='h3-index'><a href='#'>h3 제목</a></li>
-
+                            <li className={articleIndexStyles['h1-index']}><a href='#hello'>h1 제목</a></li>
+                            <li className={articleIndexStyles['h2-index']}><a href='#'>h2 제목</a></li>
+                            <li className={articleIndexStyles['h3-index']}><a href='#'>h3 제목</a></li>
+                            <li className={articleIndexStyles['h1-index']}><a href='#hello'>h1 제목</a></li>
+                            <li className={articleIndexStyles['h2-index']}><a href='#'>h2 제목</a></li>
+                            <li className={articleIndexStyles['h3-index']}><a href='#'>h3 제목</a></li>
+                            <li className={articleIndexStyles['h1-index']}><a href='#hello'>h1 제목</a></li>
+                            <li className={articleIndexStyles['h2-index']}><a href='#'>h2 제목</a></li>
+                            <li className={articleIndexStyles['h3-index']}><a href='#'>h3 제목</a></li>
+                            <li className={articleIndexStyles['h1-index']}><a href='#hello'>h1 제목</a></li>
+                            <li className={articleIndexStyles['h2-index']}><a href='#'>h2 제목</a></li>
+                            <li className={articleIndexStyles['h3-index']}><a href='#'>h3 제목</a></li>
+                            <li className={articleIndexStyles['h1-index']}><a href='#hello'>그럼 조금 긴 제목은 어떻게 될까?</a></li>
+                            <li className={articleIndexStyles['h2-index']}><a href='#'>h2 제목</a></li>
+                            <li className={articleIndexStyles['h3-index']}><a href='#'>h3 제목</a></li>
                         </ul>
                     </section>
                 </section>
 
                 {/* 아티클 하단 부분 */}
-                <section className='article-footer'>
+                <section className={styles['article-footer']}>
                     {/* 작성자 프로필 및 반응 */}
-                    <section className="writer-profile-reaction-section">
-                        <section className='profile-header'>
-                            <h2>읽어주셔서 감사합니다!</h2>
-                            <p>이 글이 마음에 드셨나요? 좋아요와 댓글로 응원해 주세요!</p>
-                        </section>
-                        <section className='profile-body'>
-                            <section className='profile'>
-                                <img src='https://avatars.githubusercontent.com/u/36643295?v=4' alt='profile img' />
-                                <section className='info'>
-                                    <section className='name'>
-                                        <span>{article?.writer?.name}</span>
-                                        <ArrowIcon className='arrow-forward' />
-                                    </section>
-                                    <span className='introduction'>
-                                        {article?.writer?.introduction}
-                                    </span>
-                                </section>
-                            </section>
-                            <section className='reaction'>
-                                <section className='like-comment'>
-                                    <button className='like' onClick={
-                                        () => {
-                                            const like = document.querySelector('.like');
-                                            setIsLiked(!isLiked);
-                                            like.classList.add('liked');
-                                        }
-                                    }>
-                                        <FavoriteIcon className='favorite-icon' />
-                                        <span>좋아요</span>
-                                    </button>
-                                    <button className='comment' onClick={
-                                        () => {
-                                            const comment = document.querySelector('.comment');
-                                            comment.scrollIntoView({ behavior: 'smooth' });
-                                        }
-                                    }>
-                                        <ChatIcon className='chat-icon' />
-                                        <span>댓글</span>
-                                    </button>
-                                </section>
-
-                                <a className='share' href='https://fclipse.github.io/articles/first-blog-upload' onClick={
-                                    (e) => {
-                                        e.preventDefault();
-                                        navigator.clipboard.writeText('https://fclipse.github.io/articles/first-blog-upload');
-                                        setIsShareClicked(true);
-                                    }
-                                }>
-                                    {!isShareClicked ? <LinkIcon className='link-icon' /> : <CheckIcon className='link-icon' />}
-
-                                    <span>
-                                        https://fclipse.github.io/articles/first-blog-upload
-                                    </span>
-                                </a>
-                            </section>
-                        </section>
-
-                    </section>
-
+                    <Profile likeCnt={article.likeCnt} commentCnt={article.comments.length} scrollToComment={scrollToComment} slug={slug} articleWriter={article.writer} />
                     {/* 추천 게시물 및 댓글 */}
-                    <ArticleCardScroll sectionName='recommand' />
+                    <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} />
                     {/* 카테고리 다른 게시물 */}
-                    <ArticleCardScroll sectionName='category' />
-
+                    <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} />
                     {/* 댓글창 */}
-                    <section className="comment-section">
-                        <section className="comment-section-header">
-                            <h2>
-                                <ChatIcon className='chat-icon' />
-                                <span>댓글</span>
-                            </h2>
-                            <Filter />
-                        </section>
-                        <Comments comments={article.comments} />
-                    </section>
-                    {/* <section className="comment-form">
-                        
-                    </section> */}
+                    <Comments ref={commentRef} comments={article.comments} />
                     <CommentForm articleId={article.id} />
                 </section>
 
@@ -430,8 +355,8 @@ const Article = () => {
                 <Footer />
             </main >
             <aside>
-                <section className="controllPanel"></section>
-                <section className="articleIndex"></section>
+                <section className={styles.controllPanel}></section>
+                <section className={styles.articleIndex}></section>
             </aside>
             <footer></footer>
         </>

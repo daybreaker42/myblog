@@ -1,4 +1,7 @@
 import Nav from '../../components/nav/Nav';
+
+import styles from './Category.module.css';
+
 function Category() {
     return (
         <div>

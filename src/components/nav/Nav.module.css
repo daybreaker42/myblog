@@ -1,0 +1,46 @@
+.nav {
+    width: calc(100% - var(--nav-left-margin) - 2 * var(--nav-left-padding));
+    height: var(--nav-height);
+    justify-content: space-between;
+    align-items: center;
+    /* 상단고정 관련 코드 */
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    margin-left: var(--nav-left-margin);
+    padding: 0 var(--nav-left-padding);
+
+    background-color: black;
+    /* blur효과 관련 코드 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: 9999;
+}
+.nav,
+.nav-left, .nav-right {
+    display: flex;
+}
+.nav-left,
+.nav-right {
+    justify-content: center;
+    gap: 1rem;
+}
+/* nav 안에 items */
+.navlink span {
+    text-decoration: none;
+    color: #7b7b7b;
+    font-size: 1rem;
+    /* font-weight: bold; */
+}
+.navlink {
+    /* padding: 20px; */
+}
+.nav-right .navlink {
+    /* padding: 20px 15px; */
+}
+
+.navlink[class*="active"]>span {
+    color: white;
+}

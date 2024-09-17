@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 // component imports
 import Nav from 'components/nav/Nav';
-import CategoryAside from 'components/categoryAside/CategoryAside';
-import Filter from './Filter';
-import Social from './Social';
-import ArticleCard from 'components/article/ArticleCard';
-import PageButtons from 'components/pageButton/PageButtons';
+import PageButtons from 'components/pagenation/Pagenation';
 import Footer from 'components/footer/Footer';
+import ArticlePinned from './components/article/pinned/ArticlePinned';
+import Article from './components/article/Article';
 
 // css imports
-import './Main.css';
+import styles from './Main.module.css';
+import config from '../../config';
+import Aside from './components/aside/Aside';
 
 // TODO - 반응형 추가
 function Main() {
     const [posts, setPosts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(10);
     useEffect(() => {
-        console.log(`main page loaded`);
+        // console.log(`main page loaded`);
         // fetch data from api
         setPosts([
             {
@@ -40,6 +39,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 2,
@@ -60,6 +61,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 3,
@@ -80,6 +83,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 4,
@@ -100,6 +105,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 5,
@@ -120,6 +127,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 6,
@@ -140,6 +149,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 7,
@@ -160,6 +171,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 8,
@@ -180,6 +193,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 9,
@@ -200,6 +215,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
             {
                 id: 10,
@@ -220,6 +237,8 @@ function Main() {
                     viewCnt: 1,
                     commentCnt: 100,
                 },
+                category: 'category-1',
+                tags: ['tag-1', 'tag-2', 'tag-3'],
             },
         ]);
         // TODO - 백엔드 구현 후 다시 작성
@@ -237,28 +256,33 @@ function Main() {
     }, []);
 
     return (
-        <div>
-            <header className="App-header">
-                <Nav />
-            </header>
-            <main>
-                <h1 className='title'>siejwkaodj's blog</h1>
-                <section className='main-body'>
-                    <Filter />
-                    <section className='main-middle'>
-                        <CategoryAside />
-                        <section className='main-content'>
-                            {posts.map((item, index) => (
-                                <ArticleCard key={`article-${item.id || index}`} article={item} />
-                            ))}
-                        </section>
-                        <Social />
+        <>
+            {/* helmet */}
+            <Helmet>
+                <title>Home | {`${config.appName}`}</title>
+                <meta name='description' content='Home page' />
+            </Helmet>
+            {/* aside, main */}
+            <div className={styles['main-root']}>
+                <Aside />
+                <main className={styles['main-main']}>
+                    <Nav />
+                    <section className={styles.title}>
+                        <h1>한성준의 블로그</h1>
+                        <p>결과보다는 과정을, 속도보다는 방향을, 무엇보다 꾸준함을.</p>
                     </section>
-                </section>
-                <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
-            </main>
+                    <section className={styles['main-body']}>
+                        {/* pinned articles */}
+                        <ArticlePinned article={posts[0]} />
+
+                        {/* article - page 1 contents */}
+                        <Article />
+                    </section>
+                </main>
+            </div>
+            {/* footer */}
             <Footer />
-        </div>
+        </>
     );
 }
 

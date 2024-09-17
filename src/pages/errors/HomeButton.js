@@ -1,15 +1,15 @@
 import React from "react";
-
+import styles from "./errors.module.css";
 import { useCustomNavigation } from "hooks/useCustomNavigation";
 const HomeButton = () => {
     const { goHome, goBack } = useCustomNavigation();
     return (
         <>
-            <button className="goHome" onClick={goHome}>
+            <button className={`${styles.goHome} clickable`} onClick={goHome}>
                 <span>&gt; return</span>
-                <div className="text">Home</div>
+                <div className={styles.text}>home</div>
             </button>
-            <button className="goBack" onClick={goBack}>
+            <button className={`${styles.goBack} clickable`} onClick={goBack}>
                 이전 페이지로 이동
             </button>
         </>

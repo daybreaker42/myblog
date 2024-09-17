@@ -6,7 +6,7 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
+  <!-- <meta name="description" content="Web site created using create-react-app" /> -->
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -22,12 +22,43 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>myBlog</title>
+  <title>Home | myBlog</title>
+  <meta name="description" content="myBlog page" />
 </head>
+<style>
+  :root {
+    --text-default: white;
+    --dark-0: #000000;
+    --dark-18: #181818;
+    --dark-1e: #1e1e1e;
+    --dark-1: #242424;
+    --dark-2: #515151;
+    --dark-3: #606060;
+
+    --nav-height: 40px;
+    --nav-left-margin: 230px;
+    --nav-left-padding: 2rem;
+
+    --blue-1: #006DE2;
+
+    --bg-color: #000;
+    /* --bg-color: #121212; */
+    --card-bg-color: #1E1E1E;
+    --text-primary: #E0E0E0;
+    --text-secondary: #A0A0A0;
+    --accent-color: #BB86FC;
+
+  }
+
+  body {
+    background-color: #121212;
+    color: white;
+  }
+</style>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+  <div id="root""></div>
 </body>
 
 </html>
