@@ -92,8 +92,23 @@
     font-size: 0.75rem;
     color: #606060;
 }
+.card-meta button{
+    /* display: flex; */
+    /* align-items: center; */
+    /* gap: 0.25rem; */
+    /* font-size: 0.75rem; */
+    color: #606060;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
 .card-meta span {
     background-color: var(--dark-18);
     border-radius: 4px;
     padding: 0.2rem 0.4rem;
+}
+.card-meta span:hover {
+    background-color: var(--dark-2);
 }

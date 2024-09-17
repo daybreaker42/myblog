@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // import components
 import { ArticleMenu, ArticleMenuButton } from './ArticleMenu';
@@ -38,6 +39,7 @@ import ImageLoader from 'components/loading/ImageLoader';
  * @returns {JSX.Element}
  */
 function ArticleCard({ article }) {
+    const navigate = useNavigate();
     // const [isLoading, setIsLoading] = useState(true);
     const [menuVisible, setMenuVisible] = useState(false);
 
@@ -59,32 +61,73 @@ function ArticleCard({ article }) {
                 </p>
                 <div className={styles["card-meta"]}>
                     <div className={styles["meta-left"]}>
-                        <span className={styles["card-category"]}>
-                            {article.category}
-                        </span>
-                        <span className={styles["card-date"]}>
-                            {article.createdAt}
-                        </span>
-                        <span className={styles["card-views"]}>
-                            조회: {article.viewCnt}
-                        </span>
-                        <span className={styles["card-comments"]}>
-                            댓글: {article.commentCnt}
-                        </span>
-                        {/* <span className={styles["card-author"]}>
-                            작성자: {article.writer}
-                        </span> */}
-                        <span className={styles["card-read-time"]}>
-                            {/* 읽는 시간: {article.readingTime.time}{article.info.readingTime.unit} */}
-                        </span>
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                                navigate(`/category?name=${article.category}`);
+                            }
+                        }>
+                            <span className={styles["card-category"]}>
+                                {article.category}
+                            </span>
+                        </button>
+
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                            }
+                        }>
+                            <span className={styles["card-date"]}>
+                                {article.createdAt}
+                            </span>
+                        </button>
+
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                            }
+                        }>
+                            <span className={styles["card-views"]}>
+                                조회: {article.viewCnt}
+                            </span>
+                        </button>
+
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                            }
+                        }>
+                            <span className={styles["card-comments"]}>
+                                댓글: {article.commentCnt}
+                            </span>
+                        </button>
+
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                            }
+                        }>
+                            <span className={styles["card-read-time"]}>
+                                {/* 읽는 시간: {article.readingTime.time}{article.info.readingTime.unit} */}
+                            </span>
+                        </button>
+
                     </div>
                     <div className={styles["meta-right"]}>
                         <div className={styles["card-tags"]}>
                             {article.tags.map((tag, index) => {
                                 return (
-                                    <span key={`tag-${index}`} className={styles["tag"]}>
-                                        # {tag}
-                                    </span>
+                                    <button key={`tag-${index}`} onClick={
+                                        (e) => {
+                                            preventEvent(e);
+                                            navigate(`/tag?name=${tag}`);
+                                        }
+                                    }>
+                                        <span className={styles["tag"]}>
+                                            # {tag}
+                                        </span>
+                                    </button>
+
                                 );
                             })}
                         </div>
@@ -94,7 +137,7 @@ function ArticleCard({ article }) {
             <ArticleMenu article={article} menuVisible={menuVisible} setMenuVisible={setMenuVisible} />
         </Link >
     );
-}
+};
 
 
 export default ArticleCard;
