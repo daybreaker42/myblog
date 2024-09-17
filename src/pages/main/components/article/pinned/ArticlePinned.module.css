@@ -15,9 +15,14 @@
     gap: 0.5rem;
 }
 .pin{
+    display: flex;
+    align-items: center;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
+}
+.icon{
+    height: 1rem;
 }
 .more{
     display: flex;

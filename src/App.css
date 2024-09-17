@@ -28,3 +28,14 @@ ul{
 ul li{
   list-style: none;
 }
+/* 텍스트 넘칠때 말줄임표로 표시 */
+.multi-line-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 표시할 줄 수 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px; /* 원하는 너비 */
+  max-height: 4.5em; /* 줄 수 * 줄 높이 */
+  line-height: 1.5em; /* 줄 높이 */
+}

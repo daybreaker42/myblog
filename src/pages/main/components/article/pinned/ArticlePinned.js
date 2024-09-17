@@ -33,10 +33,11 @@ const ArticlePinnedArea = () => {
     return (
         <section className={styles.pinned__area}>
             <header className={styles.pinned__area__title}>
-                <h1 className={styles.pin}><Pinned />Pinned</h1>
+                <h1 className={styles.pin}><Pinned className={styles.icon} />Pinned</h1>
+                {/* 더보기 버튼 */}
                 <span className={`${styles.more} clickable`} onClick={() => {
-                    navigation('/pinned');
-                }}>더보기<ArrowRight /></span>
+                    navigation('/articles/?pinned=true');
+                }}>더보기<ArrowRight className={styles.icon} /></span>
             </header>
             <ul className={styles.pinned__area__content}>
                 {mockupData.data.map((article, index) => {

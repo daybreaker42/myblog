@@ -1,43 +1,49 @@
 .card {
+    display: flex;
     background-color: var(--card-bg-color);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-
-    height: 12rem;
+    
     position: relative;
 }
-
 .card:hover {
     transform: translateY(-5px);
 }
-
 .thumbnail {
-    width: 18.75rem;
-    /* max-width: 18.75rem; */
+    display: flex;
+    align-items: center;
+    min-width: 7.5rem;
+    max-width: 7.5rem;
+    /* min-height: 7.5rem; */
+    /* width: clamp(7.5rem, 100%, 7.5rem); */
+    /* height: clamp(7.5rem, 100%, 7.5rem); */
+    /* max-width: 7.5rem;
+    max-height: 7.5rem; */
+    height: 100%;
     object-fit: cover;
+    overflow: hidden;
 }
-
 .card-content {
     display: flex;
-    height: auto;
     flex-direction: column;
     padding: 1rem;
     overflow: hidden;
+    /* gap: 1rem; */
 }
-
-.card-top {
+.card-content header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-
-.card-title {
-    font-size: 1.5rem;
+.card-content header h2 {
+    font-size: 1rem;
     margin: 0;
+    padding: 0 40px 0 0;
 
     max-height: 2em;
+    
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -45,65 +51,49 @@
     text-align: start;
     flex-shrink: 1;
 }
-
-.card-summary {
-    flex-shrink: 1;
+.card-content p {
+    -webkit-line-clamp: 3; /* 표시할 줄 수 */
+    width: auto; /* 원하는 너비 */
+    line-height: 1rem; /* 줄 높이 */
+    max-height: 3rem; /* 줄 수 * 줄 높이 */
+    margin: 0.5rem 0;
+    
+    /* margin: 1rem 0 0.75rem 0; */
+    
+    /* 
     max-height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
 
-    display: -webkit-box;
+    */
+    /* display: -webkit-box;  */
     /* Flex 대신 -webkit-box 사용 */
-    -webkit-box-orient: vertical;
+    /* -webkit-box-orient: vertical; */
     /* 수직 방향으로 박스 정렬 */
-    -webkit-line-clamp: 2;
+    /* -webkit-line-clamp: 2; */
     /* 두 줄까지만 표시하고 나머지는 ...으로 표시 */
 
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+    /* color: var(--text-secondary);
+    line-height: 1.5em; */
+    font-size: 0.75rem;
     text-align: start;
-    line-height: 1.5em;
 }
-
-.card-meta {
+.card-meta{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.card-meta div{
     display: flex;
     flex-flow: row wrap;
     gap: 0.25rem;
 
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+    font-size: 0.75rem;
+    color: #606060;
 }
-
 .card-meta span {
     background-color: var(--dark-18);
     border-radius: 4px;
     padding: 0.2rem 0.4rem;
-}
-
-@media (min-width: 768px) {
-    .card {
-        display: flex;
-        width: 720px;
-    }
-
-    .thumbnail {
-        /* width: 300px; */
-        /* height: auto; */
-    }
-
-    .card-content {
-        flex: 1;
-    }
-}
-
-@media (min-width: 1024px) {
-    .card {
-        /* max-width: 1024px; */
-    }
-
-    .card-thumbnail {
-        /* width: 400px; */
-    }
-
 }
