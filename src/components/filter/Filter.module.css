@@ -29,6 +29,7 @@
     gap: 5px;
 }
 .options li {
+    justify-content: center;
     padding: 10px;
     cursor: pointer;
     background-color: var(--dark-1e);

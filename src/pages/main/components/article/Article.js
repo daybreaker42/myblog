@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Article.module.css';
 
 import ArticleCard from 'components/article/ArticleCard';
-import Pagination from 'components/pageButton/PageButtons';
+import Pagination from 'components/pagenation/Pagenation';
 import Filter from 'components/filter/Filter';
 
 const sectionData = {

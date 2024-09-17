@@ -1,4 +1,4 @@
-import './PageButtons.css';
+import styles from './Pagenation.module.css';
 
 /**
  * pagenation 위한 buttons 컴포넌트
@@ -32,7 +32,7 @@ function PageButtons({ currentPage, setPage, totalPages }) {
     }
 
     return (
-        <div className='page-buttons'>
+        <div className={styles['page-buttons']}>
             {pages.map((page) => (
                 <PageButton
                     key={page}
@@ -54,7 +54,7 @@ function PageButton({ page, setPage, currentPage }) {
                     setPage(page);
                 }
             }}
-            className={`pageButton ${currentPage === page ? 'active' : ''}`}
+            className={`${styles['pageButton']} ${currentPage === page ? styles['selected'] : ''}`}
         >
             {page}
         </button>

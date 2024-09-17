@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 
 // component imports
 import Nav from 'components/nav/Nav';
-import PageButtons from 'components/pageButton/PageButtons';
+import PageButtons from 'components/pagenation/Pagenation';
 import Footer from 'components/footer/Footer';
 import ArticlePinned from './components/article/pinned/ArticlePinned';
 import Article from './components/article/Article';
