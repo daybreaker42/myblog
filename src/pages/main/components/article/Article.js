@@ -65,8 +65,9 @@ const sectionData = {
 
 const Article = () => {
     const [articles, setArticles] = useState([]);
-    const [pageInfo, setPageInfo] = useState({});
     const [type, setType] = useState('recent'); // recent, popular, filter
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     const headerTypes = [
         {
@@ -95,11 +96,8 @@ const Article = () => {
             // const data = await getArticlesByCategory(type, page);
             const data = sectionData.articles;
             setArticles(data);
-            setPageInfo({
-                page: 1,
-                totalPage: 10,
-                totalCnt: 100
-            });
+            setTotalPages(100);
+
         }
 
         fetchArticles();
@@ -123,7 +121,7 @@ const Article = () => {
                     <ArticleCard key={`article-${index}`} article={article} />
                 ))}
             </ul>
-            <Pagination pageInfo={pageInfo} />
+            <Pagination currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
         </section>
     );
 }

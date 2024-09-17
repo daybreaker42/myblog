@@ -16,8 +16,6 @@ import Aside from './components/aside/Aside';
 // TODO - 반응형 추가
 function Main() {
     const [posts, setPosts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(10);
     useEffect(() => {
         // console.log(`main page loaded`);
         // fetch data from api
@@ -279,9 +277,7 @@ function Main() {
 
                         {/* article - page 1 contents */}
                         <Article />
-
                     </section>
-                    <PageButtons currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
                 </main>
             </div>
             {/* footer */}
