@@ -15,7 +15,13 @@ const Aside = () => {
                 if (location.pathname !== '/') navigate('/');
             }}>성준의 Blog</h2>
             {/* github commit graph */}
-            <div className={styles['github-commit-graph']}>github commit graph</div>
+            <section className={styles['github-commit']}>
+                <h2>Github Commit Status</h2>
+                <div className={styles['github-commit-graph']}>
+                    github commit graph
+                    <img src="https://ghchart.rshah.org/fclipse" alt='github commit graph' />
+                </div>
+            </section>
             {/* 방문자 수 */}
             <section className={styles['visits']}>
                 <h2>방문자 수</h2>

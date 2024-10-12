@@ -22,14 +22,27 @@ aside h2{
     font-size: 1.5rem;
     margin: 0;
 }
+.github-commit{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: start;
+    gap: 1rem;
+}
+.github-commit>h2{
+    text-align: start;
+    margin: 0;
+}
 /* git commit graph */
 .github-commit-graph{
     width: 198px;
-    height: 198px;
+    height: 104px;
+    /* height: 198px; */
     background-color: #242424;
     display: flex;
-    justify-content: center;
     align-items: center;
+    /* 넘어가는 부분 숨김 */
+    overflow: hidden;
+    justify-content: end;
 }
 
 /* 방문자 수 관련 */
