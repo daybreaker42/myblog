@@ -18,6 +18,8 @@ import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 import styles from './ArticleCard.module.css';
 import ImageLoader from 'components/loading/ImageLoader';
 
+// TODO - 911px 이하 즈음에 tag/category가 overflow되고, height가 계속 늘어나는 문제 해결하기
+
 /**
  * ArticleCard component
  * @param {Object} article - article object

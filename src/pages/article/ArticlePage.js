@@ -248,7 +248,7 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
  * 
  * @returns {JSX.Element}
  */
-const Article = () => {
+const ArticlePage = () => {
     const { slug } = useParams();
     let article = articleMockupData;
 
@@ -363,4 +363,4 @@ const Article = () => {
     );
 }
 
-export default Article;
+export default ArticlePage;

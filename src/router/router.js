@@ -5,7 +5,7 @@ import About from 'pages/about/About';
 import Category from 'pages/category/Category';
 import Tags from 'pages/tags/Tags';
 import Settings from 'pages/settings/Settings';
-import Article from 'pages/article/Article';
+import ArticlePage from 'pages/article/ArticlePage';
 import Test from 'pages/test/Test';
 
 // error pages
@@ -23,7 +23,7 @@ const Router = () => {
                 <Route path='/about' element={<About />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/settings' element={<Settings />} />
-                <Route path='/article/:slug' element={<Article />} />
+                <Route path='/article/:slug' element={<ArticlePage />} />
                 <Route path='/test' element={<Test />} />
                 {/* <Route path='*' element={<Error404 />} /> */}
                 <Route path='*' element={<Error typeNum={404} />} />

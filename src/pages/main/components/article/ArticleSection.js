@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Article.module.css';
 
+import { supabase } from 'utils/supabase';
+
 import ArticleCard from 'components/article/ArticleCard';
 import Pagination from 'components/pagenation/Pagenation';
 import Filter from 'components/filter/Filter';
+
+// model import
+import { Article } from 'models/model';
 
 const sectionData = {
     name: 'section',
@@ -63,7 +68,7 @@ const sectionData = {
 
 };
 
-const Article = () => {
+const ArticleSection = () => {
     const [articles, setArticles] = useState([]);
     const [type, setType] = useState('recent'); // recent, popular, filter
     const [currentPage, setCurrentPage] = useState(1);
@@ -93,11 +98,35 @@ const Article = () => {
 
     useEffect(() => {
         const fetchArticles = async () => {
+            // 이전에 쓰던 mokup data
             // const data = await getArticlesByCategory(type, page);
-            const data = sectionData.articles;
-            setArticles(data);
-            setTotalPages(100);
+            // const data = sectionData.articles;
+            // setArticles(data);
+            // setTotalPages(100);
+            try {
+                // const { data, error } = await supabase
+                //     .from('article')
+                //     .select('*')
+                //     .order('created_at', { ascending: false });
 
+                let { data: articles, error } = await supabase
+                    .from('article')
+                    .select('id, created_at, title, content, category_id, slug, thumbnail_img, reading_time, unit, like_cnt, comment_cnt')
+                    .eq('status', 'NORMAL')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('Error fetching posts:', error);
+                    return;
+                }
+
+                console.log('Fetched posts:', articles);
+                articles = articles.map(article => new Article(article))
+                console.log('Fetched posts:', articles);
+                // setArticles();
+            } catch (err) {
+                console.error('Unexpected error:', err);
+            }
         }
 
         fetchArticles();
@@ -126,4 +155,4 @@ const Article = () => {
     );
 }
 
-export default Article;
+export default ArticleSection;

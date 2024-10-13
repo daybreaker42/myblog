@@ -6,11 +6,11 @@ import Nav from 'components/nav/Nav';
 import PageButtons from 'components/pagenation/Pagenation';
 import Footer from 'components/footer/Footer';
 import ArticlePinned from './components/article/pinned/ArticlePinned';
-import Article from './components/article/Article';
+import ArticleSection from './components/article/ArticleSection';
 
 // css imports
 import styles from './Main.module.css';
-import config from '../../config';
+import config from 'config';
 import Aside from './components/aside/Aside';
 
 // TODO - 반응형 추가
@@ -266,7 +266,9 @@ function Main() {
             <div className={styles['main-root']}>
                 <Aside />
                 <main className={styles['main-main']}>
-                    <Nav />
+                    <header className="App-header">
+                        <Nav />
+                    </header>
                     <section className={styles.title}>
                         <h1>한성준의 블로그</h1>
                         <p>결과보다는 과정을, 속도보다는 방향을, 무엇보다 꾸준함을.</p>
@@ -276,7 +278,7 @@ function Main() {
                         <ArticlePinned article={posts[0]} />
 
                         {/* article - page 1 contents */}
-                        <Article />
+                        <ArticleSection />
                     </section>
                 </main>
             </div>
