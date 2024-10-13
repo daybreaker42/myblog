@@ -10,11 +10,17 @@ import ArticleCardScroll from 'components/article/ArticleCardScroll';
 import Comments from './components/Comments';
 import CommentForm from './components/CommentForm';
 import Profile from 'pages/article/components/Profile';
+import TagSection from './components/TagSection';
+
+// util imports
+import { useFetch } from 'utils/fetch';
+import { ARTICLE_DATA_COLUMNS } from 'utils/constants';
 
 // css imports
-import styles from './Article.module.css';
+import styles from './ArticlePage.module.css';
 import articleIndexStyles from './components/ArticleIndex.module.css';
 import 'components/scrollbar.css';
+import { Article } from 'models/model';
 
 const articleMockupData = {
     id: 1,
@@ -245,42 +251,75 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
     }
 };
 
+
+const fetchArticle = (slug: string): (() => Promise<{ data: any; error: any }>) => async () => {
+    console.log('fetchArticle', `"${slug}"`);
+    
+    const { data, error } = await supabase
+        .from('article')
+        .select(`${ARTICLE_DATA_COLUMNS.join(', ')},
+        category:category_id(*),
+        article_tags(
+        id,
+        tags(
+            id,
+            name
+        )
+        )`)
+        .eq('slug', slug)
+        .single();
+
+    if (error) {
+        console.error('Error fetching article:', error.message);
+        return { data: null, error };
+    }
+
+    return { data, error };
+};
+
+
+const processArticle = (data: any) : Article=> {
+    return new Article(data);
+};
+
 /**
  * 아티클 페이지
  * 
  * @returns {JSX.Element}
  */
-const ArticlePage = () => {
+const ArticlePage = (): JSX.Element => {
     const { slug } = useParams();
-    let article = articleMockupData;
+    const { data: article, loading, error, fetchData } = useFetch<Article>();
+    // let article = articleMockupData;
 
     // scroll to comment
     // TODO - 여기 제대로 안 되는 버그 존재
-    const commentRef = useRef(null);
+    const commentRef = useRef<HTMLDivElement>(null);
     const scrollToComment = () => {
         if (commentRef.current) {
-            // TODO - FIX
-            // commentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            commentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' }); // 수정: 주석 제거 및 스크롤 기능 활성화
         }
         console.log('scroll to comment');
     };
 
     useEffect(() => {
-        // fetch article by id
-        // fetch(`/api/articles/${id}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         editor.setMarkdown(data.content);
-        //     });
-        // editor.setMarkdown(article.content);
-        try{
-
-        }catch(err){
-            console.error()
+        if (slug) {
+            fetchData(fetchArticle(slug), processArticle);
         }
     }, [slug]);
 
+    if(loading) {
+        return <div>Loading...</div>;
+    }
+
+    if(error){
+        return <div>Error: {error.toString()}</div>;
+    }
+
+    if(!article) {
+        return <div>Article not found</div>;
+    }
+    
     return (
         <>
             <header className={styles["App-header"]}>
@@ -293,21 +332,18 @@ const ArticlePage = () => {
                     <div style={{ width: '220px' }}></div>
                     <section className={styles["article-title"]}>
                         {/* title */}
-                        <h1 className={styles.title}>{article?.title} {slug}</h1>
+                        <h1 className={styles.title}>{article.title} {slug}</h1>
                         {/* <h1 className={styles.title}>{article?.title}</h1> */}
                         <section className={styles["article-info"]}>
-                            <span className={styles.writer}>{article?.writer?.name}</span>
-                            <span className={styles.createdAt}>{article?.createdAt}</span>
+                            {/* TODO - writer부분 구현 */}
+                            {/* <span className={styles.writer}>{article.}</span> */}   
+                            {/* <span className={styles.createdAt}>{article.getFormattedDate()}</span> */}
                             <section className={styles.readingTime}>
-                                <span className={styles.time}>{article?.readingTime?.time}</span>
-                                <span className={styles.unit}>{article?.readingTime?.unit}</span>
+                                <span className={styles.time}>{article.readingTime}</span>
+                                <span className={styles.unit}>{article.unit}</span>
                             </section>
                         </section>
-                        <section className={styles["article-tags"]}>
-                            <a href='#'><span>tag1</span></a>
-                            <a href='#'><span>tag2</span></a>
-                            <a href='#'><span>tag3</span></a>
-                        </section>
+                        <TagSection tags={article.tags} />
                     </section>
                     {/* 아티클 상단 우측 버튼들 */}
                     <section className={styles["article-options"]}>
@@ -348,14 +384,15 @@ const ArticlePage = () => {
                 {/* 아티클 하단 부분 */}
                 <section className={styles['article-footer']}>
                     {/* 작성자 프로필 및 반응 */}
-                    <Profile likeCnt={article.likeCnt} commentCnt={article.comments.length} scrollToComment={scrollToComment} slug={slug} articleWriter={article.writer} />
+                    {/* TODO - writer 구현 */}
+                    {/* <Profile likeCnt={article.like_cnt} commentCnt={article.comment_cnt} scrollToComment={scrollToComment} slug={slug} articleWriter={article.writer} /> */}
                     {/* 추천 게시물 및 댓글 */}
-                    <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} />
+                    {/* <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} /> */}
                     {/* 카테고리 다른 게시물 */}
-                    <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} />
+                    {/* <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} /> */}
                     {/* 댓글창 */}
                     {/* <Comments ref={commentRef} comments={article.comments} /> */}
-                    <CommentForm articleId={article.id} />
+                    {/* <CommentForm articleId={article.id} /> */}
                 </section>
 
                 {/* footer */}

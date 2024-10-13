@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './ArticleSection.module.css';
 // supabase client
 import { supabase } from 'utils/supabase';
+
 // components import
 import ArticleCard from 'components/article/ArticleCard';
 import Pagination from 'components/pagenation/Pagenation';
@@ -9,6 +10,7 @@ import Filter from 'components/filter/Filter';
 
 // model import
 import { Article } from 'models/model';
+import { ARTICLE_PER_PAGE, ARTICLE_DATA_COLUMNS } from 'utils/constants';
 
 // mokup data
 const sectionData = {
@@ -69,22 +71,7 @@ const sectionData = {
 
 };
 
-// CONSTANTS
-const ARTICLE_PER_PAGE: number = 10;
-const ARTICLE_DATA_COLUMNS: string[] = [
-    'id',
-    'created_at',
-    'title',
-    'content',
-    'category_id',
-    'slug',
-    'thumbnail_img',
-    'reading_time',
-    'unit',
-    'view_cnt',
-    'like_cnt',
-    'comment_cnt',
-];
+
 
 /**
  * ArticleSection

@@ -1,54 +1,124 @@
 import { useState, useCallback } from 'react';
-import { supabase } from './supabase'; 
 
-const usePaginatedFetch = (initialPageSize = 10) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [pageSize, setPageSize  ] = useState(initialPageSize);
-
-  const fetchData = useCallback(async (
-    queryFn: (arg0: number, arg1: number) => PromiseLike<{ data: any; error: any; count: any; }> | { data: any; error: any; count: any; },
-    processFn = (data: any) => data,
-    page = currentPage
-  ) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const { data, error, count } = await queryFn(page, pageSize);
-
-      if (error) throw error;
-
-      const processedData = processFn(data || []);
-      setData(processedData);
-      setCurrentPage(page);
-
-      if (count !== undefined && count !== null) {
-        setTotalPages(Math.ceil(count / pageSize));
-      } else {
-        setTotalPages(0);
-      }
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred');
-      console.error('Fetch error:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [currentPage, pageSize]);
-
-  return {
-    data,
-    loading,
-    error,
-    currentPage,
-    totalPages,
-    pageSize,
-    setPageSize,
-    fetchData
-  };
+/**
+ * Fetch data from server
+ */
+export const useFetch = <T, >() => {
+    const [data, setData] = useState<T>([] as T);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<unknown>(null);
+    
+    const fetchData = useCallback(async (
+        queryFn: () => PromiseLike<{ data: any; error: any; }> | { data: any; error: any; },
+        processFn = (data: any) => data
+    ) => {
+        setLoading(true);
+        setError(null);
+    
+        try {
+        const { data, error } = await queryFn();
+    
+        if (error) throw error;
+    
+        const processedData = processFn(data || []) as T;
+        setData(processedData);
+        } catch (err: any) {
+        setError(err.message || 'An unexpected error occurred');
+        console.error('Fetch error:', err);
+        } finally {
+        setLoading(false);
+        }
+    }, []);
+    
+    return {
+        data,
+        loading,
+        error,
+        fetchData
+    };
 };
 
-export default usePaginatedFetch;
+/**
+ * Fetch data from server
+ */
+export const useFetchArray = <T, >() => {
+    const [data, setData] = useState<T[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<unknown>(null);
+    
+    const fetchData = useCallback(async (
+        queryFn: () => PromiseLike<{ data: any; error: any; }> | { data: any; error: any; },
+        processFn = (data: any) => data
+    ) => {
+        setLoading(true);
+        setError(null);
+    
+        try {
+        const { data, error } = await queryFn();
+    
+        if (error) throw error;
+    
+        const processedData = processFn(data || []) as T[];
+        setData(processedData);
+        } catch (err: any) {
+        setError(err.message || 'An unexpected error occurred');
+        console.error('Fetch error:', err);
+        } finally {
+        setLoading(false);
+        }
+    }, []);
+    
+    return {
+        data,
+        loading,
+        error,
+        fetchData
+    };
+};
+
+/**
+ * Fetch data with pagination
+ */
+export const usePaginatedFetch = <T,>(initialPageSize = 10) => {
+    const [data, setData] = useState<T[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<unknown>(null);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [pageSize, setPageSize] = useState<number>(initialPageSize);
+
+    const fetchData = useCallback(async (
+        queryFn: (page: number, pageSize: number) => PromiseLike<{ data: any; error: any; }> | { data: any; error: any; },
+        processFn = (data: any) => data
+    ) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const { data, error } = await queryFn(currentPage, pageSize);
+
+            if (error) throw error;
+
+            const processedData = processFn(data || []) as T[];
+            setData(processedData);
+            setTotalPages(Math.ceil(data.length / pageSize)); // 수정: totalPages 계산
+        } catch (err: any) {
+            setError(err.message || 'An unexpected error occurred');
+            console.error('Fetch error:', err);
+        } finally {
+            setLoading(false);
+        }
+    }, [currentPage, pageSize]);
+
+    return {
+        data,
+        loading,
+        error,
+        currentPage,
+        totalPages,
+        pageSize,
+        setCurrentPage,
+        setPageSize,
+        fetchData
+    };
+};

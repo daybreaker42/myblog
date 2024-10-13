@@ -49,7 +49,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
-                                navigate(`/category?name=${article.category}`);
+                                navigate(`/category?name=${article.category.name}`);
                             }
                         }>
                             <span className={styles["category"]}>

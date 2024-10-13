@@ -38,9 +38,8 @@ export class Category{
  * Article class
  * 
  * Article 객체를 생성한다.
- * 
- * methods
- * - stringToUnit(value: string): Unit
+ * @param data
+ * @returns Article
  */
 export class Article {
     id: number;
@@ -81,13 +80,12 @@ export class Article {
         throw new Error(`Invalid Unit value: ${value}`);
     }
 
-    /** 시각 예쁘게 formatting 
-     * - 2024-10-11
-     * 1분 이내이면 방금 전이라고 표시
-     * 60분 이내이면 n분 전이라고 표시
-     * 24시간 이내이면 n시간 전이라고 표시
-     * 3일 이내이면 n일 전이라고 표시
-     * 그 이상이면 날짜를 표시(yyyy-mm-dd)
+    /** 시각 예쁘게 formatting - 2024-10-11
+     * - 1분 이내이면 방금 전이라고 표시
+     * - 60분 이내이면 n분 전이라고 표시
+     * - 24시간 이내이면 n시간 전이라고 표시
+     * - 3일 이내이면 n일 전이라고 표시
+     * - 그 이상이면 날짜를 표시(yyyy-mm-dd)
      */
     public getFormattedDate(): string {
         const now = new Date();
