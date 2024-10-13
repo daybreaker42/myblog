@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import styles from './ArticleMenu.module.css';
 import preventEvent from './utils/preventEvent';
-import { isVisible } from '@testing-library/user-event/dist/utils';
+// import { isVisible } from '@testing-library/user-event/dist/utils';
 
 import { ReactComponent as MoreVertIcon } from 'assets/icons/more_vert.svg';
 
