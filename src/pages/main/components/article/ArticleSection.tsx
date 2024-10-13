@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Article.module.css';
+import styles from './ArticleSection.module.css';
 
 import { supabase } from 'utils/supabase';
 
@@ -109,7 +109,7 @@ const ArticleSection = () => {
                 //     .select('*')
                 //     .order('created_at', { ascending: false });
 
-                let { data: articles, error } = await supabase
+                let { data: articleDatas, error } = await supabase
                     .from('article')
                     .select('id, created_at, title, content, category_id, slug, thumbnail_img, reading_time, unit, like_cnt, comment_cnt')
                     .eq('status', 'NORMAL')
@@ -120,10 +120,10 @@ const ArticleSection = () => {
                     return;
                 }
 
-                console.log('Fetched posts:', articles);
-                articles = articles.map(article => new Article(article))
-                console.log('Fetched posts:', articles);
-                // setArticles();
+                // console.log('Fetched posts:', articleDatas);
+                let tmp = articleDatas?.map(article => new Article(article));
+                console.log('Formed posts:', tmp);
+                setArticles(tmp);
             } catch (err) {
                 console.error('Unexpected error:', err);
             }

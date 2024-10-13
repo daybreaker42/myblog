@@ -28,6 +28,7 @@
     // "noUnusedParameters": true,
   },
   "include": [
-    "src"
+    "declaration.d.ts",
+    "src",
   ]
 }
