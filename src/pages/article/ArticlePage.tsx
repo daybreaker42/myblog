@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 // supabase client
 import { supabase } from 'utils/supabase';
@@ -7,10 +7,11 @@ import { supabase } from 'utils/supabase';
 import Nav from 'components/nav/Nav';
 import Footer from 'components/footer/Footer';
 import ArticleCardScroll from 'components/article/ArticleCardScroll';
-import Comments from './components/Comments';
+import Comments from './components/CommentsSection';
 import CommentForm from './components/CommentForm';
 import Profile from 'pages/article/components/Profile';
 import TagSection from './components/TagSection';
+import Error from 'pages/errors/Error';
 
 // util imports
 import { useFetch } from 'utils/fetch';
@@ -251,10 +252,14 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
     }
 };
 
-
+/**
+ * article server로부터 데이터를 fetch하는 함수
+ * slug를 이용하여 해당 아티클을 가져온다.
+ * 
+ * @param slug
+ * @returns
+ */
 const fetchArticle = (slug: string): (() => Promise<{ data: any; error: any }>) => async () => {
-    console.log('fetchArticle', `"${slug}"`);
-    
     const { data, error } = await supabase
         .from('article')
         .select(`${ARTICLE_DATA_COLUMNS.join(', ')},
@@ -273,12 +278,16 @@ const fetchArticle = (slug: string): (() => Promise<{ data: any; error: any }>) 
         console.error('Error fetching article:', error.message);
         return { data: null, error };
     }
-
+    // console.log('fetchArticle data:', data);
+    
     return { data, error };
 };
 
-
-const processArticle = (data: any) : Article=> {
+/**
+ * article 데이터를 가공하는 함수
+ * 데이터를 받아 article 객체를 생성한다.
+ */
+const processArticle = (data: any) : Article => {
     return new Article(data);
 };
 
@@ -306,16 +315,19 @@ const ArticlePage = (): JSX.Element => {
         if (slug) {
             fetchData(fetchArticle(slug), processArticle);
         }
-    }, [slug]);
+    }, [fetchData, slug]);
 
+    // TODO - loading, error, article에 대한 처리 필요
     if(loading) {
         return <div>Loading...</div>;
     }
-
+    
     if(error){
-        return <div>Error: {error.toString()}</div>;
+        // TODO - 나중엔 다양한 error에 대한 처리 필요, 메세지 출력 등
+        return <Error typeNum={null} message={{ title: 'error', content:error.toString() }}/>;
     }
-
+    
+    // FIXME - 로딩 초기에 loading은 처음에 false로 설정되어 있어서 로딩 초기엔 article이 없다고 뜨는 버그가 있음
     if(!article) {
         return <div>Article not found</div>;
     }
@@ -387,12 +399,12 @@ const ArticlePage = (): JSX.Element => {
                     {/* TODO - writer 구현 */}
                     {/* <Profile likeCnt={article.like_cnt} commentCnt={article.comment_cnt} scrollToComment={scrollToComment} slug={slug} articleWriter={article.writer} /> */}
                     {/* 추천 게시물 및 댓글 */}
-                    {/* <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} /> */}
+                    <ArticleCardScroll sectionTitle='추천 게시글' type='recommand' currentSlug={slug} />
                     {/* 카테고리 다른 게시물 */}
-                    {/* <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} /> */}
+                    <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} />
                     {/* 댓글창 */}
-                    {/* <Comments ref={commentRef} comments={article.comments} /> */}
-                    {/* <CommentForm articleId={article.id} /> */}
+                    <Comments ref={commentRef} comments={article.comments} />
+                    <CommentForm articleId={article.id} />
                 </section>
 
                 {/* footer */}

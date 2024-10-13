@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
  * Fetch data from server
  */
 export const useFetch = <T, >() => {
-    const [data, setData] = useState<T>([] as T);
+    const [data, setData] = useState<T>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<unknown>(null);
     

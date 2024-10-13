@@ -3,7 +3,14 @@ import styles from "./errors.module.css";
 import HomeButton from "./HomeButton";
 
 // error별 메시지
-const errorMessage = {
+type ErrorMessages = {
+    [key: number]: {
+        title: string;
+        content: string;
+    };
+};
+
+const errorMessage: ErrorMessages = {
     400: {
         title: '400 Bad Request',
         content: 'The server could not understand the request due to invalid syntax. Please check the URL and try again.'
@@ -44,18 +51,35 @@ const errorMessage = {
     504: {
         title: '504 Gateway Timeout',
         content: 'The server, while acting as a gateway or proxy, did not receive a timely response from an upstream server it needed to access in order to complete the request. Please try again later.'
-        // content: `The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server. Please try your request again later.`
-    }
+    },    
 };
 
 
-const Error = ({ typeNum }) => {
+const Error = ({ typeNum, message } : { typeNum: number | null, message: {title: string, content: string} | null, }) => {
+    // message가 있을 경우 - 커스텀 에러 메시지 출력
+    if(message) {
+        return (
+            <div>
+                <main className={styles['error-main']}>
+                    <section className={styles.body}>
+                        <span className={styles.iconWrapper}>
+                            <img src={require("assets/icons/warning.svg").default} alt='warning' width="100%" height="100%" />
+                        </span>
+                        <h1 className="title">{message.title}</h1>
+                        <p className={styles.content}>{message.content}</p>
+                        <HomeButton />
+                    </section>
+                </main>
+            </div>
+        )    
+    }
+
     // 기본 에러 - 404 에러 페이지
-    if (!errorMessage[typeNum]) {
+    if (!typeNum || !(typeNum in errorMessage)) {
         console.error(`Error page not found: typeNum - ${typeNum}`);
         typeNum = 404;
     }
-
+    // typeNum이 있는 경우 - 해당하는 에러 페이지 출력
     return (
         <div>
             <main className={styles['error-main']}>

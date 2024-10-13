@@ -1,4 +1,5 @@
 import { Unit } from './enums';
+import { getFormattedDate } from 'utils/date';
 
 /**
  * Tag class
@@ -55,6 +56,7 @@ export class Article {
     thumbnailImg: string | null;
     unit: Unit;
     tags: Tag[];
+    comments: Comment[] = [];
 
     constructor(data: any) {
         this.id = data.id;
@@ -80,56 +82,68 @@ export class Article {
         throw new Error(`Invalid Unit value: ${value}`);
     }
 
-    /** 시각 예쁘게 formatting - 2024-10-11
-     * - 1분 이내이면 방금 전이라고 표시
-     * - 60분 이내이면 n분 전이라고 표시
-     * - 24시간 이내이면 n시간 전이라고 표시
-     * - 3일 이내이면 n일 전이라고 표시
-     * - 그 이상이면 날짜를 표시(yyyy-mm-dd)
-     */
     public getFormattedDate(): string {
-        const now = new Date();
-        const diff = now.getTime() - this.created_at.getTime();
-        const diffMinutes = Math.floor(diff / 60000);
-        const diffHours = Math.floor(diff / 3600000);
-        const diffDays = Math.floor(diff / 86400000);
-        if (diffMinutes < 1) {
-            return '방금 전';
-        } else if (diffMinutes < 60) {
-            return `${diffMinutes}분 전`;
-        } else if (diffHours < 24) {
-            return `${diffHours}시간 전`;
-        } else if (diffDays < 3) {
-            return `${diffDays}일 전`;
-        } else {
-            const year = this.created_at.getFullYear();
-            const month = String(this.created_at.getMonth() + 1).padStart(2, '0');
-            const day = String(this.created_at.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
+        return getFormattedDate(this.created_at);
     }
 }
 
-// export class User {
-//     name: string;
-//     email: string;
-//     password: string;
-//     constructor(data: any) {
-//         this.name = data.name;
-//         this.email = data.email;
-//         this.password = data.password;
-//     }
-// }
+export class User {
+    id: number;
+    name: string;
+    email: string;
+    password: string | null;
+    constructor(data: any) {
+        this.id = data.id;
+        this.name = data.name;
+        this.email = data.email;
+        this.password = data.password || null;
+    }
+}
 
-// export class Comment {
-//     content: string;
-//     writer: string;
-//     constructor(data: any) {
-//         this.content = data.content;
-//         this.writer = data.writer;
-//     }
-// }
+export class Comment {
+    id: number;
+    content: string;
+    writer: string;
+    likes: CommentLike[];
+    created_at: Date;
+    constructor(data: any) {
+        this.id = data.id;
+        this.content = data.content;
+        this.writer = data.writer;
+        this.likes = data.likes.map((like: any) => new CommentLike(like));
+        this.created_at = new Date(data.created_at);
+    }
 
+    public getFormattedDate(): string {
+        return getFormattedDate(this.created_at);
+    }
+}
+
+export class Like{
+    id: number;
+    user: User;
+    article: number;
+    created_at: Date;
+    constructor(data: any) {
+        this.id = data.id;
+        this.user = new User(data.user);
+        this.article = data.article;
+        this.created_at = new Date(data.created_at);
+    }
+}
+
+export class CommentLike{
+    id: number;
+    user: User;
+    comment: number;
+    created_at: Date;
+    constructor(data: any) {
+        this.id = data.id;
+        this.user = new User(data.user);
+        this.comment = data.comment;
+        this.created_at = new Date(data.created_at);
+    }
+}
 
 
 /** interface 선언 */
