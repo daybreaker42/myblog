@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './ArticleSection.module.css';
-
+// supabase client
 import { supabase } from 'utils/supabase';
-
+// components import
 import ArticleCard from 'components/article/ArticleCard';
 import Pagination from 'components/pagenation/Pagenation';
 import Filter from 'components/filter/Filter';
@@ -10,6 +10,7 @@ import Filter from 'components/filter/Filter';
 // model import
 import { Article } from 'models/model';
 
+// mokup data
 const sectionData = {
     name: 'section',
     articles: [
@@ -68,12 +69,37 @@ const sectionData = {
 
 };
 
+// CONSTANTS
+const ARTICLE_PER_PAGE: number = 2;
+const ARTICLE_DATA_COLUMNS: string[] = [
+    'id',
+    'created_at',
+    'title',
+    'content',
+    'category_id',
+    'slug',
+    'thumbnail_img',
+    'reading_time',
+    'unit',
+    'view_cnt',
+    'like_cnt',
+    'comment_cnt',
+];
+
+/**
+ * ArticleSection
+ * 
+ * ArticleCard를 렌더링하는 컴포넌트
+ */
 const ArticleSection = () => {
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState<Article[]>([]);
     const [type, setType] = useState('recent'); // recent, popular, filter
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    
+    // const [category, setCategory] = useState('all');
 
+    // sort types - recent, popular, filter
     const headerTypes = [
         {
             name: 'Recent',
@@ -94,43 +120,60 @@ const ArticleSection = () => {
         }
     ];
 
-
-
+    // 처음 page load시 실행
     useEffect(() => {
-        const fetchArticles = async () => {
-            // 이전에 쓰던 mokup data
-            // const data = await getArticlesByCategory(type, page);
-            // const data = sectionData.articles;
-            // setArticles(data);
-            // setTotalPages(100);
-            try {
-                // const { data, error } = await supabase
-                //     .from('article')
-                //     .select('*')
-                //     .order('created_at', { ascending: false });
-
-                let { data: articleDatas, error } = await supabase
-                    .from('article')
-                    .select('id, created_at, title, content, category_id, slug, thumbnail_img, reading_time, unit, like_cnt, comment_cnt')
-                    .eq('status', 'NORMAL')
-                    .order('created_at', { ascending: false });
-
-                if (error) {
-                    console.error('Error fetching posts:', error);
-                    return;
-                }
-
-                // console.log('Fetched posts:', articleDatas);
-                let tmp = articleDatas?.map(article => new Article(article));
-                console.log('Formed posts:', tmp);
-                setArticles(tmp);
-            } catch (err) {
-                console.error('Unexpected error:', err);
-            }
-        }
-
-        fetchArticles();
+        getArticlesWithPagenation();
     }, []);
+
+    /**
+     * getArticlesWithPagenation
+     * 
+     * article 데이터를 fetch하는 함수
+     */
+    async function getArticlesWithPagenation(page = 1, pageSize = ARTICLE_PER_PAGE) {
+        try {
+            // 1. supabase로부터 article 데이터를 fetch
+            let { data: articleDatas, error, count } = await supabase
+                .from('article')
+                .select(`
+                    ${ARTICLE_DATA_COLUMNS.join(', ')},
+                    category:category_id(*),
+                    article_tags(
+                    id,
+                    tags(
+                        id,
+                        name
+                    )
+                    )
+                `, { count: 'exact' })
+                .eq('status', 'NORMAL')
+                .range((page - 1) * pageSize, page * pageSize - 1)
+                .order('created_at', { ascending: false });
+
+
+            if (error) {
+                console.error('Error fetching posts:', error);
+                return;
+            }
+            // console.log('articleDatas:', articleDatas);
+            // set currentPage
+            setCurrentPage(page);
+            
+            // count를 이용해 totalPages 계산
+            if (count !== undefined && count !== null) {
+                setTotalPages(Math.ceil(count / pageSize));
+            } else {
+                setTotalPages(0);
+            }
+            
+            // 2. fetch한 데이터를 Article 객체로 변환
+            let parsedArticle = (articleDatas || []).map(article => new Article(article)); // 수정: articleDatas가 undefined일 경우 빈 배열로 대체
+            setArticles(parsedArticle); // 수정: setArticles 함수 호출 추가
+        } catch (err) {
+            console.error('Unexpected error:', err);
+        }
+    };
+
 
     return (
         <section className={styles['article-container']}>
@@ -150,7 +193,7 @@ const ArticleSection = () => {
                     <ArticleCard key={`article-${index}`} article={article} />
                 ))}
             </ul>
-            <Pagination currentPage={currentPage} setPage={setCurrentPage} totalPages={totalPages} />
+            <Pagination currentPage={currentPage}  totalPages={totalPages} getArticlesWithPagenation={getArticlesWithPagenation}/>
         </section>
     );
 }

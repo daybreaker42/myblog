@@ -1,4 +1,26 @@
 import { Unit } from './enums';
+
+
+/**
+ * Category class
+ * 
+ * CategoryData interface를 입력으로 받아 Category 객체를 생성한다.
+ */
+export class Category{
+    id: number;
+    name: string;
+    color: string;
+    created_at: Date;
+    article_cnt: number;
+    constructor(data: any) {
+        this.id = data.id;
+        this.name = data.name;
+        this.color = data.color;
+        this.created_at = new Date(data.created_at);
+        this.article_cnt = data.article_cnt;
+    }
+}
+
 /**
  * Article class
  * 
@@ -12,26 +34,30 @@ export class Article {
     title: string;
     content: string;
     slug: string;
-    createdAt: Date;
-    categoryId: number;
-    commentCount: number;
-    likeCount: number;
+    created_at: Date;
+    category: Category;
+    view_cnt: number;
+    comment_cnt: number;
+    like_cnt: number;
     readingTime: number;
     thumbnailImg: string | null;
     unit: Unit;
+    tags: Tag[];
 
-    constructor(data: ArticleData) {
+    constructor(data: any) {
         this.id = data.id;
         this.title = data.title || '';
         this.content = data.content || '';
         this.slug = data.slug || '';
-        this.createdAt = new Date(data.created_at);
-        this.categoryId = data.category_id;
-        this.commentCount = data.comment_cnt;
-        this.likeCount = data.like_cnt;
+        this.created_at = new Date(data.created_at);
+        this.category = new Category(data.category);
+        this.view_cnt = data.view_cnt;
+        this.comment_cnt = data.comment_cnt;
+        this.like_cnt = data.like_cnt;
         this.readingTime = data.reading_time;
         this.thumbnailImg = data.thumbnail_img;
         this.unit = Article.stringToUnit(data.unit);
+        this.tags = data.article_tags ? data.article_tags.map((tag: any) => new Tag(tag.tags)) : [];
     }
 
     private static stringToUnit(value: string): Unit {
@@ -41,24 +67,6 @@ export class Article {
         }
         throw new Error(`Invalid Unit value: ${value}`);
     }    
-}
-/**
- * ArticleData interface
- * 
- * Article 객체 생성에 필요한 데이터를 정의한다.
- */
-interface ArticleData {
-    id: number;
-    title?: string;
-    content?: string;
-    slug?: string;
-    created_at: string | number | Date;
-    category_id: number;
-    comment_cnt: number;
-    like_cnt: number;
-    reading_time: number;
-    thumbnail_img: string | null;
-    unit: string;
 }
 
 export class User {
@@ -82,5 +90,17 @@ export class Comment {
 }
 
 export class Tag {
+    id: number;
+    name: string;
+    constructor(data: any) {
+        this.id = data.id;
+        this.name = data.name;
+    }
+}
 
+
+
+
+export interface ArticleCardProps {
+    article: Article;
 }
