@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+// supabase client
+import { supabase } from 'utils/supabase';
 
 // componetns imports
 import Nav from 'components/nav/Nav';
@@ -257,7 +259,8 @@ const ArticlePage = () => {
     const commentRef = useRef(null);
     const scrollToComment = () => {
         if (commentRef.current) {
-            commentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // TODO - FIX
+            // commentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         console.log('scroll to comment');
     };
@@ -271,7 +274,11 @@ const ArticlePage = () => {
         //         editor.setMarkdown(data.content);
         //     });
         // editor.setMarkdown(article.content);
+        try{
 
+        }catch(err){
+            console.error()
+        }
     }, [slug]);
 
     return (
@@ -347,7 +354,7 @@ const ArticlePage = () => {
                     {/* 카테고리 다른 게시물 */}
                     <ArticleCardScroll sectionTitle='카테고리 내 다른 게시물' type='category' currentSlug={slug} />
                     {/* 댓글창 */}
-                    <Comments ref={commentRef} comments={article.comments} />
+                    {/* <Comments ref={commentRef} comments={article.comments} /> */}
                     <CommentForm articleId={article.id} />
                 </section>
 

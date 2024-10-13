@@ -29,7 +29,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
     const [menuVisible, setMenuVisible] = useState(false);
 
     return (
-        <Link to={`/article/${article.id}`} className={styles.card}>
+        <Link to={`/article/${article.slug}`} className={styles.card}>
             <div className={styles.thumbnail}>
                 <ImageLoader src={'https://picsum.photos/300/200'} alt={article.title} width={undefined} height={undefined} loadingIndicator={undefined} errorIndicator={undefined} />
             </div>
@@ -56,17 +56,17 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
                                 {article.category.name}
                             </span>
                         </button>
-
+                        {/* 날짜 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
                             }
                         }>
                             <span className={styles["date"]}>
-                                {article.created_at.toString()}
+                                {article.getFormattedDate()}
                             </span>
                         </button>
-
+                        {/* 조회수 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
@@ -76,7 +76,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
                                 조회: {article.view_cnt}
                             </span>
                         </button>
-
+                        {/* 댓글 수 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
@@ -86,7 +86,17 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
                                 댓글: {article.comment_cnt}
                             </span>
                         </button>
-
+                        {/* 좋아요 수 표시 */}
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                            }
+                        }>
+                            <span className={styles["likes"]}>
+                                좋아요: {article.like_cnt}
+                            </span>
+                        </button>
+                        {/* 읽는 시간 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);

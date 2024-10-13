@@ -70,7 +70,7 @@ const sectionData = {
 };
 
 // CONSTANTS
-const ARTICLE_PER_PAGE: number = 2;
+const ARTICLE_PER_PAGE: number = 10;
 const ARTICLE_DATA_COLUMNS: string[] = [
     'id',
     'created_at',
@@ -96,6 +96,7 @@ const ArticleSection = () => {
     const [type, setType] = useState('recent'); // recent, popular, filter
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     
     // const [category, setCategory] = useState('all');
 
@@ -133,6 +134,7 @@ const ArticleSection = () => {
     async function getArticlesWithPagenation(page = 1, pageSize = ARTICLE_PER_PAGE) {
         try {
             // 1. supabase로부터 article 데이터를 fetch
+            setIsLoading(true);
             let { data: articleDatas, error, count } = await supabase
                 .from('article')
                 .select(`
@@ -169,6 +171,7 @@ const ArticleSection = () => {
             // 2. fetch한 데이터를 Article 객체로 변환
             let parsedArticle = (articleDatas || []).map(article => new Article(article)); // 수정: articleDatas가 undefined일 경우 빈 배열로 대체
             setArticles(parsedArticle); // 수정: setArticles 함수 호출 추가
+            setIsLoading(false);
         } catch (err) {
             console.error('Unexpected error:', err);
         }
