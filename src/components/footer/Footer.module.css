@@ -1,4 +1,4 @@
-footer {
+.footer {
     display: flex;
     flex-flow: column wrap;
     align-items: start;
@@ -12,10 +12,11 @@ footer {
 
     box-sizing: border-box;
 }
-footer p{
+.footer p{
     margin: 0;
+    text-align: start;
 }
-footer header{
+.footer header{
     display: flex;
     align-items: end;
     gap: 1rem;

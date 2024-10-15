@@ -72,7 +72,7 @@ const Profile = ({ likeCnt, commentCnt, scrollToComment, slug, articleWriter }) 
             </section>
             <section className={profileStyles['profile-body']}>
                 {/* 프로필 카드 - 누르면 블로그 메인으로 이동 */}
-                <a ref={profile} className={`${profileStyles['profile']} click`} href={`/`}>
+                <Link ref={profile} className={`${profileStyles['profile']} click`} to={`/`}>
                     <img src='https://avatars.githubusercontent.com/u/36643295?v=4' alt='profile img' />
                     <section className={profileStyles['info']}>
                         <section className={profileStyles['name']}>
@@ -83,7 +83,7 @@ const Profile = ({ likeCnt, commentCnt, scrollToComment, slug, articleWriter }) 
                             {articleWriter?.introduction}
                         </span>
                     </section>
-                </a>
+                </Link>
                 {/* 반응 섹션 */}
                 <section className={profileStyles['reaction']}>
                     <section className={profileStyles['like-comment']}>

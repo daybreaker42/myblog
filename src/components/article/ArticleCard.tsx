@@ -27,7 +27,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
     const navigate = useNavigate();
     // const [isLoading, setIsLoading] = useState(true);
     const [menuVisible, setMenuVisible] = useState(false);
-
+    
     return (
         <Link to={`/article/${article.slug}`} className={styles.card}>
             <div className={styles.thumbnail}>
@@ -52,7 +52,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
                                 navigate(`/category?name=${article.category.name}`);
                             }
                         }>
-                            <span className={styles["category"]}>
+                            <span className={styles["category"]} style={{ '--label-color': article.category.color } as React.CSSProperties}                            >
                                 {article.category.name}
                             </span>
                         </button>

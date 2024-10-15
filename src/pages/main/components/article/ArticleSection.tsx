@@ -10,7 +10,7 @@ import Filter from 'components/filter/Filter';
 
 // model import
 import { Article } from 'models/model';
-import { ARTICLE_PER_PAGE, ARTICLE_DATA_COLUMNS } from 'utils/constants';
+import { ARTICLE_PER_PAGE } from 'utils/constants';
 
 // mokup data
 const sectionData = {
@@ -71,8 +71,6 @@ const sectionData = {
 
 };
 
-
-
 /**
  * ArticleSection
  * 
@@ -124,17 +122,7 @@ const ArticleSection = () => {
             setIsLoading(true);
             let { data: articleDatas, error, count } = await supabase
                 .from('article')
-                .select(`
-                    ${ARTICLE_DATA_COLUMNS.join(', ')},
-                    category:category_id(*),
-                    article_tags(
-                    id,
-                    tags(
-                        id,
-                        name
-                    )
-                    )
-                `, { count: 'exact' })
+                .select(Article.getArticleDefaultColumns(), { count: 'exact' })
                 .eq('status', 'NORMAL')
                 .range((page - 1) * pageSize, page * pageSize - 1)
                 .order('created_at', { ascending: false });
@@ -164,10 +152,12 @@ const ArticleSection = () => {
         }
     };
 
+    if(isLoading) return <div>Loading...</div>;
+    if(!articles) return <div>No data</div>;
 
     return (
         <section className={styles['article-container']}>
-            <header className={styles.header}>
+            <header className={styles['header']}>
                 {headerTypes.map((headerType, index) => (
                     <span
                         key={`header-${index}`}

@@ -74,16 +74,56 @@ export class Article {
         this.tags = data.article_tags ? data.article_tags.map((tag: any) => new Tag(tag.tags)) : [];
     }
 
+    public static getArticleDefaultColumns(): string {
+        const defaultData: string[] = [
+            'id',
+            'slug',
+            'unit',
+            'title',
+            'content',
+            'view_cnt',
+            'like_cnt',
+            'created_at',
+            'comment_cnt',
+            'category_id',
+            'reading_time',
+            'thumbnail_img',
+        ];
+
+        return `${defaultData.join(', ')},
+        category:category_id(*),
+        article_tags(
+            id,
+            tags(
+                id,
+                name
+            )
+        )`;
+    }
+
+    /**
+     * getFormattedDate - created_at 날짜를 포맷팅하여 반환한다.
+     * - 해당 함수를 사용하여 created_at을 가져와야만 한다.
+    */
+    public getFormattedDate(): string {
+       return getFormattedDate(this.created_at);
+    }
+    
+    /**  toJsonString - Article 객체를 JSON 문자열로 변환한다. */
+    public toJsonString(): string {
+        return JSON.stringify(this);
+    }
+
+    /**
+     * stringToUnit - 문자열을 Unit 타입으로 변환한다.
+     * - 해당 함수는 Article 객체를 생성할 때만 사용한다.
+     */
     private static stringToUnit(value: string): Unit {
         const unitKey = value.toUpperCase() as keyof typeof Unit;
         if (unitKey in Unit) {
             return Unit[unitKey];
         }
         throw new Error(`Invalid Unit value: ${value}`);
-    }
-
-    public getFormattedDate(): string {
-        return getFormattedDate(this.created_at);
     }
 }
 

@@ -6,6 +6,7 @@ import Nav from 'components/nav/Nav';
 import PageButtons from 'components/pagenation/Pagenation';
 import Footer from 'components/footer/Footer';
 import ArticlePinned from './components/article/pinned/ArticlePinned';
+import PopularArticles from './components/article/popular/PopularArticles';
 import ArticleSection from './components/article/ArticleSection';
 
 // css imports
@@ -276,7 +277,8 @@ function Main() {
                     <section className={styles['main-body']}>
                         {/* pinned articles */}
                         <ArticlePinned article={posts[0]} />
-
+                        {/* Popular articles */}
+                        <PopularArticles />
                         {/* article - page 1 contents */}
                         <ArticleSection />
                     </section>

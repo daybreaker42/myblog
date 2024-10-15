@@ -18,10 +18,10 @@
 span.selected{
     color: white;
 }
-header span{
+.header span{
     color: #838383;
 }
-header span:hover{
+.header span:hover{
     cursor: pointer;
 }
 span .selected{

@@ -15,7 +15,6 @@ import Error from 'pages/errors/Error';
 
 // util imports
 import { useFetch } from 'utils/fetch';
-import { ARTICLE_DATA_COLUMNS } from 'utils/constants';
 
 // css imports
 import styles from './ArticlePage.module.css';
@@ -262,15 +261,7 @@ SEO 기여: 이미지나 미디어 콘텐츠의 의미를 명확히 하여, 검�
 const fetchArticle = (slug: string): (() => Promise<{ data: any; error: any }>) => async () => {
     const { data, error } = await supabase
         .from('article')
-        .select(`${ARTICLE_DATA_COLUMNS.join(', ')},
-        category:category_id(*),
-        article_tags(
-        id,
-        tags(
-            id,
-            name
-        )
-        )`)
+        .select(Article.getArticleDefaultColumns())
         .eq('slug', slug)
         .single();
 
@@ -344,11 +335,11 @@ const ArticlePage = (): JSX.Element => {
                     <div style={{ width: '220px' }}></div>
                     <section className={styles["article-title"]}>
                         {/* title */}
-                        <h1 className={styles.title}>{article.title} {slug}</h1>
-                        {/* <h1 className={styles.title}>{article?.title}</h1> */}
+                        <h1 className={styles.title}>{article.title}</h1>
+                        
                         <section className={styles["article-info"]}>
                             {/* TODO - writer부분 구현 */}
-                            {/* <span className={styles.writer}>{article.}</span> */}   
+                            {/* <span className={styles.writer}>{article.}</span>    */}
                             {/* <span className={styles.createdAt}>{article.getFormattedDate()}</span> */}
                             <section className={styles.readingTime}>
                                 <span className={styles.time}>{article.readingTime}</span>

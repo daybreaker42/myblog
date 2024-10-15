@@ -4,7 +4,7 @@ import config from 'config';
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className={styles['footer']}>
             <header>
                 <p className={styles.title}>성준의 Blog</p>
                 <span>v{config.version}</span>

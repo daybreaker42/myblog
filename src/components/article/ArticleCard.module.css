@@ -113,5 +113,5 @@
     background-color: var(--dark-2);
 }
 .category{
-    outline: 1px solid #1DACFF;
+    outline: 1px solid var(--label-color);
 }

@@ -11,6 +11,7 @@ import Test from 'pages/test/Test';
 // error pages
 import Error from 'pages/errors/Error';
 import ScrollToTop from './ScrollToTop';
+import ArticleList from 'pages/article/list/ArticleList';
 
 const Router = () => {
     return (
@@ -23,7 +24,12 @@ const Router = () => {
                 <Route path='/about' element={<About />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/settings' element={<Settings />} />
-                <Route path='/article/:slug' element={<ArticlePage />} />
+                <Route path="/article">
+                    <Route index element={<ArticlePage />} />
+                    <Route path="popular" element={<ArticleList />} />
+                    <Route path="pinned" element={<ArticleList />} />
+                    <Route path=":slug" element={<ArticlePage />} />
+                </Route>
                 <Route path='/test' element={<Test />} />
                 {/* <Route path='*' element={<Error404 />} /> */}
                 <Route path='*' element={<Error typeNum={404} />} />

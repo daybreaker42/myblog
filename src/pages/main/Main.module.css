@@ -21,10 +21,12 @@
 }
 
 .main-main{
+    width: calc(100% - 230px);
     margin-top: var(--nav-height);
     padding: 0 2rem;
     background-color: var(--dark-1);
     border-radius: 8px 0 0 8px;
+    box-sizing: border-box;
 }
 .main-body{
     display: flex;

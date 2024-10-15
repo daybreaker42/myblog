@@ -1,6 +1,51 @@
 import { useState, useCallback } from 'react';
 
 /**
+// data fetch example
+
+// 1. supabase init
+import supabase from 'utils/supabase';
+
+// 2. fetch function
+const fetchArticle = (slug: string): (() => Promise<{ data: any; error: any }>) => async () => {
+    const { data, error } = await supabase
+        .from('article')
+        .select(`${ARTICLE_DATA_COLUMNS.join(', ')},
+        category:category_id(*),
+        article_tags(
+        id,
+        tags(
+            id,
+            name
+        )
+        )`)
+        .eq('slug', slug)
+        .single();
+
+    if (error) {
+        console.error('Error fetching article:', error.message);
+        return { data: null, error };
+    }
+    // console.log('fetchArticle data:', data);
+    
+    return { data, error };
+};
+
+// 3. data process function
+const processArticle = (data: any) => {
+    return data;
+}
+
+// 4. Fetch data from server
+const { data, loading, error, fetchData } = useFetch<Article>();
+useEffect(() => {
+    fetchData(fetchArticle, processArticle);
+}, []);
+*/
+
+
+
+/**
  * Fetch data from server
  */
 export const useFetch = <T, >() => {
@@ -16,17 +61,17 @@ export const useFetch = <T, >() => {
         setError(null);
     
         try {
-        const { data, error } = await queryFn();
-    
-        if (error) throw error;
-    
-        const processedData = processFn(data || []) as T;
-        setData(processedData);
+            const { data, error } = await queryFn();
+        
+            if (error) throw error;
+        
+            const processedData = processFn(data || []) as T;
+            setData(processedData);
         } catch (err: any) {
-        setError(err.message || 'An unexpected error occurred');
-        console.error('Fetch error:', err);
+            setError(err.message || 'An unexpected error occurred');
+            console.error('Fetch error:', err);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }, []);
     
@@ -54,17 +99,19 @@ export const useFetchArray = <T, >() => {
         setError(null);
     
         try {
-        const { data, error } = await queryFn();
-    
-        if (error) throw error;
-    
-        const processedData = processFn(data || []) as T[];
-        setData(processedData);
+            const { data, error } = await queryFn();
+        
+            if (error) throw error;
+        
+            const processedData = processFn(data || []) as T[];
+            // console.log('processedData:', processedData);
+            
+            setData(processedData);
         } catch (err: any) {
-        setError(err.message || 'An unexpected error occurred');
-        console.error('Fetch error:', err);
+            setError(err.message || 'An unexpected error occurred');
+            console.error('Fetch error:', err);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }, []);
     
@@ -114,10 +161,10 @@ export const usePaginatedFetch = <T,>(initialPageSize = 10) => {
         data,
         loading,
         error,
-        currentPage,
         totalPages,
-        pageSize,
+        currentPage,
         setCurrentPage,
+        pageSize,
         setPageSize,
         fetchData
     };
