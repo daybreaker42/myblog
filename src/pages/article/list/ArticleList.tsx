@@ -3,37 +3,41 @@ import { useEffect } from "react";
 import { Article } from "models/model";
 // utils import
 import { supabase } from "utils/supabase";
-import { usePaginatedFetch } from "utils/fetch";
-import { ARTICLE_PER_PAGE } from "utils/constants";
+// import { ARTICLE_PER_PAGE } from "utils/constants";
 // styles import
 import styles from './ArticleList.module.css';
+import { useQuery } from "@tanstack/react-query";
+
+// constants
+const ARTICLE_PER_PAGE = 10;
 
 // 한번에 로드할 게시글 수
 let articlePerPage = ARTICLE_PER_PAGE;
 
-const fetchArticles = async (page: number, pageSize: number) => {
-    const response = await supabase
+async function fetchArticles({page} : {page: number}) {
+    const {data, error} = await supabase
     .from('article')
     .select(Article.getArticleDefaultColumns())
     .order('created_at', { ascending: false })
-    .range((page - 1) * pageSize, (page - 1) * pageSize - 1);
+    .range((page - 1) * ARTICLE_PER_PAGE, (page - 1) * ARTICLE_PER_PAGE - 1);
 
-    return response;
+    if(error){
+        throw error;
+    }
+
+    const processedData: Article[] = data.map((article: any) => new Article(article));
+    return processedData;
 }
 
-const processArticles = (data: any) => {
-    return data.map((article: any) => new Article(article));
-}
 
 const ArticleList = () => {
-    const { data, loading, error, currentPage, totalPages, setCurrentPage, pageSize, setPageSize, fetchData } = usePaginatedFetch<Article>(articlePerPage);
+    const { data, error, isPending, isError } = useQuery({
+        queryKey:['articles'], 
+        queryFn: () => fetchArticles({page: 1})
+    });
 
-    useEffect(() => {
-        // fetchData(fetchArticles, processArticles);
-    }, [fetchData]);
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error!</p>;
+    if (isPending) return <p>Loading...</p>;
+    if (isError) return <p>Error: {error.message}</p>;
     if (!data) return <p>No data</p>;
 
     return (

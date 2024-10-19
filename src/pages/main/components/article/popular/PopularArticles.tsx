@@ -5,11 +5,11 @@ import styles from './PopularArticles.module.css';
 // import models
 import { Article } from 'models/model';
 // import utils
-import { useFetchArray } from 'utils/fetch';
 import { supabase } from 'utils/supabase';
 // import icons
 import {ReactComponent as ArrowRight} from 'assets/icons/arrow_forward.svg';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 // constants
 const POPULAR_ARTICLE_COUNT = 7;
@@ -18,44 +18,37 @@ const POPULAR_ARTICLE_COUNT = 7;
  * fetch Popular Articles
  * @returns Popular Articles data
  */
-const fetchPopularArticles = async () => {
+async function fetchPopularArticles() : Promise<Article[]> {
     const { data, error } = await supabase
         .from('article')
         .select(Article.getArticleDefaultColumns())
-        .order('title', { ascending: true })
-        .order('comment_cnt', { ascending: false })
-        .order('like_cnt', { ascending: false })
         .order('view_cnt', { ascending: false })
+        .order('like_cnt', { ascending: false })
+        .order('comment_cnt', { ascending: false })
+        .order('title', { ascending: true })
         .limit(POPULAR_ARTICLE_COUNT);
 
-    return { data, error };
-}
-
-const processPopularArticles = (data: any) => {
-    // console.log(`data - ${data}`);
-    const proecessedDatas: Article[] = data.map((article: any) => new Article(article));
-    // proecessedDatas.forEach((article: Article) => {
-    //     console.log(`article - ${article.toJsonString()}`);
-    // });
-    
-    return proecessedDatas;
+    if (error) {
+        throw error;
+    }
+    const parsedData = (data || []).map((article: any) => new Article(article));
+    return parsedData;
 }
 
 /**
  * Popular Articles 컴포넌트
  */
 const PopularArticles = () => {
-    const { data: articles, loading, error, fetchData } = useFetchArray<Article>();
     const navigation = useNavigate();
+    const {data, isPending, isError, error } = useQuery({
+        queryKey: ['popularArticles'],
+        queryFn: fetchPopularArticles,
+    });
 
-    useEffect(() => {
-        fetchData(fetchPopularArticles, processPopularArticles);
-        
-    }, [fetchData]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error!</div>;
-    if (!articles){
+    if (isPending) return <div>Loading...</div>;
+    if (isError) return <div>Error: {error.message}</div>;
+    if (!data){
         return <div>No data</div>;
     }
     // console.log(`articles - ${articles}`);
@@ -69,7 +62,7 @@ const PopularArticles = () => {
                 }}>더보기 <ArrowRight height={'1rem'}/></button>
             </header>
             <div className={styles['article-list']}>
-                {articles.map((article: Article, index: number) => (
+                {data.map((article: Article, index: number) => (
                     <PopularArticleCard key={index} data={article}/>
                 ))}
             </div>

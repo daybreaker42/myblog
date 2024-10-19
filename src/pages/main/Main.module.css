@@ -1,4 +1,4 @@
-.main-root{
+.root{
     display: flex;
 }
 .title{
@@ -20,10 +20,13 @@
     margin: 0;
 }
 
-.main-main{
-    width: calc(100% - 230px);
+.main{
+    width: clamp(538px, calc(100% - 230px), 100%);
     margin-top: var(--nav-height);
-    padding: 0 2rem;
+    /* margin: var(--nav-height) 0; */
+    /* padding: 2rem; */
+    padding: 0 clamp(2rem, calc((100% - 1400px) / 2), 100% / 2);
+
     background-color: var(--dark-1);
     border-radius: 8px 0 0 8px;
     box-sizing: border-box;

@@ -1,3 +1,4 @@
+import { Article } from 'models/model';
 import styles from './Pagenation.module.css';
 
 /**
@@ -13,10 +14,10 @@ import styles from './Pagenation.module.css';
 interface PageButtonsProps {
     currentPage: number;
     totalPages: number;
-    getArticlesWithPagenation: (page: number) => void;
+    setPage: (page: number) => void;
 }
 
-function PageButtons({ currentPage, totalPages, getArticlesWithPagenation }: PageButtonsProps) {
+function PageButtons({ currentPage, totalPages, setPage }: PageButtonsProps) {
     const pages = [];
     pages.push(1);
     for (let i = currentPage - 4; i <= currentPage + 4; i++) {
@@ -42,7 +43,7 @@ function PageButtons({ currentPage, totalPages, getArticlesWithPagenation }: Pag
                 <PageButton
                     key={page}
                     page={page}
-                    getArticlesWithPagenation={getArticlesWithPagenation}
+                    setPage={setPage}
                     currentPage={currentPage}
                 />
             ))}
@@ -53,16 +54,16 @@ function PageButtons({ currentPage, totalPages, getArticlesWithPagenation }: Pag
 interface PageButtonProps {
     page: number;
     currentPage: number;
-    getArticlesWithPagenation: (page: number) => void;
+    setPage: (page: number) => void;
 }
 
-function PageButton({ page, currentPage, getArticlesWithPagenation }: PageButtonProps) {
+function PageButton({ page, currentPage, setPage }: PageButtonProps) {
     return (
         <button
             onClick={() => {
                 if (currentPage !== page) {
                     // console.log(page);
-                    getArticlesWithPagenation(page);
+                    setPage(page);
                 }
             }}
             className={`${styles['pageButton']} ${currentPage === page ? styles['selected'] : ''}`}

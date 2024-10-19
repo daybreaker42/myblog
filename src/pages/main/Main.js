@@ -264,9 +264,9 @@ function Main() {
                 <meta name='description' content='Home page' />
             </Helmet>
             {/* aside, main */}
-            <div className={styles['main-root']}>
+            <div className={styles['root']}>
                 <Aside />
-                <main className={styles['main-main']}>
+                <main className={styles['main']}>
                     <header className="App-header">
                         <Nav />
                     </header>

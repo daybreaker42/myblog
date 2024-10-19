@@ -8,13 +8,16 @@ import { Article } from 'models/model';
 // svg imports
 import { ReactComponent as ArrowRight } from 'assets/icons/arrow_forward.svg';
 import { ReactComponent as Pinned } from 'assets/icons/pin.svg';
-import { useFetchArray } from 'utils/fetch';
 import { supabase } from 'utils/supabase';
 
 // component imports
 import ArticlePinnedCard from './ArticlePinnedCard';
+import { useQuery } from '@tanstack/react-query';
 
 // constants
+/**
+ * Number of pinned articles to be displayed
+ */
 const PINNED_ARTICLE_LIMIT = 8;
 
 // mockup data
@@ -43,24 +46,19 @@ const PINNED_ARTICLE_LIMIT = 8;
 /**
  * fetch pinned articles
  */
-const fetchPinnedArticles = async () => {
+async function fetchPinnedArticles(): Promise<Article[]> {
     const { data, error } = await supabase
-    .from('article')
-    .select(Article.getArticleDefaultColumns())
-    .eq('isPinned', true)
-    .limit(PINNED_ARTICLE_LIMIT);
+        .from('article')
+        .select(Article.getArticleDefaultColumns())
+        .eq('isPinned', true)
+        .limit(PINNED_ARTICLE_LIMIT);
 
-    // console.log(`fetchPinnedArticles data - ${JSON.stringify(data)}`);
-    
-    
-    return { data, error };
-}
+    if (error) {
+        throw error;
+    }
 
-/**
- * process pinned articles
- */
-const processPinnedArticles = (data: any) => {
     const processedData: Article[] = data.map((article: any) => new Article(article));
+
     return processedData;
 }
 
@@ -69,16 +67,14 @@ const processPinnedArticles = (data: any) => {
  */
 const ArticlePinnedArea = () => {
     const navigation = useNavigate();
-    const { data: pinnedArticles, loading, error, fetchData } = useFetchArray<Article>();
+    const { data, isPending, isError, error } = useQuery({
+        queryKey: ['pinnedArticles'], 
+        queryFn: fetchPinnedArticles
+    });
 
-    useEffect(() => {
-        // fetch pinned articles
-        fetchData(fetchPinnedArticles, processPinnedArticles);
-    }, [fetchData]);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error!</div>;
-    if (!pinnedArticles) return <div>No data</div>;    
+    if (isPending) return <div>Loading...</div>;
+    if (isError) return <div>Error: {error.message}</div>;
+    if (!data) return <div>No data</div>;    
 
     return (
         <section className={styles.pinned__area}>
@@ -90,7 +86,7 @@ const ArticlePinnedArea = () => {
                 }}>더보기<ArrowRight className={styles.icon} /></span>
             </header>
             <ul className={styles.pinned__area__content}>
-                {pinnedArticles.map((article: Article, index: number) => {
+                {data.map((article: Article, index: number) => {
                     return (
                         <ArticlePinnedCard key={`article-pinned-${index}`} article={article} />
                     );

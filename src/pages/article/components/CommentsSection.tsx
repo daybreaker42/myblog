@@ -10,6 +10,16 @@ import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 
 
 import { Comment } from 'models/model';
+import { FilterOption } from 'models/interface';
+
+// constants
+const options : FilterOption[] = [
+    { value: 'option-1', label: '최신순' },
+    { value: 'option-2', label: '인기순' },
+    { value: 'option-3', label: '좋아요순' },
+    { value: 'option-4', label: '신고순' },
+];
+
 /**
  * 댓글 목록
  */
@@ -17,6 +27,7 @@ const CommentsSection = forwardRef(({ comments }: { comments: Comment[] }, ref: 
     const commentLength = comments.length;
     const [isOverflowedList, setIsOverflowedList] = useState<boolean[]>(Array(commentLength).fill(false));
     const commentRefs = useRef([]);
+    const [selectedFilter, setSelectedFilter] = useState<FilterOption | null>(null);
 
     useEffect(() => {
         const newIsOverflowedList = Array(commentLength).fill(false);
@@ -41,7 +52,7 @@ const CommentsSection = forwardRef(({ comments }: { comments: Comment[] }, ref: 
                     <ChatIcon className={styles['chat-icon']} />
                     <span>댓글</span>
                 </h2>
-                <Filter />
+                <Filter options={options} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}/>
             </section>
             <section className={styles['comment-section-body']}>
                 {comments.map((comment, index) => (

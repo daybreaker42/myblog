@@ -29,7 +29,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
     const [menuVisible, setMenuVisible] = useState(false);
     
     return (
-        <Link to={`/article/${article.slug}`} className={styles.card}>
+        <Link to={`/article/${article.slug}`} className={styles['card']}>
             <div className={styles.thumbnail}>
                 <ImageLoader src={'https://picsum.photos/300/200'} alt={article.title} width={undefined} height={undefined} loadingIndicator={undefined} errorIndicator={undefined} />
             </div>
