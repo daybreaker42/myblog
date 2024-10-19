@@ -33,6 +33,19 @@ export class Category{
         this.created_at = new Date(data.created_at);
         this.article_cnt = data.article_cnt;
     }
+
+    public getFormattedDate(): string {
+        return getFormattedDate(this.created_at);
+    }
+
+    public parseArticleCnt(): string {
+        // 1. article_cnt가 1000 이상일 경우, 1k+로 표시
+        // 2. article_cnt가 1000 미만일 경우, 그대로 표시
+        if(this.article_cnt >= 1000) {
+            return '1k+';
+        }
+        return this.article_cnt.toString();
+    }
 }
 
 /**
