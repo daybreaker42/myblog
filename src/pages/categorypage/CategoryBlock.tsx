@@ -23,7 +23,7 @@ const CategoryBlock = ({ category }: { category: CategoryWithArticles }) => {
             </ul>
             {category.article_cnt > 10 ? (
                 <footer>
-                    <Link to={`?name=${category.name}`}>
+                    <Link to={`/category/${category.name}`}>
                         <span>더보기</span>
                         <RightArrow style={{ height: '16px' }} />
                     </Link>

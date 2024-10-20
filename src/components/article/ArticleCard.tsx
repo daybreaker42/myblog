@@ -49,7 +49,7 @@ const ArticleCard = ({ article }: { article: ArticleWithCategory}) => {
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
-                                navigate(`/category?name=${article.category.name}`);
+                                navigate(`/category/${article.category.name}`);
                             }
                         }>
                             <span className={styles["category"]} style={{ '--label-color': article.category.color } as React.CSSProperties}                            >

@@ -3,6 +3,7 @@ import Main from 'pages/main/Main'
 import Profile from 'pages/profile/Profile';
 import About from 'pages/about/About';
 import CategoryPage from 'pages/categorypage/CategoryPage';
+import CategoryArticleList from 'pages/categorypage/CategoryArticleList';
 import Tags from 'pages/tagspage/TagsPage';
 import TagArticleList from 'pages/tagspage/TagArticleList';
 import Settings from 'pages/settings/Settings';
@@ -23,7 +24,10 @@ const Router = () => {
             <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path='/category' element={<CategoryPage />} />
+                <Route path='/category'>
+                    <Route index element={<CategoryPage />} />
+                    <Route path=':category' element={<CategoryArticleList />} />
+                </Route>
                 <Route path='/tags'>
                     <Route index element={<Tags />} />
                     <Route path=':tag' element={<TagArticleList />} />

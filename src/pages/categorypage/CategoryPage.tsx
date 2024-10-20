@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import config from 'config';
 import { supabase } from 'utils/supabase';
 import Masonry from 'react-masonry-css';
@@ -64,7 +64,7 @@ const mockupData: {success: boolean, length: number, data: {count: number, proce
 },
 };
 
-
+// TODO - 나중에 여기 무한 스크롤 추가하기
 
 // fetch categories from supabase
 async function fetchCategories({ selectedFilter, search }: { selectedFilter: FilterOption, search: string }) : Promise<{processedData: CategoryWithArticles[], count: number}> {
@@ -139,6 +139,7 @@ function CategoryPage() {
     const { data, isPending, isError, error } = useQuery({
         queryKey: ['categories', { search, selectedFilter }],
         queryFn: () => fetchCategories({ selectedFilter, search }),
+        placeholderData: keepPreviousData,
     });
     // mockup data 사용
     // const { data, isPending, isError, error } = { data: mockupData.data, isPending: false, isError: false, error: {message: 'asdf'} };
