@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 // models import
-import { Article } from "models/model";
+import { ArticleWithCategory } from "models/model";
 // utils import
 import { supabase } from "utils/supabase";
 // import { ARTICLE_PER_PAGE } from "utils/constants";
@@ -17,7 +16,7 @@ let articlePerPage = ARTICLE_PER_PAGE;
 async function fetchArticles({page} : {page: number}) {
     const {data, error} = await supabase
     .from('article')
-    .select(Article.getArticleDefaultColumns())
+    .select(ArticleWithCategory.getArticleDefaultColumns())
     .order('created_at', { ascending: false })
     .range((page - 1) * ARTICLE_PER_PAGE, (page - 1) * ARTICLE_PER_PAGE - 1);
 
@@ -25,7 +24,7 @@ async function fetchArticles({page} : {page: number}) {
         throw error;
     }
 
-    const processedData: Article[] = data.map((article: any) => new Article(article));
+    const processedData: ArticleWithCategory[] = data.map((article: any) => new ArticleWithCategory(article));
     return processedData;
 }
 

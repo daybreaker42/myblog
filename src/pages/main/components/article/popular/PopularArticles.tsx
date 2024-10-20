@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import PopularArticleCard from './PopularArticleCard';
 import styles from './PopularArticles.module.css';
 // import models
-import { Article } from 'models/model';
+import { ArticleWithCategory } from 'models/model';
 // import utils
 import { supabase } from 'utils/supabase';
 // import icons
@@ -18,10 +18,10 @@ const POPULAR_ARTICLE_COUNT = 7;
  * fetch Popular Articles
  * @returns Popular Articles data
  */
-async function fetchPopularArticles() : Promise<Article[]> {
+async function fetchPopularArticles() : Promise<ArticleWithCategory[]> {
     const { data, error } = await supabase
         .from('article')
-        .select(Article.getArticleDefaultColumns())
+        .select(ArticleWithCategory.getArticleDefaultColumns())
         .order('view_cnt', { ascending: false })
         .order('like_cnt', { ascending: false })
         .order('comment_cnt', { ascending: false })
@@ -31,7 +31,7 @@ async function fetchPopularArticles() : Promise<Article[]> {
     if (error) {
         throw error;
     }
-    const parsedData = (data || []).map((article: any) => new Article(article));
+    const parsedData = (data || []).map((article: any) => new ArticleWithCategory(article));
     return parsedData;
 }
 
@@ -62,7 +62,7 @@ const PopularArticles = () => {
                 }}>더보기 <ArrowRight height={'1rem'}/></button>
             </header>
             <div className={styles['article-list']}>
-                {data.map((article: Article, index: number) => (
+                {data.map((article: ArticleWithCategory, index: number) => (
                     <PopularArticleCard key={index} data={article}/>
                 ))}
             </div>

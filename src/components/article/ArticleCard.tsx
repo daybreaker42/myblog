@@ -19,11 +19,11 @@ import styles from './ArticleCard.module.css';
 import ImageLoader from 'components/loading/ImageLoader';
 
 // imports models
-import { Article, Tag, ArticleCardProps } from 'models/model';
+import { ArticleWithCategory, Tag } from 'models/model';
 
 // TODO - 911px 이하 즈음에 tag/category가 overflow되고, height가 계속 늘어나는 문제 해결하기
 
-const ArticleCard = ({ article }: ArticleCardProps) => {
+const ArticleCard = ({ article }: { article: ArticleWithCategory}) => {
     const navigate = useNavigate();
     // const [isLoading, setIsLoading] = useState(true);
     const [menuVisible, setMenuVisible] = useState(false);

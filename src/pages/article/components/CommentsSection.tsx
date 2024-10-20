@@ -27,7 +27,7 @@ const CommentsSection = forwardRef(({ comments }: { comments: Comment[] }, ref: 
     const commentLength = comments.length;
     const [isOverflowedList, setIsOverflowedList] = useState<boolean[]>(Array(commentLength).fill(false));
     const commentRefs = useRef([]);
-    const [selectedFilter, setSelectedFilter] = useState<FilterOption | null>(null);
+    const [selectedFilter, setSelectedFilter] = useState<FilterOption>(options[0]);
 
     useEffect(() => {
         const newIsOverflowedList = Array(commentLength).fill(false);

@@ -7,8 +7,8 @@ import { ReactComponent as FilterIcon } from 'assets/icons/filter.svg';
 
 const Filter = ({ options, selectedFilter, setSelectedFilter }: { 
     options: FilterOption[], 
-    selectedFilter: FilterOption | null,
-    setSelectedFilter: React.Dispatch<React.SetStateAction<FilterOption | null>> 
+    selectedFilter: FilterOption,
+    setSelectedFilter: React.Dispatch<React.SetStateAction<FilterOption>> 
 }) => {    
     const [isOpen, setIsOpen] = useState(false);
     // const [selectedOption, setSelectedOption] = useState('선택하세요');
@@ -62,7 +62,7 @@ const Filter = ({ options, selectedFilter, setSelectedFilter }: {
     }, []);
 
     return (
-        <div className={`clickable ${styles.filter}`}>
+        <div className={`clickable ${styles['filter']}`}>
             <div ref={dropdownRef} className={styles["selected-option"]} onClick={() => { toggleDropdown() }}>
                 <FilterIcon />
                 {selectedFilter ? selectedFilter.label : '선택하세요'}

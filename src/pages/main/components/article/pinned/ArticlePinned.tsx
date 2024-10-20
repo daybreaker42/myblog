@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './ArticlePinned.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +41,8 @@ const PINNED_ARTICLE_LIMIT = 8;
 //         },
 //     ]
 // }
+
+// NOTE - 여기는 Article 클래스 그대로 사용 (categor 미포함)
 
 /**
  * fetch pinned articles

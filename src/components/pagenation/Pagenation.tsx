@@ -1,4 +1,3 @@
-import { Article } from 'models/model';
 import styles from './Pagenation.module.css';
 
 /**

@@ -4,4 +4,5 @@ export enum Unit{
     HOUR = 'HOUR',
     MIN = 'MIN',
     SEC = 'SEC',
+    NONE = 'NONE'
 }

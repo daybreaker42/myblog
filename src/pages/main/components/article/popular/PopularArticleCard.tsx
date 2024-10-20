@@ -1,4 +1,4 @@
-import { Article } from "models/model";
+import { ArticleWithCategory } from "models/model";
 import styles from './PopularArticleCard.module.css';
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const truncateText = (text: string, maxLength: number) => {
  * 
  * 인기 게시글 카드 컴포넌트
  */
-const PopularArticleCard = ({data} : {data: Article}) => {
+const PopularArticleCard = ({data} : {data: ArticleWithCategory}) => {
     const truncatedTitle = truncateText(data.title, 30);
     const truncatedContent = truncateText(data.content, 100);
 

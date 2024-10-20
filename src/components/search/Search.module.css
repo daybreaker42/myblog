@@ -1,0 +1,15 @@
+.search{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    height: 40px;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #1E1E1E;
+
+    color: white;
+    font-size: 20px;
+}

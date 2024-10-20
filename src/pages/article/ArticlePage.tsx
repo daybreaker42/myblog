@@ -17,8 +17,10 @@ import Error from 'pages/errors/Error';
 import styles from './ArticlePage.module.css';
 import articleIndexStyles from './components/ArticleIndex.module.css';
 import 'components/scrollbar.css';
-import { Article } from 'models/model';
 import { useQuery } from '@tanstack/react-query';
+
+// model
+import { ArticleWithCategory } from 'models/model';
 
 // const articleMockupData = {
 //     id: 1,
@@ -256,10 +258,10 @@ import { useQuery } from '@tanstack/react-query';
  * @param slug
  * @returns
  */
-async function fetchArticle(slug: string): Promise<Article>{
+async function fetchArticle(slug: string): Promise<ArticleWithCategory>{
     const { data, error } = await supabase
         .from('article')
-        .select(Article.getArticleDefaultColumns())
+        .select(ArticleWithCategory.getArticleDefaultColumns())
         .eq('slug', slug)
         .single();
 
@@ -267,7 +269,7 @@ async function fetchArticle(slug: string): Promise<Article>{
         throw error;
     }
     
-    return new Article(data);
+    return new ArticleWithCategory(data);
 };
 
 /**

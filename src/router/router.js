@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Main from 'pages/main/Main'
 import Profile from 'pages/profile/Profile';
 import About from 'pages/about/About';
-import Category from 'pages/category/Category';
+import CategoryPage from 'pages/categorypage/CategoryPage';
 import Tags from 'pages/tags/Tags';
 import Settings from 'pages/settings/Settings';
 import ArticlePage from 'pages/article/ArticlePage';
@@ -13,13 +13,14 @@ import Error from 'pages/errors/Error';
 import ScrollToTop from './ScrollToTop';
 import ArticleList from 'pages/article/list/ArticleList';
 
+
 const Router = () => {
     return (
         <BrowserRouter>
             <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path='/category' element={<Category />} />
+                <Route path='/category' element={<CategoryPage />} />
                 <Route path='/tags' element={<Tags />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/profile' element={<Profile />} />

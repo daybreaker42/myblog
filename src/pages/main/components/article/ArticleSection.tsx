@@ -9,7 +9,7 @@ import Pagination from 'components/pagenation/Pagenation';
 import Filter from 'components/filter/Filter';
 
 // model import
-import { Article } from 'models/model';
+import { ArticleWithCategory } from 'models/model';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { FilterOption } from 'models/interface';
 
@@ -44,7 +44,7 @@ const headerTypes = [
     //     ),
     // }
 ];
-// TODO - options 목록 가져오기
+// TODO - options 목록 서버에서 가져오는 기능 추가
 const FILTER_OPTIONS : FilterOption[] = [
     { value: 'option-1', label: '작성일 내림차순' },
     { value: 'option-2', label: '조회수 내림차순' },
@@ -118,7 +118,7 @@ const FILTER_OPTIONS : FilterOption[] = [
  * 
  * article 데이터를 fetch하는 함수
  */
-async function getArticlesWithPagenation({page = 1, type = ARTICLE_TYPE.RECENT}): Promise<{ parsedArticle: Article[]; count: number | null | undefined; }> {
+async function getArticlesWithPagenation({page = 1, type = ARTICLE_TYPE.RECENT}): Promise<{ parsedArticle: ArticleWithCategory[]; count: number | null | undefined; }> {
     // 1. supabase로부터 article 데이터를 fetch
     
     // fetch article data
@@ -129,7 +129,7 @@ async function getArticlesWithPagenation({page = 1, type = ARTICLE_TYPE.RECENT})
     if(type === ARTICLE_TYPE.RECENT) {
     ({ data, error, count } = await supabase
         .from('article')
-        .select(Article.getArticleDefaultColumns(), { count: 'exact' })
+        .select(ArticleWithCategory.getArticleDefaultColumns(), { count: 'exact' })
         .eq('status', 'NORMAL')
         .range(startPage, endPage)
         .order('created_at', { ascending: false }));
@@ -137,7 +137,7 @@ async function getArticlesWithPagenation({page = 1, type = ARTICLE_TYPE.RECENT})
     } else if(type === ARTICLE_TYPE.POPULAR) {
         ({ data, error, count } = await supabase
         .from('article')
-        .select(Article.getArticleDefaultColumns(), { count: 'exact' })
+        .select(ArticleWithCategory.getArticleDefaultColumns(), { count: 'exact' })
         .eq('status', 'NORMAL')
         .range(startPage, endPage)
         .order('view_cnt', { ascending: false })
@@ -153,7 +153,7 @@ async function getArticlesWithPagenation({page = 1, type = ARTICLE_TYPE.RECENT})
     }
     
     // 2. fetch한 데이터를 Article 객체로 변환
-    let parsedArticle = (data || []).map(article => new Article(article)); // 수정: articleDatas가 undefined일 경우 빈 배열로 대체
+    let parsedArticle = (data || []).map(article => new ArticleWithCategory(article)); // 수정: articleDatas가 undefined일 경우 빈 배열로 대체
     return { parsedArticle, count };
 };
 
@@ -166,7 +166,7 @@ async function getArticlesWithPagenation({page = 1, type = ARTICLE_TYPE.RECENT})
 const ArticleSection = () => {
     const [type, setType] = useState(ARTICLE_TYPE.RECENT) // recent, popular, filter
     const [page, setPage] = useState(1);
-    const [selectedFilter, setSelectedFilter] = useState<FilterOption | null>(null);
+    const [selectedFilter, setSelectedFilter] = useState<FilterOption>(FILTER_OPTIONS[0]);
 
     const {
         data,

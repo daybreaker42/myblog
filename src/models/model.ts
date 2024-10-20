@@ -1,5 +1,5 @@
-import { Unit } from './enums';
 import { getFormattedDate } from 'utils/date';
+import { Unit } from './enums';
 
 /**
  * Tag class
@@ -48,6 +48,14 @@ export class Category{
     }
 }
 
+export class CategoryWithArticles extends Category {
+    articles: Article[];
+    constructor(data: any) {
+        super(data);
+        this.articles = data.articles.map((article: any) => new Article(article));
+    }
+}
+
 /**
  * Article class
  * 
@@ -61,7 +69,6 @@ export class Article {
     content: string;
     slug: string;
     created_at: Date;
-    category: Category;
     view_cnt: number;
     comment_cnt: number;
     like_cnt: number;
@@ -77,7 +84,6 @@ export class Article {
         this.content = data.content || '';
         this.slug = data.slug || '';
         this.created_at = new Date(data.created_at);
-        this.category = new Category(data.category);
         this.view_cnt = data.view_cnt;
         this.comment_cnt = data.comment_cnt;
         this.like_cnt = data.like_cnt;
@@ -85,6 +91,68 @@ export class Article {
         this.thumbnailImg = data.thumbnail_img;
         this.unit = Article.stringToUnit(data.unit);
         this.tags = data.article_tags ? data.article_tags.map((tag: any) => new Tag(tag.tags)) : [];
+    }
+
+    public static getArticleDefaultColumns(): string {
+        const defaultData: string[] = [
+            'id',
+            'slug',
+            'unit',
+            'title',
+            'content',
+            'view_cnt',
+            'like_cnt',
+            'created_at',
+            'comment_cnt',
+            'reading_time',
+            'thumbnail_img',
+        ];
+
+        return `${defaultData.join(', ')},
+        article_tags(
+            id,
+            tags(
+                id,
+                name
+            )
+        )`;
+    }
+
+    /**
+     * getFormattedDate - created_at 날짜를 포맷팅하여 반환한다.
+     * - 해당 함수를 사용하여 created_at을 가져와야만 한다.
+    */
+    public getFormattedDate(): string {
+       return getFormattedDate(this.created_at);
+    }
+    
+    /**  toJsonString - Article 객체를 JSON 문자열로 변환한다. */
+    public toJsonString(): string {
+        return JSON.stringify(this);
+    }
+
+    /**
+     * stringToUnit - 문자열을 Unit 타입으로 변환한다.
+     * - 해당 함수는 Article 객체를 생성할 때만 사용한다.
+     */
+    private static stringToUnit(value: string | null): Unit {
+        if (!value) {
+            value = 'NONE';
+        }
+        const unitKey = value.toUpperCase() as keyof typeof Unit;
+        if (unitKey in Unit) {
+            return Unit[unitKey];
+        }
+        throw new Error(`Invalid Unit value: ${value}`);
+    }
+}
+
+
+export class ArticleWithCategory extends Article {
+    category: Category;
+    constructor(data: any) {
+        super(data);
+        this.category = new Category(data.category);
     }
 
     public static getArticleDefaultColumns(): string {
@@ -113,32 +181,8 @@ export class Article {
             )
         )`;
     }
-
-    /**
-     * getFormattedDate - created_at 날짜를 포맷팅하여 반환한다.
-     * - 해당 함수를 사용하여 created_at을 가져와야만 한다.
-    */
-    public getFormattedDate(): string {
-       return getFormattedDate(this.created_at);
-    }
-    
-    /**  toJsonString - Article 객체를 JSON 문자열로 변환한다. */
-    public toJsonString(): string {
-        return JSON.stringify(this);
-    }
-
-    /**
-     * stringToUnit - 문자열을 Unit 타입으로 변환한다.
-     * - 해당 함수는 Article 객체를 생성할 때만 사용한다.
-     */
-    private static stringToUnit(value: string): Unit {
-        const unitKey = value.toUpperCase() as keyof typeof Unit;
-        if (unitKey in Unit) {
-            return Unit[unitKey];
-        }
-        throw new Error(`Invalid Unit value: ${value}`);
-    }
 }
+
 
 export class User {
     id: number;
@@ -196,15 +240,4 @@ export class CommentLike{
         this.comment = data.comment;
         this.created_at = new Date(data.created_at);
     }
-}
-
-
-/** interface 선언 */
-/**
- * ArticleCardProps interface
- * 
- * ArticleCard 컴포넌트의 props type을 정의한다.
- */
-export interface ArticleCardProps {
-    article: Article;
 }
