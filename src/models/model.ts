@@ -26,12 +26,14 @@ export class Category{
     color: string;
     created_at: Date;
     article_cnt: number;
+    thumbnail_img: string | null;
     constructor(data: any) {
         this.id = data.id;
         this.name = data.name;
         this.color = data.color;
         this.created_at = new Date(data.created_at);
         this.article_cnt = data.article_cnt;
+        this.thumbnail_img = data.thumbnail_img;
     }
 
     public getFormattedDate(): string {

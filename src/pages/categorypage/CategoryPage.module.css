@@ -113,8 +113,12 @@
 }
 
 /* category block css */
+/* CategoryBlock.tsx에서도 해당 css 사용 */
 .category-block{
-    display: inline-block;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 35px;
+
     --width: 236px;
     width: var(--width);
     min-width: var(--width);
@@ -122,6 +126,24 @@
     padding: 1rem;
     box-sizing: border-box;
     background-color: #515151;
+
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+.category-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 60% 투명도의 검은색 오버레이 */
+    z-index: 1;
+}
+.category-block > * {
+    position: relative;
+    z-index: 2; /* 오버레이 위에 텍스트를 표시 */
 }
 .category-block > header{
     display: flex;
@@ -135,6 +157,30 @@
     font-weight: normal;
 }
 .category-block > header > span{
-    color: #838383;
+    color: white;
     font-size: 1rem;
+}
+.category-block > ul{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
+}
+.category-block > ul > li{
+    text-align: start;
+    gap: 0.5rem;
+    
+    height: 19px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.category-block > ul > li > a{
+    text-align: start;
+    font-size: 1rem;
+}
+.category-block > footer > a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 0.5rem; */
 }

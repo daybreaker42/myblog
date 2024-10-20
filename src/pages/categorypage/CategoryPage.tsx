@@ -49,7 +49,7 @@ const mockupData: {success: boolean, length: number, data: {count: number, proce
             name: `Category ${index}`,
             description: 'This is a category description',
             createdAt: '2024-10-11',
-            article_cnt: 10,
+            article_cnt: getRandomInt(1, 20),
             total_view_cnt: 100,
             total_like_cnt: 50,
             color: '#000000',
@@ -85,6 +85,7 @@ async function fetchCategories({ selectedFilter, search }: { selectedFilter: Fil
         query = query.ilike('name', `%${search}%`);
     }
     
+    // filter 적용에 따라 정렬 방식 변경
     if (selectedFilter) {
         switch (selectedFilter.value) {
             case '게시물 수 내림차순':
@@ -135,6 +136,7 @@ async function fetchCategories({ selectedFilter, search }: { selectedFilter: Fil
 function CategoryPage() {
     const [search, setSearch] = useState('');
     const [selectedFilter, setSelectedFilter] = useState<FilterOption>(FILTER_OPTIONS[0]);
+    // supabase - reat query
     const { data, isPending, isError, error } = useQuery({
         queryKey: ['categories', { search }],
         queryFn: () => fetchCategories({ selectedFilter, search }),
