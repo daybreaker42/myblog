@@ -10,8 +10,13 @@ import styles from './Pagenation.module.css';
  * - 맨 마지막 idx의 페이지
  * - 만약 여기서 겹치는게 있거나, 1과 마지막 idx를 넘어가는 경우는 추가하지 않는다.
  */
-function PageButtons({ currentPage, setPage, totalPages }) {
+interface PageButtonsProps {
+    currentPage: number;
+    totalPages: number;
+    setPage: (page: number) => void;
+}
 
+function PageButtons({ currentPage, totalPages, setPage }: PageButtonsProps) {
     const pages = [];
     pages.push(1);
     for (let i = currentPage - 4; i <= currentPage + 4; i++) {
@@ -45,12 +50,18 @@ function PageButtons({ currentPage, setPage, totalPages }) {
     );
 }
 
-function PageButton({ page, setPage, currentPage }) {
+interface PageButtonProps {
+    page: number;
+    currentPage: number;
+    setPage: (page: number) => void;
+}
+
+function PageButton({ page, currentPage, setPage }: PageButtonProps) {
     return (
         <button
             onClick={() => {
                 if (currentPage !== page) {
-                    console.log(page);
+                    // console.log(page);
                     setPage(page);
                 }
             }}

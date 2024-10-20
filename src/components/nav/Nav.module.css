@@ -1,22 +1,24 @@
 .nav {
-    width: calc(100% - var(--nav-left-margin) - 2 * var(--nav-left-padding));
+    width: 100%;
     height: var(--nav-height);
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     /* 상단고정 관련 코드 */
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 9999;
-    margin-left: var(--nav-left-margin);
+    /* margin-left: var(--nav-left-margin); */
     padding: 0 var(--nav-left-padding);
+    padding-left: var(--nav-left-margin);
 
     background-color: black;
     /* blur효과 관련 코드 */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    z-index: 9999;
+    /* aside - 1000으로 설정 -> 이것보다 높음 */
+    z-index: 999;
 }
 .nav,
 .nav-left, .nav-right {

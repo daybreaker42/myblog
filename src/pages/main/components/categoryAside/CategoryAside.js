@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import styles from './CategoryAside.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
+
 import { ReactComponent as ArrowRight } from 'assets/icons/arrow_forward.svg';
 
 const categoriesExample = [
@@ -58,14 +60,10 @@ const CategoryAside = () => {
 
     return (
         <div className={styles["category-aside"]}>
-            <section className='clickable' onClick={
-                // category page로 redirect
-                () => {
-                    navigate('/category');
-                }
-            }>
-                <h2>Category</h2><ArrowRight />
-            </section>
+            <Link className='clickable' to='/category'>
+                <h2>Category</h2>
+                <ArrowRight />
+            </Link>
             <ul>
                 {categoryComponents}
             </ul>

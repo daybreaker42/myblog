@@ -32,6 +32,7 @@ main {
 }
 
 .title {
+    text-align: start;
     font-size: 48px;
 }
 

@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "baseUrl": "src",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    /* Type Checking */
+    "strict": true, /* Enable all strict type-checking options. */
+    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+    "sourceMap": true,
+    "outDir": "./dist",
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+  },
+  "include": [
+    "declaration.d.ts",
+    "custom.d.ts",
+    "src",
+  ]
+}

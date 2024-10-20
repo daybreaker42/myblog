@@ -34,6 +34,12 @@
     text-align: start;
 }
 
+.home-button{
+    display: flex;
+    flex-flow: column nowrap;
+    align-self: center;
+    gap: 20px;
+}
 .goHome {
     display: flex;
     align-self: center;
@@ -56,9 +62,11 @@
 }
 
 
-.goHome:active {
+.goHome:hover {
     box-shadow: 0 0 0 2px var(--dark-2);
+    transition: box-shadow 0.3s ease-in;
 }
+
 
 .goBack {
     display: flex;

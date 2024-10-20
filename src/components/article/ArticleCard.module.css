@@ -1,4 +1,12 @@
+:root{
+    --thumbnail-size: 7.5rem;
+}
+
+/* FIXME 1034px 에서 화면 넘어가는 문제 해결 필요 */
 .card {
+    /* width: clamp(0px, calc(100% - var(--thumbnail-size)), 100%); */
+    width: 100%;
+
     display: flex;
     background-color: var(--card-bg-color);
     border-radius: 8px;
@@ -13,8 +21,8 @@
 .thumbnail {
     display: flex;
     align-items: center;
-    min-width: 7.5rem;
-    max-width: 7.5rem;
+    min-width: var(--thumbnail-size);
+    max-width: var(--thumbnail-size);
     /* min-height: 7.5rem; */
     /* width: clamp(7.5rem, 100%, 7.5rem); */
     /* height: clamp(7.5rem, 100%, 7.5rem); */
@@ -111,4 +119,7 @@
 }
 .card-meta span:hover {
     background-color: var(--dark-2);
+}
+.category{
+    outline: 1px solid var(--label-color);
 }

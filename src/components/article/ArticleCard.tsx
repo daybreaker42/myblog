@@ -10,43 +10,28 @@ import { ArticleMenu, ArticleMenuButton } from './ArticleMenu';
 import preventEvent from './utils/preventEvent';
 
 // import icons
-import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
-import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
-import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
+// import { ReactComponent as TimerIcon } from '../../assets/icons/timer.svg';
+// import { ReactComponent as MoreVertIcon } from '../../assets/icons/more_vert.svg';
+// import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 
 // imports css
 import styles from './ArticleCard.module.css';
 import ImageLoader from 'components/loading/ImageLoader';
 
-/**
- * ArticleCard component
- * @param {Object} article - article object
- * @param {string} article.id - article id
- * @param {string} article.title - article title
- * @param {string} article.content - article content
- * @param {string} article.writer - user name
- * @param {string} article.createdAt - article creation date
- * @param {Object} article.readingTime - article reading time
- * @param {number} article.readingTime.time - article reading time value
- * @param {string} article.readingTime.unit - article reading time unit
- * @param {number} article.viewCnt - article view count
- * @param {number} article.commentCnt - article comment count
- * @param {number} article.likesCnt - article like count
- * @param {string} article.category - article category
- * @param {Array<string>} article.tags - article tags
- * 
- * 
- * @returns {JSX.Element}
- */
-function ArticleCard({ article }) {
+// imports models
+import { ArticleWithCategory, Tag } from 'models/model';
+
+// TODO - 911px 이하 즈음에 tag/category가 overflow되고, height가 계속 늘어나는 문제 해결하기
+
+const ArticleCard = ({ article }: { article: ArticleWithCategory}) => {
     const navigate = useNavigate();
     // const [isLoading, setIsLoading] = useState(true);
     const [menuVisible, setMenuVisible] = useState(false);
-
+    
     return (
-        <Link to={`/article/${article.id}`} className={styles.card}>
+        <Link to={`/article/${article.slug}`} className={styles['card']}>
             <div className={styles.thumbnail}>
-                <ImageLoader src={'https://picsum.photos/300/200'} alt={article.title} />
+                <ImageLoader src={'https://picsum.photos/300/200'} alt={article.title} width={undefined} height={undefined} loadingIndicator={undefined} errorIndicator={undefined} />
             </div>
             {/* <img loading='lazy' src={'https://picsum.photos/300/200'} alt={article.title} /> */}
             <div className={styles["card-content"]}>
@@ -64,67 +49,77 @@ function ArticleCard({ article }) {
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
-                                navigate(`/category?name=${article.category}`);
+                                navigate(`/category/${article.category.name}`);
                             }
                         }>
-                            <span className={styles["card-category"]}>
-                                {article.category}
+                            <span className={styles["category"]} style={{ '--label-color': article.category.color } as React.CSSProperties}                            >
+                                {article.category.name}
                             </span>
                         </button>
-
+                        {/* 날짜 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-date"]}>
-                                {article.createdAt}
+                            <span className={styles["date"]}>
+                                {article.getFormattedDate()}
                             </span>
                         </button>
-
+                        {/* 조회수 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-views"]}>
-                                조회: {article.viewCnt}
+                            <span className={styles["views"]}>
+                                조회: {article.view_cnt}
                             </span>
                         </button>
-
+                        {/* 댓글 수 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-comments"]}>
-                                댓글: {article.commentCnt}
+                            <span className={styles["comments"]}>
+                                댓글: {article.comment_cnt}
                             </span>
                         </button>
-
+                        {/* 좋아요 수 표시 */}
                         <button onClick={
                             (e) => {
                                 preventEvent(e);
                             }
                         }>
-                            <span className={styles["card-read-time"]}>
-                                {/* 읽는 시간: {article.readingTime.time}{article.info.readingTime.unit} */}
+                            <span className={styles["likes"]}>
+                                좋아요: {article.like_cnt}
+                            </span>
+                        </button>
+                        {/* 읽는 시간 표시 */}
+                        <button onClick={
+                            (e) => {
+                                preventEvent(e);
+                            }
+                        }>
+                            <span className={styles["read-time"]}>
+                                읽는 시간: {article.readingTime}{article.unit}
                             </span>
                         </button>
 
                     </div>
                     <div className={styles["meta-right"]}>
                         <div className={styles["card-tags"]}>
-                            {article.tags.map((tag, index) => {
+                            {article.tags.map((tag: Tag, index: number) => {
                                 return (
                                     <button key={`tag-${index}`} onClick={
                                         (e) => {
                                             preventEvent(e);
-                                            navigate(`/tag?name=${tag}`);
+                                            navigate(`/tag?name=${tag.name}`);
                                         }
                                     }>
                                         <span className={styles["tag"]}>
-                                            # {tag}
+                                            # {tag.name}
                                         </span>
                                     </button>
 

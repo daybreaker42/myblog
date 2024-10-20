@@ -2,28 +2,37 @@ import React, { useState, useEffect, useRef, forwardRef } from 'react';
 // util functions
 import isOverflow from 'utils/overflow';
 // css
-import styles from './Comments.module.css';
+import styles from './CommentsSection.module.css';
 import 'components/transparentButton.css';
 // components
 import Filter from 'components/filter/Filter';
 import { ReactComponent as ChatIcon } from 'assets/icons/chat.svg';
 
+
+import { Comment } from 'models/model';
+import { FilterOption } from 'models/interface';
+
+// constants
+const options : FilterOption[] = [
+    { value: 'option-1', label: '최신순' },
+    { value: 'option-2', label: '인기순' },
+    { value: 'option-3', label: '좋아요순' },
+    { value: 'option-4', label: '신고순' },
+];
+
 /**
  * 댓글 목록
- * 
- * @param {Object} props
- * @param {Array} props.comments - 댓글 목록
- * 
- * @returns {JSX.Element}
  */
-const Comments = forwardRef(({ comments }, ref) => {
-    const [isOverflowedList, setIsOverflowedList] = useState(Array(comments.length).fill(false));
+const CommentsSection = forwardRef(({ comments }: { comments: Comment[] }, ref: React.Ref<HTMLElement>) => {
+    const commentLength = comments.length;
+    const [isOverflowedList, setIsOverflowedList] = useState<boolean[]>(Array(commentLength).fill(false));
     const commentRefs = useRef([]);
+    const [selectedFilter, setSelectedFilter] = useState<FilterOption>(options[0]);
 
     useEffect(() => {
-        const newIsOverflowedList = Array(comments.length).fill(false);
+        const newIsOverflowedList = Array(commentLength).fill(false);
 
-        commentRefs.current.forEach((pElement, index) => {
+        commentRefs.current.forEach((pElement: HTMLElement, index: number) => {
             if (pElement && isOverflow(pElement)) {
                 newIsOverflowedList[index] = true;
             } else if (pElement) {
@@ -43,13 +52,13 @@ const Comments = forwardRef(({ comments }, ref) => {
                     <ChatIcon className={styles['chat-icon']} />
                     <span>댓글</span>
                 </h2>
-                <Filter />
+                <Filter options={options} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}/>
             </section>
             <section className={styles['comment-section-body']}>
                 {comments.map((comment, index) => (
                     <React.Fragment key={comment.id}>
-                        <Comment comment={comment} isOverflowed={isOverflowedList[index]} />
-                        {comments.length - 1 > index && <div className={styles['comment-divider']}></div>}
+                        <CommentComponent comment={comment} isOverflowed={isOverflowedList[index]} />
+                        {commentLength - 1 > index && <div className={styles['comment-divider']}></div>}
                     </React.Fragment>
                 ))}
                 <section className={styles['comment-page-btns']}>
@@ -76,7 +85,7 @@ const Comments = forwardRef(({ comments }, ref) => {
  * 
  * @returns {JSX.Element}
  */
-const Comment = ({ comment, isOverflowed }) => {
+const CommentComponent = ({ comment, isOverflowed }: { comment: Comment, isOverflowed: boolean }) => {
     const [isMore, setIsMore] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -85,7 +94,7 @@ const Comment = ({ comment, isOverflowed }) => {
             <section className={styles["comment-header"]}>
                 <section className={styles["comment-writer"]}>
                     <span>{comment.writer}</span>
-                    <span>{comment.createdAt}</span>
+                    <span>{comment.getFormattedDate()}</span>
                 </section>
                 <section className={styles["comment-reaction"]}>
                     <button className={`${styles.like} transparent-button`}>좋아요 {comment.likes.length}</button>
@@ -114,7 +123,7 @@ const Comment = ({ comment, isOverflowed }) => {
  * 
  * @returns {JSX.Element}
  */
-const MoreView = ({ isMore, setIsMore, isCollapsed, setIsCollapsed }) => {
+const MoreView = ({ isMore, setIsMore, isCollapsed, setIsCollapsed }: { isMore: boolean; setIsMore: Function; isCollapsed: boolean; setIsCollapsed: Function; }): JSX.Element | null=> {
     if (isMore === undefined) return null;
     return (
         <button className='more transparent-button' onClick={() => {
@@ -128,4 +137,4 @@ const MoreView = ({ isMore, setIsMore, isCollapsed, setIsCollapsed }) => {
     );
 };
 
-export default Comments;
+export default CommentsSection;

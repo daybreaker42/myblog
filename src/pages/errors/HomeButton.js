@@ -4,7 +4,7 @@ import { useCustomNavigation } from "hooks/useCustomNavigation";
 const HomeButton = () => {
     const { goHome, goBack } = useCustomNavigation();
     return (
-        <>
+        <div className={styles['home-button']}>
             <button className={`${styles.goHome} clickable`} onClick={goHome}>
                 <span>&gt; return</span>
                 <div className={styles.text}>home</div>
@@ -12,7 +12,7 @@ const HomeButton = () => {
             <button className={`${styles.goBack} clickable`} onClick={goBack}>
                 이전 페이지로 이동
             </button>
-        </>
+        </div>
     );
 };
 

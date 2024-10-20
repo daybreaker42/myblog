@@ -3,7 +3,8 @@
 ## 설명
 
 - 나만의 블로그 프로젝트
-- React + Supabase + Vercel 이용해서 배포
+- React + Supabase + Vercel 이용
+- 배포는 Vercel (+ Github Action) 이용
 
 ## Run/Deploy Project
 
@@ -17,6 +18,8 @@ npm install
 
 ### Run Project
 
+#### local
+
 ```bash
 npm start 
 ```
@@ -24,12 +27,18 @@ npm start
 
 ### Deploy Project
 
+#### 1. Vercel로 배포
+
+- 이 경우 github repository와 연동하여 배포 가능
+- Vercel에서 환경변수 설정 필요
+
+#### 2. 직접 빌드 후 배포
+
 ```bash
 npm run build
 
 serve -s build
 ```
-
 
 ## 기능
 
