@@ -16,6 +16,7 @@ import Filter from 'components/filter/Filter';
 import { Article, CategoryWithArticles } from 'models/model';
 import { FilterOption } from 'models/interface';
 import { getRandomInt } from 'utils/random';
+import { applyOrder } from 'utils/applyOrder';
 
 // constants
 const FILTER_OPTIONS: FilterOption[] = [
@@ -27,7 +28,7 @@ const FILTER_OPTIONS: FilterOption[] = [
     { value: '좋아요 오름차순', label: '좋아요 오름차순' },
     { value: '작성일 내림차순', label: '작성일 내림차순' },
     { value: '작성일 오름차순', label: '작성일 오름차순' },
-]
+];
 // masonry breakpoint
 // item width = 236px
 const breakpointColumnsObj = {
@@ -62,10 +63,7 @@ const mockupData: {success: boolean, length: number, data: {count: number, proce
 },
 };
 
-// 함수로 중복 코드 제거
-const applyOrder = (query: any, column: string, ascending: boolean) => {
-    return query.order(column, { ascending });
-};
+
 
 // fetch categories from supabase
 async function fetchCategories({ selectedFilter, search }: { selectedFilter: FilterOption, search: string }) : Promise<{processedData: CategoryWithArticles[], count: number}> {

@@ -3,7 +3,7 @@ import Main from 'pages/main/Main'
 import Profile from 'pages/profile/Profile';
 import About from 'pages/about/About';
 import CategoryPage from 'pages/categorypage/CategoryPage';
-import Tags from 'pages/tags/Tags';
+import Tags from 'pages/tagspage/TagsPage';
 import Settings from 'pages/settings/Settings';
 import ArticlePage from 'pages/article/ArticlePage';
 import Test from 'pages/test/Test';

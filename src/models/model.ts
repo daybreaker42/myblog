@@ -9,9 +9,17 @@ import { Unit } from './enums';
 export class Tag {
     id: number;
     name: string;
+    article_cnt: number;
+    created_at: Date;
     constructor(data: any) {
         this.id = data.id;
         this.name = data.name;
+        this.article_cnt = data.article_cnt;
+        this.created_at = new Date(data.created_at);
+    }
+
+    public getFormattedDate(): string {
+        return getFormattedDate(this.created_at);
     }
 }
 
