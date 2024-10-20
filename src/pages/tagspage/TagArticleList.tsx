@@ -9,7 +9,6 @@ import config from "config";
 import Nav from "components/nav/Nav";
 import styles from "./TagsPage.module.css";
 // utils
-// import { fetchData } from "./common/fetchData";
 import { FILTER_OPTIONS } from "./common/tagFilterOptions";
 // styles
 import categoryStyle from "pages/categorypage/CategoryPage.module.css";
@@ -107,14 +106,10 @@ const TagArticleList = () => {
                 </div>
                 <section className={categoryStyle['body']}>
                     <header className={`${categoryStyle['head']} ${categoryStyle['item-2']}`}>
-                        <h1>Tags Page</h1>
+                        <h1># {tag}</h1>
                         <span className={categoryStyle['dash']}></span>
                         <span className={categoryStyle['count']}>{data.count}개</span>
                     </header>
-                    {/* <aside className={`${categoryStyle['aside']} ${categoryStyle['item-4']}`}>
-                        <Filter options={FILTER_OPTIONS} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}/>
-                        <Search search={search} setSearch={setSearch} />
-                    </aside> */}
                     <div className={categoryStyle['item-5']}>
                         <ul className={styles['tags-list']}>
                             {data.articles.map((article, index) => (
