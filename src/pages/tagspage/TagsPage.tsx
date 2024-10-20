@@ -14,7 +14,7 @@ import TagBlock from './TagBlock';
 // models
 import { FilterOption } from 'models/interface';
 // utils
-import { getRandomInt } from 'utils/random';
+import { getRandomInt, getRandomString } from 'utils/random';
 import { supabase } from 'utils/supabase';
 import { Tag } from 'models/model';
 import { useQuery } from '@tanstack/react-query';
@@ -32,14 +32,14 @@ const FILTER_OPTIONS: FilterOption[] = [
 ];
 
 // mockup data
-const data = {
-    count: 200,
-    processedData: Array.from({ length: 200 }, (_, index) => ({
-        id: index,
-        name: `Tag ${index}`,
-        article_cnt: getRandomInt(1, 20),
-    })).map((tag) => new Tag(tag)),
-};
+// const data = {
+//     count: 200,
+//     processedData: Array.from({ length: 200 }, (_, index) => ({
+//         id: index,
+//         name: getRandomString(getRandomInt(5, 15)),
+//         article_cnt: getRandomInt(1, 20),
+//     })).map((tag) => new Tag(tag)),
+// };
 
 async function fetchData({ selectedFilter, search} : { selectedFilter: FilterOption, search: string }) {
     let query = supabase
