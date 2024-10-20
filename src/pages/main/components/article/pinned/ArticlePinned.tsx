@@ -12,6 +12,7 @@ import { supabase } from 'utils/supabase';
 // component imports
 import ArticlePinnedCard from './ArticlePinnedCard';
 import { useQuery } from '@tanstack/react-query';
+import Loading from 'components/loading/loading/Loading';
 
 // constants
 /**
@@ -73,7 +74,7 @@ const ArticlePinnedArea = () => {
         queryFn: fetchPinnedArticles
     });
 
-    if (isPending) return <div>Loading...</div>;
+    if (isPending) return <Loading />; // 로딩 중일 때
     if (isError) return <div>Error: {error.message}</div>;
     if (!data) return <div>No data</div>;    
 

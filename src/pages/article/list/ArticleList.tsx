@@ -6,6 +6,7 @@ import { supabase } from "utils/supabase";
 // styles import
 import styles from './ArticleList.module.css';
 import { useQuery } from "@tanstack/react-query";
+import Loading from "components/loading/loading/Loading";
 
 // constants
 const ARTICLE_PER_PAGE = 10;
@@ -35,7 +36,7 @@ const ArticleList = () => {
         queryFn: () => fetchArticles({page: 1})
     });
 
-    if (isPending) return <p>Loading...</p>;
+    if (isPending) return <Loading />;
     if (isError) return <p>Error: {error.message}</p>;
     if (!data) return <p>No data</p>;
 

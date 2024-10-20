@@ -21,6 +21,7 @@ import { useQuery } from '@tanstack/react-query';
 
 // model
 import { ArticleWithCategory } from 'models/model';
+import Loading from 'components/loading/loading/Loading';
 
 // const articleMockupData = {
 //     id: 1,
@@ -298,7 +299,7 @@ const ArticlePage = (): JSX.Element => {
 
     // TODO - loading, error, article에 대한 처리 필요
     if(isPending){
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     
     if(isError){

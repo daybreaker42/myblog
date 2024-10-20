@@ -17,6 +17,7 @@ import { Article, CategoryWithArticles } from 'models/model';
 import { FilterOption } from 'models/interface';
 import { getRandomInt } from 'utils/random';
 import { applyOrder } from 'utils/applyOrder';
+import Loading from 'components/loading/loading/Loading';
 
 // constants
 const FILTER_OPTIONS: FilterOption[] = [
@@ -136,7 +137,7 @@ function CategoryPage() {
     const [selectedFilter, setSelectedFilter] = useState<FilterOption>(FILTER_OPTIONS[0]);
     // supabase - reat query
     const { data, isPending, isError, error } = useQuery({
-        queryKey: ['categories', { search }],
+        queryKey: ['categories', { search, selectedFilter }],
         queryFn: () => fetchCategories({ selectedFilter, search }),
     });
     // mockup data 사용
@@ -147,7 +148,7 @@ function CategoryPage() {
     
     
     if (isPending) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if(isError) {
         return <div>Error: {error.message}</div>;

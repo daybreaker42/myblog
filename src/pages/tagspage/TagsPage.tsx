@@ -12,24 +12,14 @@ import Search from 'components/search/Search';
 import TagBlock from './TagBlock';
 
 // models
-import { FilterOption } from 'models/interface';
+
 // utils
+import { fetchData } from './common/fetchData';
 import { getRandomInt, getRandomString } from 'utils/random';
-import { supabase } from 'utils/supabase';
-import { Tag } from 'models/model';
-import { useQuery } from '@tanstack/react-query';
-import { applyOrder } from 'utils/applyOrder';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { FILTER_OPTIONS } from './common/tagFilterOptions';
+import Loading from 'components/loading/loading/Loading';
 // constants
-const FILTER_OPTIONS: FilterOption[] = [
-    { value: '게시물 수 내림차순', label: '게시물 수 내림차순' },
-    { value: '게시물 수 오름차순', label: '게시물 수 오름차순' },
-    { value: '조회수 내림차순', label: '조회수 내림차순' },
-    { value: '조회수 오름차순', label: '조회수 오름차순' },
-    { value: '좋아요 내림차순', label: '좋아요 내림차순' },
-    { value: '좋아요 오름차순', label: '좋아요 오름차순' },
-    { value: '작성일 내림차순', label: '작성일 내림차순' },
-    { value: '작성일 오름차순', label: '작성일 오름차순' },
-];
 
 // mockup data
 // const data = {
@@ -41,62 +31,6 @@ const FILTER_OPTIONS: FilterOption[] = [
 //     })).map((tag) => new Tag(tag)),
 // };
 
-async function fetchData({ selectedFilter, search} : { selectedFilter: FilterOption, search: string }) {
-    let query = supabase
-        .from('tags')
-        .select(`*`, { count: 'exact' });
-
-    if (search) {
-        query = query.ilike('name', `%${search}%`);
-    }
-    
-    // filter 적용에 따라 정렬 방식 변경
-    if (selectedFilter) {
-        switch (selectedFilter.value) {
-            case '게시물 수 내림차순':
-                query = applyOrder(query, 'article_cnt', false);
-                break;
-            case '게시물 수 오름차순':
-                query = applyOrder(query, 'article_cnt', true);
-                break;
-            case '조회수 내림차순':
-                query = applyOrder(query, 'total_view_cnt', false);
-                break;
-            case '조회수 오름차순':
-                query = applyOrder(query, 'total_view_cnt', true);
-                break;
-            case '좋아요 내림차순':
-                query = applyOrder(query, 'total_like_cnt', false);
-                break;
-            case '좋아요 오름차순':
-                query = applyOrder(query, 'total_like_cnt', true);
-                break;
-            case '작성일 내림차순':
-                query = applyOrder(query, 'created_at', false);
-                break;
-            case '작성일 오름차순':
-                query = applyOrder(query, 'created_at', true);
-                break;
-            default:
-                query = applyOrder(query, 'name', true);
-                break;
-        }
-    }
-
-    const { data, count, error } = await query;
-
-    if (error) {
-        console.error('Error fetching data:', error);
-        // 사용자에게 적절한 피드백 제공
-        throw new Error('데이터를 가져오는 중 오류가 발생했습니다.');
-    }
-
-    console.log(data);
-    
-    
-    const processedData: Tag[] = data.map((tag: Tag) => new Tag(tag));
-    return {processedData, count: count ?? 0};
-}
 
 
 /**
@@ -106,12 +40,13 @@ function Tags() {
     const [selectedFilter, setSelectedFilter] = useState(FILTER_OPTIONS[0]);
     const [search, setSearch] = useState('');
     const { data, isPending, isError, error } = useQuery({
-        queryKey: ['tags'], 
+        queryKey: ['tags', { search, selectedFilter }], 
         queryFn: () => fetchData({ selectedFilter, search }),
+        placeholderData: keepPreviousData,
     });
 
     if (isPending) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (isError) {
         return <div>Error: {error.message}</div>;

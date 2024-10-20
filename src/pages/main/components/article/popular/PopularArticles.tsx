@@ -10,6 +10,7 @@ import { supabase } from 'utils/supabase';
 import {ReactComponent as ArrowRight} from 'assets/icons/arrow_forward.svg';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import Loading from 'components/loading/loading/Loading';
 
 // constants
 const POPULAR_ARTICLE_COUNT = 7;
@@ -46,7 +47,7 @@ const PopularArticles = () => {
     });
 
 
-    if (isPending) return <div>Loading...</div>;
+    if (isPending) return <Loading />;
     if (isError) return <div>Error: {error.message}</div>;
     if (!data){
         return <div>No data</div>;

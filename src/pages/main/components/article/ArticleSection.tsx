@@ -12,6 +12,7 @@ import Filter from 'components/filter/Filter';
 import { ArticleWithCategory } from 'models/model';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { FilterOption } from 'models/interface';
+import Loading from 'components/loading/loading/Loading';
 
 // constants
 const ARTICLE_PER_PAGE = 10;
@@ -182,7 +183,7 @@ const ArticleSection = () => {
     
     const totalPages = data?.count ? Math.ceil(data.count / ARTICLE_PER_PAGE) : 0;
 
-    if(isLoading) return <div>Loading...</div>;
+    if(isLoading) return <Loading />;
     if(isError) return <div>Error: {error.message}</div>;
     if(!data) return <div>No data</div>;
 
