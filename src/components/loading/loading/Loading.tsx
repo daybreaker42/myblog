@@ -1,6 +1,10 @@
-import HomeButton from 'pages/errors/HomeButton';
+import HomeButton from 'components/homebutton/HomeButton';
 import styles from './Loading.module.css';
 
+/**
+ * Loading Component
+ * 로딩 페이지 - 전체 화면 로딩 시 사용
+ */
 const Loading = () => {
     return (
         <div className={styles['root']}>

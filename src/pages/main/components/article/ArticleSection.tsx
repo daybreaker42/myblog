@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './ArticleSection.module.css';
 // supabase client
 import { supabase } from 'utils/supabase';
@@ -12,7 +12,7 @@ import Filter from 'components/filter/Filter';
 import { ArticleWithCategory } from 'models/model';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { FilterOption } from 'models/interface';
-import Loading from 'components/loading/loading/Loading';
+import LoadingBlock from 'components/loading/loading/LoadingBlock';
 
 // constants
 const ARTICLE_PER_PAGE = 10;
@@ -183,7 +183,7 @@ const ArticleSection = () => {
     
     const totalPages = data?.count ? Math.ceil(data.count / ARTICLE_PER_PAGE) : 0;
 
-    if(isLoading) return <Loading />;
+    if(isLoading) return <LoadingBlock />;
     if(isError) return <div>Error: {error.message}</div>;
     if(!data) return <div>No data</div>;
 

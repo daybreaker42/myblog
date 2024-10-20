@@ -115,7 +115,7 @@ const ArticleCard = ({ article }: { article: ArticleWithCategory}) => {
                                     <button key={`tag-${index}`} onClick={
                                         (e) => {
                                             preventEvent(e);
-                                            navigate(`/tag?name=${tag.name}`);
+                                            navigate(`/tag/${tag.name}`);
                                         }
                                     }>
                                         <span className={styles["tag"]}>

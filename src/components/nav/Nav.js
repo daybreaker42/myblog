@@ -1,6 +1,4 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
-import { ReactComponent as Account } from '../../assets/icons/account.svg';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './Nav.module.css';
@@ -33,11 +31,8 @@ const navItems = [
 
 function Nav() {
     // useLocator로 현재 페이지를 가져와서 active 클래스를 추가해준다.
-    const location = useLocation(); // 현재 페이지 경로를 가져옴
-    const path = location.pathname; // 현재 페이지 경로를 가져옴
-    // console.log(`location - `, location);
-    // console.log(`location - `, location.pathname);
-
+    // const location = useLocation(); // 현재 페이지 경로를 가져옴
+    // const path = location.pathname; // 현재 페이지 경로를 가져옴
 
     return <nav className={styles.nav}>
         <div className={styles['nav-left']}>

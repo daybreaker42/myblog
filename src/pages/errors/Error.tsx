@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./errors.module.css";
-import HomeButton from "./HomeButton";
+import HomeButton from "../../components/homebutton/HomeButton";
 
 // error별 메시지
 type ErrorMessages = {

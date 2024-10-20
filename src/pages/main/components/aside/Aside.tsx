@@ -1,5 +1,3 @@
-// imports Aside from './components/Aside';
-import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Aside.module.css';
 import CategoryAside from '../categoryAside/CategoryAside';

@@ -22,22 +22,23 @@
     padding: 0;
     list-style: none;
     gap: 0;
+    width: 100%;
 }
 /* categoryComponent 관련 css */
 .category-component {
-    width: 172px;
+    width: 100%;
     height: 34px;
     display: flex;
     align-items: center;
     justify-content: start;
 
+    font-size: 1rem;
     border-radius: 10px;
+    padding: 0.5rem 1rem;
     transition: background-color 0.2s ease-in-out;
+    box-sizing: border-box;
 }
 .category-component:hover{
     background-color: #515151;
-}
-.category-component>span {
-    padding: 5px 0px 5px 15px;
 }
 

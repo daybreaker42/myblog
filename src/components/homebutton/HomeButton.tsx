@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./errors.module.css";
+import styles from "./HomeButton.module.css";
 import { useCustomNavigation } from "hooks/useCustomNavigation";
+
 const HomeButton = () => {
     const { goHome, goBack } = useCustomNavigation();
     return (

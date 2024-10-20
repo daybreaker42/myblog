@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 // import components
 import PopularArticleCard from './PopularArticleCard';
 import styles from './PopularArticles.module.css';
@@ -10,7 +9,7 @@ import { supabase } from 'utils/supabase';
 import {ReactComponent as ArrowRight} from 'assets/icons/arrow_forward.svg';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import Loading from 'components/loading/loading/Loading';
+import LoadingBlock from 'components/loading/loading/LoadingBlock';
 
 // constants
 const POPULAR_ARTICLE_COUNT = 7;
@@ -47,7 +46,7 @@ const PopularArticles = () => {
     });
 
 
-    if (isPending) return <Loading />;
+    if (isPending) return <LoadingBlock />;
     if (isError) return <div>Error: {error.message}</div>;
     if (!data){
         return <div>No data</div>;
