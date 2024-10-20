@@ -4,7 +4,7 @@
     align-items: start;
     
     width: 100%;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 .category-aside > a{
     width: 100%;
@@ -37,6 +37,10 @@
     padding: 0.5rem 1rem;
     transition: background-color 0.2s ease-in-out;
     box-sizing: border-box;
+    /* overflow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .category-component:hover{
     background-color: #515151;
