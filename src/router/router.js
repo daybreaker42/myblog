@@ -9,7 +9,7 @@ import TagArticleList from 'pages/tagspage/TagArticleList';
 import Settings from 'pages/settings/Settings';
 import ArticlePage from 'pages/article/ArticlePage';
 import Test from 'pages/test/Test';
-import ArticleList from 'pages/article/list/ArticleList';
+// import ArticleList from 'pages/article/list/ArticleList';
 import AdminPage from 'pages/admin/AdminPage';
 
 import Loading from 'components/loading/loading/Loading';
@@ -40,9 +40,9 @@ const Router = () => {
                 <Route path='/settings' element={<Settings />} />
                 <Route path="/article">
                     <Route index element={<ArticlePage />} />
-                    <Route path="popular" element={<ArticleList />} />
-                    <Route path="pinned" element={<ArticleList />} />
-                    <Route path=":slug" element={<ArticlePage />} />
+                    {/* <Route path="popular" element={<ArticleList />} /> */}
+                    {/* <Route path="pinned" element={<ArticleList />} />
+                    <Route path=":slug" element={<ArticlePage />} /> */}
                 </Route>
 
                 {/* admin pages */}
