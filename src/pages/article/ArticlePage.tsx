@@ -317,7 +317,7 @@ const ArticlePage = (): JSX.Element => {
             <header className={styles["App-header"]}>
                 <Nav />
             </header>
-            <main>
+            <main className={styles['main']}>
                 {/* 아티클 상단 부분 */}
                 <section className={styles['article-header']}>
                     {/* 왼쪽 공간 여백 설정 */}

@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
-import { getArticlesByCategory } from 'api/article';
 // import css
 import styles from './ArticleCardScroll.module.css';
 import 'components/click.css';
