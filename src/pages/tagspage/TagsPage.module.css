@@ -1,7 +1,0 @@
-.tags-list{
-    display: flex;
-    flex-flow: row wrap;
-    max-width: 992px;
-    margin: 0 auto;
-    gap: 0.5rem;
-}

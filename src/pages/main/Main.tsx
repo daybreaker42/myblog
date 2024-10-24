@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Search, Moon, Sun, Menu, X, BookMarked, Flame, Clock, Heart, MessageSquare, Eye, BarChart2, Mail, Bug } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Nav from 'components/nav/Nav';
 
 const BlogMainPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,54 +16,7 @@ const BlogMainPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full bg-gray-800 border-b border-gray-700 z-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo & Brand */}
-            <div className="flex-shrink-0 flex items-center">
-              <h1 className="text-xl font-bold cursor-pointer hover:text-blue-400 transition-colors">Tech Blog</h1>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Projects</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">About</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a>
-              <button className="p-2 rounded-lg hover:bg-gray-700 transition-colors">
-                <Search className="w-5 h-5" />
-              </button>
-              <button 
-                className="p-2 rounded-lg hover:bg-gray-700 transition-colors"
-                onClick={() => setIsDarkMode(!isDarkMode)}
-              >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-            </div>
-
-            {/* Mobile menu button */}
-            <button 
-              className="md:hidden p-2 rounded-lg hover:bg-gray-700 transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-gray-800 border-b border-gray-700">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#" className="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 transition-colors">Home</a>
-              <a href="#" className="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 transition-colors">Projects</a>
-              <a href="#" className="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 transition-colors">About</a>
-              <a href="#" className="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 transition-colors">Contact</a>
-            </div>
-          </div>
-        )}
-      </nav>
+      <Nav isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
       {/* Main Content */}
       <div className="pt-16 flex min-h-screen flex-col">
