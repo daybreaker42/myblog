@@ -1,9 +1,0 @@
-/* 눌렀을때 크기 줄어드는 효과 */
-.click {
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.click:active {
-    transform: scale(0.98);
-}

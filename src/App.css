@@ -1,20 +1,18 @@
-.App {
-  /* text-align: center; */
+/* .App {
   height: 100%;
 }
 
 .App-header {
   display: flex;
   justify-content: space-between;
-  /* font-size: calc(10px + 2vmin); */
   color: white;
-}
+} */
+
 /* global - 공통으로 들어갈 부분 설정 */
-main {
-  /* nav바 높이만큼 top margin 설정 */
+/* main {
   margin-top: var(--nav-height);
 }
-/* clickable - 눌렀을때 자연스럽게 버튼 크기가 작아짐 */
+
 .clickable{
   transition: transform 0.2s ease;
 }
@@ -28,7 +26,7 @@ ul{
 }
 ul li{
   list-style: none;
-}
+} */
 /* 텍스트 넘칠때 말줄임표로 표시 */
 .multi-line-ellipsis {
   display: -webkit-box;
