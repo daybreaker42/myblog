@@ -10,15 +10,20 @@ import { HelmetProvider } from "react-helmet-async";
 
 
 const queryClient = new QueryClient();
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <QueryClientProvider client={queryClient}>
-    <ReactQueryDevtools initialIsOpen={true} />
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
-  </QueryClientProvider >
-);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true} />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </QueryClientProvider >
+  );
+} else {
+  console.error('Failed to find the root element');
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
