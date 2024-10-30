@@ -86,6 +86,7 @@ export class Article {
     thumbnailImg: string | null;
     unit: Unit;
     tags: Tag[];
+    category_id: number;
     comments: Comment[] = [];
 
     constructor(data: any) {
@@ -100,6 +101,7 @@ export class Article {
         this.readingTime = data.reading_time;
         this.thumbnailImg = data.thumbnail_img;
         this.unit = Article.stringToUnit(data.unit);
+        this.category_id = data.category_id;
         this.tags = data.article_tags ? data.article_tags.map((tag: any) => new Tag(tag.tags)) : [];
     }
 
@@ -113,6 +115,7 @@ export class Article {
             'view_cnt',
             'like_cnt',
             'created_at',
+            'category_id',
             'comment_cnt',
             'reading_time',
             'thumbnail_img',
