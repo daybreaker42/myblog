@@ -1,4 +1,5 @@
 import CategoryBlock from "components/category/CategoryBlock";
+import TagSection from "components/tag/TagSection";
 import { Link } from "react-router-dom";
 import { Article } from "types/type";
 import { formatTimeUnit, getFormattedDate } from "utils/date";
@@ -38,11 +39,11 @@ export function ArticleCard({ article }: { article: Article }) {
                         <p className="text-gray-400 line-clamp-2 text-sm sm:text-base">
                             {article.description}
                         </p>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap align-center gap-2">
                             {/* category render - category_id가 없는 경우엔 render 안함 */}
                             { article.category_id && <CategoryBlock category_id={article.category_id} />}
-                            <span className="px-2 py-1 bg-[#1a1a1a] text-gray-300 text-sm rounded-md">#상태관리</span>
-                            <span className="px-2 py-1 bg-[#1a1a1a] text-gray-300 text-sm rounded-md">#최적화</span>
+                            
+                            <TagSection article_id={article.id} />
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between text-sm text-gray-400 gap-2">
                             <div className="flex items-center space-x-4">

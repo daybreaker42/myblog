@@ -1,4 +1,4 @@
-import { Article, Category } from "types/type";
+import { Article, Category, Tag, TagBlock } from "types/type";
 
 // Utility function to process the fetched data
 export default function jsonToArticle(data: any[]): Article[] {
@@ -34,4 +34,20 @@ export function jsonToCategory(data: any): Category {
         thumbnailImg: data.thumbnailImg,
         createdAt: data.createdAt
     };
+}
+
+export function jsonToTags(data: any[]): Tag[] | TagBlock[] {
+    if(!data[0].article_cnt){
+        return data.map(tag => ({
+            id: tag.id,
+            name: tag.name,
+            created_at: tag.created_at,
+        } as TagBlock));
+    }
+    return data.map(tag => ({
+        id: tag.id,
+        name: tag.name,
+        article_cnt: tag.article_cnt,
+        created_at: tag.created_at,
+    } as Tag));
 }

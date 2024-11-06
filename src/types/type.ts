@@ -51,8 +51,13 @@ interface Category {
 interface Tag {
   id: number;
   name: string;
-  articleCnt: number;
-  createdAt: Date;
+  article_cnt: number;
+  created_at: Date;
+}
+interface TagBlock {
+  id: number;
+  name: string;
+  created_at: Date;
 }
 
 // 댓글 관련
@@ -90,4 +95,4 @@ enum UserRole {
 }
 
 export { ArticleStatus, TimeUnit, UserRole };
-export type { Article, Category, Tag, Comment, Image, User };
+export type { Article, Category, Tag, TagBlock, Comment, Image, User };

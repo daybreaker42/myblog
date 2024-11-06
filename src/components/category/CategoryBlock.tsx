@@ -39,7 +39,7 @@ export default function CategoryBlock({ category_id }: { category_id: number }) 
     }
 
     return (
-        <Link to={`/category/${data?.name}`}>
+        <Link to={`/category/${data?.name}`} className="flex">
             {isFetching ? (
                 <span className="px-2 py-1 bg-amber-500 text-black text-sm rounded-md">...</span>
             ) : isError ? (
