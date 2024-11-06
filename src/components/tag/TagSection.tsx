@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { TagBlock } from "types/type";
-import { jsonToTags } from "utils/jsonConvert";
+import { jsonToTagBlocks } from "utils/jsonConvert";
 import { supabase } from "utils/supabase";
 import TagBlockComponent from "./TagBlock";
 
@@ -23,7 +23,7 @@ async function fetchTags({ article_id }:{ article_id: number }){
     }
   
     // Extract the tags data from the joined result
-    const processedTags: TagBlock[] = jsonToTags(tags.map(item => item.tags));
+    const processedTags: TagBlock[] = jsonToTagBlocks(tags.map(item => item.tags));
     return { data: processedTags, count };
   };
 

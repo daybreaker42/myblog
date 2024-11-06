@@ -114,7 +114,7 @@ created_at : timestamp
 tags table columns
 id : int8
 name : text
-article_cnt : int4
+total_article_cnt : int4
 created_at : timestamp
 
 article_tags table columns

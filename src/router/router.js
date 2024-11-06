@@ -6,7 +6,9 @@ import ScrollToTop from './ScrollToTop';
 import Article from 'page/articles/Article';
 import ArticleDetail from 'page/articles/ArticleDetail';
 import Category from 'page/category/Category';
+import CategorySearchLayout from 'page/category/CategorySearchLayout';
 import About from 'page/about/About';
+import Tag from 'page/tag/Tag';
 
 
 const Router = () => {
@@ -23,11 +25,11 @@ const Router = () => {
 
                 <Route path="/category">
                     <Route index element={<Category />} />
-                    <Route path=":slug" element={<Category />} />
+                    <Route path=":slug" element={<CategorySearchLayout />} />
                 </Route>
                 <Route path="/tag">
-                    <Route index element={<Category />} />
-                    <Route path=":slug" element={<Category />} />
+                    <Route index element={<Tag />} />
+                    <Route path=":slug" element={<CategorySearchLayout />} />
                 </Route>
                 <Route path='/about' element={<About />} />
             </Routes>

@@ -72,8 +72,8 @@ export default function Main() {
         <Helmet>
             <meta charSet="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Home - {appName}</title>
-            <meta name="description" content="성준의 블로그 태그/카테고리 페이지입니다." />
+            <title>Home | {appName}</title>
+            <meta name="description" content="성준의 블로그에 오신 것을 환영합니다. 주로 프로그래밍 문제 해결 과정을 주로 다루고 있습니다." />
         </Helmet>
         <div className="Main bg-[#0a0a0a] text-gray-200 min-h-screen">
             <header className="bg-[#111111] border-b border-gray-800 sticky top-0 z-50">

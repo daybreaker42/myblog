@@ -27,27 +27,30 @@ export function jsonToCategory(data: any): Category {
     return {
         id: data.id,
         name: data.name,
-        articleCnt: data.articleCnt,
+        article_cnt: data.article_cnt,
         color: data.color,
-        totalViewCnt: data.totalViewCnt,
-        totalLikeCnt: data.totalLikeCnt,
-        thumbnailImg: data.thumbnailImg,
-        createdAt: data.createdAt
+        total_view_cnt: data.total_view_cnt,
+        total_like_cnt: data.total_like_cnt,
+        thumbnail_img: data.thumbnail_img,
+        created_at: data.created_at
     };
 }
 
-export function jsonToTags(data: any[]): Tag[] | TagBlock[] {
-    if(!data[0].article_cnt){
+export function jsonToTagBlocks(data: any[]): TagBlock[] {
         return data.map(tag => ({
             id: tag.id,
             name: tag.name,
             created_at: tag.created_at,
         } as TagBlock));
-    }
+    
+    
+}
+
+export function jsonToTags(data: any[]): Tag[] {
     return data.map(tag => ({
         id: tag.id,
         name: tag.name,
-        article_cnt: tag.article_cnt,
+        total_article_cnt: tag.total_article_cnt,
         created_at: tag.created_at,
     } as Tag));
 }

@@ -39,19 +39,19 @@ enum TimeUnit {
 interface Category {
   id: number;
   name: string;
-  articleCnt: number;
+  article_cnt: number;
   color: string;
-  totalViewCnt: number;
-  totalLikeCnt: number;
-  thumbnailImg: string;
-  createdAt: Date;
+  total_view_cnt: number;
+  total_like_cnt: number;
+  thumbnail_img: string;
+  created_at: Date;
 }
 
 // 태그 관련
 interface Tag {
   id: number;
   name: string;
-  article_cnt: number;
+  total_article_cnt: number;
   created_at: Date;
 }
 interface TagBlock {
