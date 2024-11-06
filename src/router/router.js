@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Main from 'pages/main/Main'
-import ArticlePage from 'pages/article/ArticlePage';
-import { CategoryPage } from 'pages/category/CategoryPage';
-import { TagPage } from 'pages/tag/TagPage';
-import { ArticleListPage } from 'pages/article/ArticleListPage';
-// util
+// pages
+import Main from 'page/main/Main'
+// utils
 import ScrollToTop from './ScrollToTop';
+import Article from 'page/articles/Article';
+import ArticleDetail from 'page/articles/ArticleDetail';
+import Category from 'page/category/Category';
+import About from 'page/about/About';
 
 
 const Router = () => {
@@ -15,20 +16,20 @@ const Router = () => {
             <Routes>
                 {/* public pages */}
                 <Route path="/" element={<Main />} />
-                <Route path="/article">
-                    <Route index element={<ArticleListPage />} />
-                    {/* <Route path="popular" element={<ArticleListPage />} /> */}
-                    {/* <Route path="pinned" element={<ArticleListPage />} /> */}
-                    <Route path=":slug" element={<ArticlePage />} />
+                <Route path="article">
+                    <Route index element={<Article />} />
+                    <Route path=":slug" element={<ArticleDetail />} />
                 </Route>
+
                 <Route path="/category">
-                    <Route index element={<CategoryPage />} />
-                    <Route path=":slug" element={<CategoryPage />} />
+                    <Route index element={<Category />} />
+                    <Route path=":slug" element={<Category />} />
                 </Route>
                 <Route path="/tag">
-                    <Route index element={<TagPage />} />
-                    <Route path=":slug" element={<TagPage />} />
+                    <Route index element={<Category />} />
+                    <Route path=":slug" element={<Category />} />
                 </Route>
+                <Route path='/about' element={<About />} />
             </Routes>
         </BrowserRouter>
     );

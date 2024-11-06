@@ -27,6 +27,22 @@ npm start
 
 ### Deploy Project
 
+#### 0. 배포 전 설정
+
+1. tailwind css minify 설정
+
+```bash
+npx tailwindcss -o build.css --minify
+```
+
+2. github 배포
+
+```bash
+git add .
+git commit -m "commit message"
+git push origin main
+```
+
 #### 1. Vercel로 배포
 
 - 이 경우 github repository와 연동하여 배포 가능

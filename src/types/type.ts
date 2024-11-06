@@ -1,0 +1,93 @@
+// 게시물 관련
+interface Article {
+  id: number;
+  title: string;
+  description: string;
+  created_at: Date;
+  content: string;
+  status: ArticleStatus;
+  category_id: number;
+  slug: string;
+  is_comment_blocked: boolean;
+  thumbnail_img?: string;
+  reading_time?: number;
+  time_unit?: TimeUnit;
+  like_cnt: number;
+  comment_cnt: number;
+  view_cnt: number;
+  is_upload_queued: boolean;
+  expected_upload_time?: Date;
+  article_pwd?: string;
+  is_pinned: boolean;
+}
+  
+enum ArticleStatus {
+  NORMAL = 'NORMAL',
+  WRITING = 'WRITING',
+  HIDDEN = 'HIDDEN'
+}
+
+enum TimeUnit {
+  SEC = 'SEC',
+  MIN = 'MIN',
+  HOUR = 'HOUR',
+  DAY = 'DAY',
+  MON = 'MON'
+}
+
+// 카테고리 관련
+interface Category {
+  id: number;
+  name: string;
+  articleCnt: number;
+  color: string;
+  totalViewCnt: number;
+  totalLikeCnt: number;
+  thumbnailImg: string;
+  createdAt: Date;
+}
+
+// 태그 관련
+interface Tag {
+  id: number;
+  name: string;
+  articleCnt: number;
+  createdAt: Date;
+}
+
+// 댓글 관련
+interface Comment {
+  id: number;
+  userId: number;
+  content: string;
+  pwd?: string;
+  articleId: number;
+  createdAt: Date;
+}
+
+// 이미지 관련
+interface Image {
+  id: number;
+  articleId: number;
+  url: string;
+  createdAt: Date;
+}
+
+// 사용자 관련
+interface User {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+  role: UserRole;
+  createdAt: Date;
+}
+
+enum UserRole {
+  MASTER = 'MASTER',
+  ADMIN = 'ADMIN',
+  USER = 'USER'
+}
+
+export { ArticleStatus, TimeUnit, UserRole };
+export type { Article, Category, Tag, Comment, Image, User };
