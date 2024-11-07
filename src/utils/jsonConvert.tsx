@@ -42,8 +42,6 @@ export function jsonToTagBlocks(data: any[]): TagBlock[] {
             name: tag.name,
             created_at: tag.created_at,
         } as TagBlock));
-    
-    
 }
 
 export function jsonToTags(data: any[]): Tag[] {

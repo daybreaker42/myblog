@@ -9,7 +9,7 @@ export default function Nav() {
                 <NavLink to="/" className="text-2xl font-bold text-amber-500">{appName}</NavLink>
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
                     <NavLink to="/" className={({ isActive }) => isActive ? "text-amber-500 hover:text-amber-500 transition-colors" : "hover:text-amber-500 transition-colors"}>홈</NavLink>
-                    <NavLink to="/article" className={({ isActive }) => isActive ? "text-amber-500 hover:text-amber-500 transition-colors" : "hover:text-amber-500 transition-colors"}>글목록</NavLink>
+                    {/* <NavLink to="/article" className={({ isActive }) => isActive ? "text-amber-500 hover:text-amber-500 transition-colors" : "hover:text-amber-500 transition-colors"}>글목록</NavLink> */}
                     <NavLink to="/category" className={({ isActive }) => isActive ? "text-amber-500 hover:text-amber-500 transition-colors" : "hover:text-amber-500 transition-colors"}>카테고리</NavLink>
                     <NavLink to="/tag" className={({ isActive }) => isActive ? "text-amber-500 hover:text-amber-500 transition-colors" : "hover:text-amber-500 transition-colors"}>태그</NavLink>
                     <NavLink to="/about" className={({ isActive }) => isActive ? "text-amber-500 hover:text-amber-500 transition-colors" : "hover:text-amber-500 transition-colors"}>소개</NavLink>
