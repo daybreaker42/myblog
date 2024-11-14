@@ -110,12 +110,14 @@ total_view_cnt : int4
 total_like_cnt : int4
 thumbnail_img : text
 created_at : timestamp
+recent_article_date : timestamp
 
 tags table columns
 id : int8
 name : text
-total_article_cnt : int4
+article_cnt : int4
 created_at : timestamp
+recent_article_date : timestamp
 
 article_tags table columns
 article_id : int8 (Foreign Key)
