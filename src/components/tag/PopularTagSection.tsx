@@ -14,7 +14,7 @@ async function fetchPopularTags(): Promise<Tag[]>{
     const {data, error} = await supabase
     .from('tags')
     .select('*')
-    .order('total_article_cnt', {ascending: false})
+    .order('article_cnt', {ascending: false})
     .limit(10);
     
     if(error){
@@ -56,7 +56,7 @@ export default function PopularTagSection(){
             { error ? <ErrorCard error={error}/> :
                 <div className="flex flex-wrap gap-3">
                 {data?.map(tag => (
-                    <PopularTagBlock key={tag.id} name={tag.name} count={tag.total_article_cnt} />
+                    <PopularTagBlock key={tag.id} name={tag.name} count={tag.article_cnt} />
                 ))}
             </div>
             }

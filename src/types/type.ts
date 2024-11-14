@@ -45,14 +45,16 @@ interface Category {
   total_like_cnt: number;
   thumbnail_img: string;
   created_at: Date;
+  recent_article_date?: Date;
 }
 
 // 태그 관련
 interface Tag {
   id: number;
   name: string;
-  total_article_cnt: number;
+  article_cnt: number;
   created_at: Date;
+  recent_article_date?: Date;
 }
 interface TagBlock {
   id: number;

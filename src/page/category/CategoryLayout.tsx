@@ -2,13 +2,14 @@ import Nav from "components/Nav";
 import { Helmet } from "react-helmet-async";
 import CategoryCard from "components/category/CategoryCard";
 import { supabase } from "utils/supabase";
-import { jsonToCategory } from "utils/jsonConvert";
+import { jsonToCategory, jsonToTags } from "utils/jsonConvert";
 import { useQuery } from "@tanstack/react-query";
 import { ErrorCard } from "components/error/ErrorCard";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { SEARCH_DEBOUNCE_TIME } from "utils/constants";
 import TagCard from "components/tag/TagCard";
+import { Category, Tag } from "types/type";
 
 const LAYOUT_TYPE = {
     CATEGORY:{
@@ -29,12 +30,17 @@ interface CategoryTagSearchProps{
 }
 /**
  * 카테고리/태그 목록 가져오기
+ * - table명을 받아서 카테고리인지 태그인지 구분하여 데이터 가져오기
+ * @param table - 카테고리인지 태그인지 구분
+ * @param keyword - 검색어
+ * @returns {data, count} - 데이터와 데이터 개수 반환
  */
-async function fetchCategoryOrTagList({ table, keyword } : CategoryTagSearchProps) {
+async function fetchCategoryOrTagList({ table, keyword } : CategoryTagSearchProps): Promise<{data: Category[] | Tag[] | undefined, count: number}>{
     if(!table) throw new Error('table is required');
     
     // 일단은 table명을 소문자로 변경하여 category인지 tags인지 확인
-    // 하드코딩한 방식이라 추후 수정 필요
+    // FIXME 하드코딩한 방식이라 추후 수정 필요
+    // TODO - recent_article_date 추가
     const tableName = table.toLowerCase() === 'category' ? 'category' : 'tags';
     let query = supabase
     .from(tableName)
@@ -52,8 +58,17 @@ async function fetchCategoryOrTagList({ table, keyword } : CategoryTagSearchProp
         throw error;
     }
     
-    const processedCategories = data.map((item: any) => jsonToCategory(item));
-    return {data: processedCategories, count};
+    let processedCategories: Category[] | Tag[] | null = null;
+    if(tableName === 'category'){
+        processedCategories = data.map((item: any) => jsonToCategory(item));
+    }else{
+        // 태그일 경우
+        processedCategories = jsonToTags(data);
+    }
+
+    console.log('processedCategories:', processedCategories);
+    
+    return {data: processedCategories, count: count || 0};
 }
 
 /**
@@ -90,6 +105,7 @@ export default function CategoryLayout({ title, popular } : { title: string, pop
     };
 
     useEffect(() => {
+        // 처음 렌더링 시에 txt input에 focus
         if (inputRef.current) {
             inputRef.current.focus();
         }

@@ -5,6 +5,7 @@ import { supabase } from "utils/supabase";
 import TagBlockComponent from "./TagBlock";
 
 // Alternative Supabase query using joins
+// TODO - 어차피 page에서 여러 article들 보여지면 해당 article들 tag들 모두 가져와야 함 -> 각 card마다 요청 보내지 말고, 한번에 가져오는 최적화 하기
 async function fetchTags({ article_id }:{ article_id: number }){
     const { data: tags, count, error } = await supabase
       .from('article_tags')
@@ -27,6 +28,10 @@ async function fetchTags({ article_id }:{ article_id: number }){
     return { data: processedTags, count };
   };
 
+  /**
+   * ArticleCard에서 사용되는 TagSection 컴포넌트
+   * - ArticleCard의 하단에 보여지는 태그 목록
+   */
 export default function TagSection({ article_id }: { article_id: number }) {
     const { data, isFetching, error } = useQuery({
         queryKey: ["tags", article_id],

@@ -33,14 +33,17 @@ export function jsonToCategory(data: any): Category {
         total_like_cnt: data.total_like_cnt,
         thumbnail_img: data.thumbnail_img,
         created_at: data.created_at
+        // TODO recent_article_date
     };
 }
 
+// TODO - 이거 배열로 받는게 맞나? 개별로 받아야 하진 않나?
 export function jsonToTagBlocks(data: any[]): TagBlock[] {
         return data.map(tag => ({
             id: tag.id,
             name: tag.name,
             created_at: tag.created_at,
+            // TODO recent_article_date
         } as TagBlock));
 }
 
@@ -48,7 +51,7 @@ export function jsonToTags(data: any[]): Tag[] {
     return data.map(tag => ({
         id: tag.id,
         name: tag.name,
-        total_article_cnt: tag.total_article_cnt,
+        article_cnt: tag.article_cnt,
         created_at: tag.created_at,
     } as Tag));
 }
