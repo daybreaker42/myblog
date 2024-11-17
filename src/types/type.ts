@@ -96,5 +96,42 @@ enum UserRole {
   USER = 'USER'
 }
 
+// 에디터 관련
+interface EditorDraft {
+  id: string;
+  title: string;
+  content: string;
+  savedAt: Date;
+}
+
+// 이미지 관리 관련
+interface UploadImage {
+  id: string;
+  url: string;
+  uploadedAt: Date;
+  progress?: number;  // 업로드 진행률
+}
+
+// 토스트 메시지 관련
+interface ToastMessage {
+  id: string;
+  type: 'success' | 'error' | 'info' | 'loading';
+  message: string;
+}
+
+// 목차 관련
+interface TocItem {
+  id: string;
+  level: number;
+  text: string;
+  isActive?: boolean;
+}
+
+// 추천 제목 관련
+interface TitleSuggestion {
+  id: string;
+  title: string;
+}
+
 export { ArticleStatus, TimeUnit, UserRole };
-export type { Article, Category, Tag, TagBlock, Comment, Image, User };
+export type { Article, Category, Tag, TagBlock, Comment, Image, User, EditorDraft, UploadImage, ToastMessage, TocItem, TitleSuggestion };
