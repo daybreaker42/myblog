@@ -8,7 +8,9 @@ import Category from 'page/category/Category';
 import CategorySearchLayout from 'page/category/CategorySearchLayout';
 import About from 'page/about/About';
 import Tag from 'page/tag/Tag';
+// admin
 import AdminMain from 'page/admin/AdminMain';
+import AdminEditor from 'page/admin/AdminEditor';
 
 export const PATH = {
     HOME: '/',
@@ -43,7 +45,11 @@ const Router = () => {
                 <Route path={PATH.ABOUT} element={<About />} />
 
                 {/* admin pages */}
-                <Route path={PATH.ADMIN} element={<AdminMain to={PATH.ADMIN} />} />
+                <Route path={PATH.ADMIN}  >
+                    <Route index element={<AdminMain />} />
+                    <Route path="edit" element={<AdminEditor />} />
+                    <Route path="*" element={<Navigate to={PATH.ADMIN} replace />} />
+                </Route>
                 <Route path={PATH.NOT_FOUND} element={<div className='grid place-items-center text-white min-h-screen'>404 Page Not Found</div>} />
             </Routes>
         </BrowserRouter>
