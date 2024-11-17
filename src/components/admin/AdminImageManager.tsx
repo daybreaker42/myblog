@@ -6,6 +6,7 @@ import type { UploadImage } from 'types/type';
 interface AdminImageManagerProps {
   isVisible: boolean;
   onClose: () => void;
+  onOpen: () => void;
   images?: UploadImage[];
   onUpload?: (files: FileList) => void;
   onCopy?: (url: string) => void;
@@ -13,8 +14,9 @@ interface AdminImageManagerProps {
 }
 
 export default function AdminImageManager({
-  isVisible,
+  isVisible = true,
   onClose,
+  onOpen,
   images = [],
   onUpload,
   onCopy,
@@ -28,8 +30,28 @@ export default function AdminImageManager({
     }
   };
 
-  if (!isVisible) return null;
+  if (!isVisible) return (
+    <div className="mb-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <h2 className="text-sm font-medium">이미지 관리</h2>
+          <span className="text-xs text-gray-400">
+            업로드된 이미지 {images.length}개
+          </span>
+        </div>
+        <button 
+          className="text-xs text-amber-500 hover:text-amber-400"
+          onClick={onOpen}
+        >
+          펼치기
+        </button>
+      </div>
+    </div>
+  );
 
+  // 모바일에서만 완전히 숨김
+  if (!isVisible && window.innerWidth < 640) return null;
+  
   return (
     <div className="mb-6">
       {/* Header */}
@@ -44,7 +66,7 @@ export default function AdminImageManager({
           className="text-xs text-amber-500 hover:text-amber-400"
           onClick={onClose}
         >
-          전체보기
+          접기
         </button>
       </div>
 

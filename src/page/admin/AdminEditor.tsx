@@ -36,7 +36,7 @@ export default function AdminEditor() {
   // 부가 상태들
   const [showPreview, setShowPreview] = useState(true);
   const [showSidebar, setShowSidebar] = useState(true);
-  const [showImageManager, setShowImageManager] = useState(false);
+  const [showImageManager, setShowImageManager] = useState(true);
 
   return (
     <>
@@ -75,6 +75,7 @@ export default function AdminEditor() {
               <AdminImageManager
                 isVisible={showImageManager}
                 onClose={() => setShowImageManager(false)}
+                onOpen={() => setShowImageManager(true)}
               />
               <AdminEditorMain
                 editorState={editorState}
