@@ -38,6 +38,10 @@
 - shows comments
 - shows related articles
 
+### /notices
+- article 공지사항 페이지
+- article 중 pinned 된 것들만 보여줌
+
 ### /category
 - category list page
 

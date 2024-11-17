@@ -1,0 +1,74 @@
+/* markdown 추가 스타일링시 사용되는 css 파일 */
+
+.markdown-preview.prose {
+    /* Light text for all content */
+    color: #e5e7eb;
+    max-width: none;
+}
+
+/* Headings */
+.markdown-preview.prose h1,
+.markdown-preview.prose h2,
+.markdown-preview.prose h3,
+.markdown-preview.prose h4,
+.markdown-preview.prose h5,
+.markdown-preview.prose h6 {
+    color: #e5e7eb;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Code blocks */
+.markdown-preview.prose pre {
+    background-color: #1f2937;
+    border-radius: 0.375rem;
+    padding: 1rem;
+}
+
+/* 인라인 code에만 스타일 적용 */
+.markdown-preview.prose :not(pre) > code {
+    color: #e5e7eb;
+    background-color: #374151;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-family: monospace;
+}
+
+.markdown-preview.prose :not(pre) > code::before,
+.markdown-preview.prose :not(pre) > code::after {
+    content: '';
+}
+
+/* pre 안의 code는 추가 스타일 제거 */
+.markdown-preview.prose pre > code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    color: inherit;
+}
+
+.markdown-preview.prose code {
+    font-family: monospace;
+    color: #e5e7eb;
+    background-color: #374151;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+}
+
+/* Tables */
+.markdown-preview.prose table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.markdown-preview.prose th,
+.markdown-preview.prose td {
+    border: 1px solid #374151;
+    padding: 0.5rem;
+}
+
+.markdown-preview.prose th {
+    background-color: #1f2937;
+    color: #e5e7eb;
+}
