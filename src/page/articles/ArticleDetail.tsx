@@ -51,6 +51,9 @@ function Todos() {
         },
         staleTime: 1000 * 60 * 5, // 5분
     });
+
+    if (isPending) return <div>Loading...</div>;
+    if (isError) return <div>Error: {error.message}</div>;
     
     return (
     <div className="bg-[#0a0a0a] text-gray-200 min-h-screen">

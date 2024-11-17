@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Main from 'page/main/Main'
 // utils
 import ScrollToTop from './ScrollToTop';
-import Article from 'page/articles/Article';
 import ArticleDetail from 'page/articles/ArticleDetail';
 import Category from 'page/category/Category';
 import CategorySearchLayout from 'page/category/CategorySearchLayout';
@@ -45,7 +44,7 @@ const Router = () => {
 
                 {/* admin pages */}
                 <Route path={PATH.ADMIN} element={<AdminMain to={PATH.ADMIN} />} />
-                <Route path={PATH.NOT_FOUND} element={<div className='grid place-items-center text-white min-h-screen'>404 Not Found</div>} />
+                <Route path={PATH.NOT_FOUND} element={<div className='grid place-items-center text-white min-h-screen'>404 Page Not Found</div>} />
             </Routes>
         </BrowserRouter>
     );
