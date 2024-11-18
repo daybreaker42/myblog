@@ -89,6 +89,7 @@ id : int8
 title: text
 created_at: timestamp
 content : text
+content_html : text
 status :enum:article_status (NORMAL, WRITING, HIDDEN, ..)
 category_id : int8 (category table - Foreign Key)
 slug : text
