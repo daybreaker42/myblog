@@ -11,6 +11,7 @@ import Tag from 'page/tag/Tag';
 // admin
 import AdminMain from 'page/admin/AdminMain';
 import AdminEditor from 'page/admin/AdminEditor';
+import Test from 'page/test/test';
 
 export const PATH = {
     HOME: '/',
@@ -50,6 +51,9 @@ const Router = () => {
                     <Route path="edit" element={<AdminEditor />} />
                     <Route path="*" element={<Navigate to={PATH.ADMIN} replace />} />
                 </Route>
+                {/* test page */}
+                <Route path="/test" element={<Test />} />
+                {/* not found */}
                 <Route path={PATH.NOT_FOUND} element={<div className='grid place-items-center text-white min-h-screen'>404 Page Not Found</div>} />
             </Routes>
         </BrowserRouter>
