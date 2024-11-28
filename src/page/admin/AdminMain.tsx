@@ -26,6 +26,7 @@ const useDebounce = (callback: Function, delay: number) => {
     }, [callback, delay, timer]);
 };
 
+// TODO - 여기랑 editor 비교해서 빠진 기능 넣고, main page 디자인 시작하기
 export default function AdminMain() {
     const [title, setTitle] = useState('');
     const [markdown, setMarkdown] = useState('');

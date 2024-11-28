@@ -1,10 +1,11 @@
-# MyBlog projet
+# MyBlog projet - 241129 중단
 
 ## 설명
 
 - 나만의 블로그 프로젝트
 - React + Supabase + Vercel 이용
 - 배포는 Vercel (+ Github Action) 이용
+->  티스토리 스킨 편집을 위해 티도리 프레임워크로 넘어감 (241129)
 
 ## Run/Deploy Project
 

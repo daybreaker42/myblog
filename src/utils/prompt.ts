@@ -3,7 +3,10 @@ const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GOOGLE_API_KEY || "")
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export async function generateContent(prompt: string) {
-//   const prompt = "Write a story about a magic backpack.";
+    if(!prompt){
+        throw new Error("Prompt is required");
+    }
+    //   const prompt = "Write a story about a magic backpack.";
     const result = await model.generateContent(systemInstructions + prompt);
     // console.log(result.response.text());
     return result;

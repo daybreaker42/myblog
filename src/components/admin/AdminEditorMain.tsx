@@ -1,5 +1,5 @@
 // src/components/admin/AdminEditorMain.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
@@ -22,7 +22,27 @@ export default function AdminEditorMain({
 }: AdminEditorMainProps) {
   const [titleSuggestions, setTitleSuggestions] = useState<TitleSuggestion[]>([]);
   const [autoSaveStatus, setAutoSaveStatus] = useState<'saving' | 'saved' | 'error'>('saved');
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
+  const previewRef = useRef<HTMLDivElement>(null);
   const characterCount = editorState.content.length;
+
+  const handleCopy = async () => {
+    try {
+      if (!previewRef.current) return;
+      if (copyStatus !== 'idle') return;
+      // Get the rendered HTML content
+      const content = previewRef.current.innerHTML;
+      await navigator.clipboard.writeText(content);
+      
+      // Show success feedback
+      setCopyStatus('copied');
+      setTimeout(() => setCopyStatus('idle'), 2000);
+    } catch (err) {
+      // Show error feedback
+      setCopyStatus('error');
+      setTimeout(() => setCopyStatus('idle'), 2000);
+    }
+  };
 
   // 자동 저장 효과
   useEffect(() => {
@@ -118,6 +138,14 @@ export default function AdminEditorMain({
           <div className="border-b border-gray-800 px-4 py-2 bg-[#0a0a0a] flex justify-between items-center">
             <span className="text-sm font-medium">미리보기</span>
             <div className="flex items-center gap-2">
+              <button
+                onClick={handleCopy}
+                className="px-2 py-1 text-xs border border-gray-700 rounded hover:border-amber-500 transition-colors"
+              >
+                {copyStatus === 'idle' && '복사'}
+                {copyStatus === 'copied' && '복사됨!'}
+                {copyStatus === 'error' && '복사 실패'}
+              </button>
               <span className="text-xs text-gray-400">읽는 시간: 약 3분</span>
               <button 
                 className="sm:hidden ml-2 text-amber-500"
@@ -128,7 +156,7 @@ export default function AdminEditorMain({
             </div>
           </div>
           <div className="p-4 h-[calc(100%-40px)] overflow-auto">
-            <div className="prose markdown-preview">
+            <div className="prose markdown-preview" ref={previewRef}>
               <Markdown
                 remarkPlugins={[remarkGfm]}
                 components={{

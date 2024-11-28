@@ -38,6 +38,15 @@ export default function AdminEditor() {
   const [showSidebar, setShowSidebar] = useState(true);
   const [showImageManager, setShowImageManager] = useState(true);
 
+  const handleImageUpload = (imageUrl: string) => {
+    // 마크다운 이미지 문법으로 에디터에 이미지 추가
+    const imageMarkdown = `![](${imageUrl})\n`;
+    setEditorState(prev => ({
+      ...prev,
+      content: prev.content + imageMarkdown
+    }));
+  };
+
   return (
     <>
       <Helmet>
@@ -76,6 +85,7 @@ export default function AdminEditor() {
                 isVisible={showImageManager}
                 onClose={() => setShowImageManager(false)}
                 onOpen={() => setShowImageManager(true)}
+                onImageUpload={handleImageUpload}
               />
               <AdminEditorMain
                 editorState={editorState}
